@@ -564,9 +564,6 @@ border: 1px solid rgba(255, 255, 255, 0.7);bottom: 1em;content: '';left: 1em;opa
         height: 170px;
         margin-left: -85px;
     }
-	.timeline>li .timeline-image img{
-        
-    }
     .timeline>li .timeline-image h4 {
         margin-top: 40px;
     }
@@ -579,4 +576,139 @@ border: 1px solid rgba(255, 255, 255, 0.7);bottom: 1em;content: '';left: 1em;opa
 /* ---------------------------------------------------------------------------- */
 .maps iframe{
     pointer-events: none;
+}
+
+
+
+#loginbtn{
+  display: block;
+  border-radius: 4px;
+  background-color: #816943;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 18px; 
+  float : left;
+  width: 100px;
+  height : 50px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin-top:20px;
+  margin-left : 30px;
+  padding-top:7px;
+}
+
+#loginbtn span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+#loginbtn span:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+#loginbtn:hover span {
+  padding-right: 25px;
+}
+
+#loginbtn:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+#registerbtn{
+  display: block;
+  border-radius: 4px;
+  background-color: #816943;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 18px; 
+  float : left;
+  width: 100px;
+  height : 50px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin-top:20px;
+  margin-left: 40px;
+  padding-top:7px;
+}
+
+#registerbtn span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+#registerbtn span:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+#registerbtn:hover span {
+  padding-right: 25px;
+}
+
+#registerbtn:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+#registerbtn-1{
+  display: block;
+  border-radius: 4px;
+  background-color: #816943;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 18px; 
+  float : left;
+  width: 100px;
+  height : 50px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin-top:20px;
+  margin-left: 100px;
+  padding-top:7px;
+}
+
+#registerbtn-1 span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+#registerbtn-1 span:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+#registerbtn-1:hover span {
+  padding-right: 25px;
+}
+
+#registerbtn-1:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+.t{
+	width: 300px;
+	line-height: 30px;
+	float : left;
+	margin-left : 420px;
 }
