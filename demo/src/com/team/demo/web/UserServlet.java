@@ -105,21 +105,23 @@ public class UserServlet extends BaseServlet {
 			if (ret1 == null || ret1.isEmpty()) {
 				if (uname == null || uname.isEmpty()) {
 					System.out.println("用户名不能为空!");
+					write(response, "-1");
 					return;
 				} else if (!upass.equals(upass1)) {
 					System.out.println("密码不相同!");
+					write(response, "-2");
 					return;
 				} else {
 					String sql2 = "insert into user(uname,upass,head,gender) values(?,?,?,?)";
 					int ret2 = DBHelper.update(sql2, uname, upass, head, Integer.parseInt(gender));
 					if (ret2 > 0) {
 						System.out.println("注册成功!");
-						write(response, ret2);
+						write(response, "1");
 					}
 				}
 			} else {
 				System.out.println("用户名已存在!");
-				write(response, ret1);
+				write(response, "0");
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();

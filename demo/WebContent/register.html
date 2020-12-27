@@ -161,8 +161,12 @@
 		    			if(this.ret==1){
 		    				alert("注册成功");
 		    				location.href="login.html";
-		    			}else{
-		    				alert("注册失败");
+		    			}else if(this.ret==0){
+		    				alert("注册失败!用户名已存在!");
+		    			}else if(this.ret==-1){
+		    				alert("注册失败!用户名不能为空!");
+		    			}else if(this.ret==-2){
+		    				alert("注册失败!两次密码不同!");
 		    			}
 		    		})
 	    		}
