@@ -110,7 +110,7 @@ public class UserServlet extends BaseServlet {
 					System.out.println("密码不相同!");
 					return;
 				} else {
-					String sql2 = "insert into tbl_user(uname,upass,head,gender) values(?,?,?,?)";
+					String sql2 = "insert into user(uname,upass,head,gender) values(?,?,?,?)";
 					int ret2 = DBHelper.update(sql2, uname, upass, head, Integer.parseInt(gender));
 					if (ret2 > 0) {
 						System.out.println("注册成功!");
