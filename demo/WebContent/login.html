@@ -61,6 +61,12 @@
                     <li>
                         <a class="page-scroll" href="contact.html">Contact</a>
                     </li>
+                     <li>
+                        <a class="page-scroll" href="login.html">Login</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="register.html">Register</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -106,7 +112,7 @@
 	    			p.append("vcode",this.vcode);
 	    			p.append("vtime",this.vtime);
 	    			p.append("ret",this.ret);
-	    			axios.post("login.s?op=login",p).then(res=>{
+	    			axios.post("user.s?op=login",p).then(res=>{
 		    			this.ret = res.data;
 		    			if(this.ret == 1){
 		    				alert("登录成功!");
