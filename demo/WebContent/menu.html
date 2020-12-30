@@ -167,7 +167,14 @@
 		<div id="main-content">
 			<div class="container" >
 				<article id="menu">
-				<div class="search bar7">
+		
+				<div class="container">
+					<div class="heading" name="1">
+						<h2>
+							<span  class="hr">{{typename}}</span>
+						</h2>
+					</div>
+		<div class="search bar7">
         <form>
          <select id="citySel" class="select" @click="changetypeid">
          <option value="">请选择类型</option>
@@ -180,17 +187,16 @@
          <option  value='7'>手工冰淇淋</option>
          <option  value='8'>甜品</option>
          </select>
-            <input type="text" id="value" placeholder="搜索" name="crid">
-            <button type="button" @click="search" ></button>
+         <div id="value1">
+         <input type="text" id="value2" placeholder="最小值"><span id="-">~</span><input type="text" id="value3" placeholder="最大值">
+         </div>     
+         <div class="bar8">
+         <input type="text" id="value" placeholder="搜索" name="crid">
+         <button type="button" @click="search" ></button>
+         </div> 
+         
         </form>
         </div>
-				<div class="container">
-					<div class="heading" name="1">
-						<h2>
-							<span  class="hr"></span>
-						</h2>
-					</div>
-					
                  
 					<div  class="row">
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"
@@ -229,10 +235,11 @@
     		   xh : [[]],
     		   index : 1,  //页数
     		   size : 8,  //每页显示数量
-    		   typeid : "", //蛋糕类型id
+    		   typeid : location.hash.substring(1), //蛋糕类型id
+    		   typename : "",
     		   count : 0, //尾页
-    		   maxPrice : "10000",
-    		   minPrice : "0",
+    		   maxPrice : "",
+    		   minPrice : "",
     		   cname : ""
     	   },
     	  
@@ -240,26 +247,62 @@
     	   created(){
     		   this.query();
     		   this.queryCount();
+    		   this.show();
     	   },
     	   methods : {
+    		   show(){
+    			   console.info("+++"+this.typeid);
+    			   if(this.typeid==""){
+    				   this.typename = "甜品展示";
+    			   }else if(this.typeid==1){
+    				   this.typename="生日蛋糕";
+    			   }else if(this.typeid==2){
+    				   this.typename="杯子蛋糕";
+    			   }else if(this.typeid==3){
+    				   this.typename="甜甜圈";
+    			   }else if(this.typeid==4){
+    				   this.typename="面包";
+    			   }else if(this.typeid==5){
+    				   this.typename="饮品";
+    			   }else if(this.typeid==6){
+    				   this.typename="小吃";
+    			   }else if(this.typeid==7){
+    				   this.typename="手工冰淇淋";
+    			   }else if(this.typeid==8){
+    				   this.typename="甜品";
+    			   }
+    			   console.info("+++"+this.typename);
+    		   },
     		   search(){
+    			   this.show();
+    			   if(this.typeid!=location.hash.substring(1)){
+    				   var options=$("#citySel option:selected");
+          		       this.typeid=options.val();   //拿到选中项的值
+    			   }			   
     			   var name=document.getElementById('value').value;
     			   this.cname = name;
-    			   console.info(this.cname);
-    			   var options=$("#citySel option:selected");
-   		  		   this.typeid=options.val();   //拿到选中项的值
-   		  		   console.info(this.typeid);
-    			   this.index=1;
-    			   this.queryCount();
+   		  	       var mPrice=document.getElementById('value2').value;
+			       this.minPrice = mPrice;
+			       var MPrice=document.getElementById('value3').value;
+			       this.maxPrice = MPrice;
+			       this.index=1;
+    			   this.queryCount(); 
     			   this.query();
    		  		
     		   },
     		   changetypeid(){
+    			 
     			 var options=$("#citySel option:selected");
     		     this.typeid=options.val();   //拿到选中项的值
+    		     var name=document.getElementById('value').value;
+  			     this.cname = name;
+  			     var mPrice=document.getElementById('value2').value;
+		         this.minPrice = mPrice;
+		         var MPrice=document.getElementById('value3').value;
+		         this.maxPrice = MPrice;
+		         this.show();
     			 this.queryCount();
     		     this.index=1;	
-    		     this.cname="";
   		  		 this.query();
     		   },
     		   query(){
@@ -274,8 +317,12 @@
    				}
     		   }).then(res=>{
     			   this.list = res.data;
+    			   this.show();
     			   if(this.list==0){
     				   alert("暂无该商品！");
+    				   this.cname = "";
+    				   this.typeid = "";
+    				   
     			   }else{
     				   if(this.list.length%this.size==0){
         				   this.xh = [[0,1],[2,3],[4,5],[6,7]];
@@ -303,9 +350,12 @@
    				    typeid : this.typeid,
    				    size : this.size,
    				    cname : this.cname,
+   				    maxPrice : this.maxPrice,
+				    minPrice : this.minPrice
    				}
     		   }).then(res=>{
     			   this.count = res.data;
+    			   this.show();
     			   console.info(this.count);
     		   })
     	   },

@@ -27,16 +27,6 @@ public class CakeQueryServlet extends BaseServlet {
 		write(response, cdao.query(Integer.parseInt(typeid),Integer.parseInt(index),Integer.parseInt(size)));
 	}
 	
-	public void queryAllBy(HttpServletRequest request,HttpServletResponse response) throws IOException {
-		String index = request.getParameter("index");
-		String size = request.getParameter("size");
-		String typeid = request.getParameter("typeid");
-		String maxPrice = request.getParameter("maxPrice");
-		String minPrice = request.getParameter("minPrice");
-		String name = request.getParameter("cname");
-		System.out.println(cdao.queryAllBy(typeid,Integer.parseInt(minPrice),Integer.parseInt(maxPrice),name,Integer.parseInt(index),Integer.parseInt(size)));
-		write(response, cdao.queryAllBy(typeid,Integer.parseInt(minPrice),Integer.parseInt(maxPrice),name,Integer.parseInt(index),Integer.parseInt(size)));
-	}
 	
 	public void queryCount(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		String typeid = request.getParameter("typeid");
@@ -46,12 +36,28 @@ public class CakeQueryServlet extends BaseServlet {
 		write(response, totalPage);
 	}
 	
+	public void queryAllBy(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		String index = request.getParameter("index");
+		String size = request.getParameter("size");
+		String typeid = request.getParameter("typeid");
+		String maxPrice = request.getParameter("maxPrice");
+		String minPrice = request.getParameter("minPrice");
+		String name = request.getParameter("cname");
+		System.out.println(cdao.queryAllBy(typeid,minPrice,maxPrice,name,Integer.parseInt(index),Integer.parseInt(size)).size());
+		write(response, cdao.queryAllBy(typeid,minPrice,maxPrice,name,Integer.parseInt(index),Integer.parseInt(size)));
+	}
+	
+	
 	public void queryCountAll(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		String typeid = request.getParameter("typeid");
 		String size = request.getParameter("size");
 		String name = request.getParameter("cname");
-		int count = cdao.queryCountAll(typeid,name);
-		int totalPage = (count%Integer.parseInt(size)==0)?(count/Integer.parseInt(size)):((count/Integer.parseInt(size))+1);
+		String maxPrice = request.getParameter("maxPrice");
+		String minPrice = request.getParameter("minPrice");
+		
+		int count = cdao.queryCountAll(typeid,name,minPrice,maxPrice);
+		System.out.println(count);
+		int totalPage = (count%Integer.parseInt(size)==0)?(count/Integer.parseInt(size)):((count/Integer.parseInt(size)+1));
 		write(response, totalPage);
 	}
 

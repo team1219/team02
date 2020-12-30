@@ -784,34 +784,102 @@ border: 1px solid rgba(255, 255, 255, 0.7);bottom: 1em;content: '';left: 500px;o
 /*搜索框7*/
       
 .bar7 form {
-	height:62px;
+	height:170px;
 }
-.bar7 input {
+.bar8 input {
 	width:240px;
 	border-radius:42px;
 	border:2px solid #324B4E;
 	background:#F9F0DA;
 	transition:.3s linear;
 	float:right;
+    padding: 15px;
+    margin-top: -110px;
+    margin-right: 20px;
 }
-.bar7 input:focus {
+.bar8 input:focus {
 	width:300px;
+	margin-bottom:80px;
 }
-.bar7 button {
+.bar8 button {
 	background:none;
 	border : none;
-	top:6px;
 	right:0px;
 	position : relative;
-	left : 1050px;
+	font-size: 20px;
+	left : 1040px;
+	margin-top: -117px;
 }
-.bar7 button:before {
+.bar8 button:before {
 	content:"Search";
 	font-family:FontAwesome;
 	color:#324b4e;
 }
 
 #citySel {
+margin-left: 530px;
 width: 200px;
-height : 50px
+height: 40px;
+}
+#value1{
+	width: 120px;
+}
+#\- {
+display: block;
+margin-left: 667px;
+margin-bottom: 75px;
+width: 20px;
+}
+.select {
+  display:flex;
+  flex-direction: column;
+  position:relative;
+  width:250px;
+  height:40px;
+}
+
+.option {
+  padding:0 30px 0 10px;
+  min-height:40px;
+  display:flex;
+  align-items:center;
+  background:#333;
+  border-top:#222 solid 1px;
+  position:absolute;
+  top:0;
+  width: 100%;
+  pointer-events:none;
+  order:2;
+  z-index:1;
+  transition:background .4s ease-in-out;
+  box-sizing:border-box;
+  overflow:hidden;
+  white-space:nowrap;
+  
+}
+
+.search > form:nth-child(1) > input:nth-child(2) {
+ background: wheat;
+ margin-right: 400px;
+ font-style: normal;
+ width: 110px;
+margin-bottom: 30px;
+ margin-top:14px;
+}
+.search > form:nth-child(1) > div:nth-child(2) > input:nth-child(1) {
+margin-left: 530px;
+width: 120px;
+margin-top: 3px;
+float: left;
+}
+.search > form:nth-child(1) > div:nth-child(2) > input:nth-child(3) {
+
+width: 120px;
+margin-left: 700px;
+float: left;
+margin-top: -107px;
+}
+.search > form:nth-child(1) > input:nth-child(4) {
+margin-right: 250px;
+width: 110px;
 }
