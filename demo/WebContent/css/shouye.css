@@ -1232,8 +1232,12 @@ area{outline: none;}
 .Xcontent01{
 	width: 1200px;
 	height: 596px;;
-	margin: auto;
+	margin: 120px;
 	overflow: hidden;
+}
+#img-1 {
+margin-left: 90px;
+margin-top: -50px;
 }
 .Xcontent02>a>p{
 	font-family: "微软雅黑";
