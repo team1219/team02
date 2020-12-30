@@ -15,10 +15,9 @@
 <!-- Owl Carousel Assets -->
 <link href="owl-carousel/owl.carousel.css" rel="stylesheet">
 <link href="owl-carousel/owl.theme.css" rel="stylesheet">
-<!-- 引入vue 和 axios -->
+<!-- 引入vue 和 axios --> 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
-<script
-	src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
 
 <!-- Custom CSS -->
 <link rel="stylesheet" href="css/style.css">
@@ -161,43 +160,19 @@
 	</header>
 
 
- 
 	<!-- /////////////////////////////////////////Content -->
-	<div id="page-content">
-		<div id="main-content">
-			<div class="container" >
-				<article id="menu">
-				<div class="search bar7">
-        <form>
-         <select id="citySel" class="select" @click="changetypeid">
-         <option value="">请选择类型</option>
-         <option  value='1'>生日蛋糕</option>
-         <option  value='2'>杯子蛋糕</option>
-         <option  value='3'>甜甜圈</option>
-         <option  value='4'>面包</option>
-         <option  value='5'>饮品</option>
-         <option  value='6'>小吃</option>
-         <option  value='7'>手工冰淇淋</option>
-         <option  value='8'>甜品</option>
-         </select>
-            <input type="text" id="value" placeholder="搜索" name="crid">
-            <button type="button" @click="search" ></button>
-        </form>
-        </div>
-				<div class="container">
-					<div class="heading" name="1">
+	<div id="page-content" >
+		<div id="main-content" >
+			<div class="container">
+				<article>
+					<div id="heading" class="heading">
 						<h2>
-							<span  class="hr"></span>
+							<span class="hr">Cupcakes</span>
 						</h2>
 					</div>
-					
-                 
-					<div  class="row">
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"
-							v-for="row in xh">
+					<div id="menu" class="row"  >
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" v-for="row in xh">
 							<div class="item-container" v-for="idx in row">
-							<div id="heading" class="heading">
-					</div>
 								<a href="#">
 									<div class="item-caption">
 										<div class="item-caption-inner">
@@ -207,144 +182,144 @@
 											</div>
 										</div>
 									</div> 
-									<img class="cupcakes" :src="list[idx].cimg" alt="..." />
-									<h3>{{list[idx].cname}}</h3>
+									<img class="cupcakes" :src="list[idx].cimg" />
 								</a>
 							</div>
-						
+						</div>
 					</div>
-					</div>
-						<div class="btn-10">
-						<a @click="first" id="btn-f" style="vertical-align:middle;margin-left:340px;"  ><span>首页</span></a>
-						<a @click="up" id="btn-f" style="vertical-align:middle"  ><span>上一页</span></a>  
-						<a @click="next" id="btn-f" style="vertical-align:middle"  ><span>下一页</span></a>
-						<a @click="last" id="btn-f" style="vertical-align:middle"  ><span>尾页</span></a>
-					    </div>
 				</article>
 				<script type="text/javascript">
       var vue = new Vue({
     	   el : "#menu",
     	   data : {
-    		   list : [], //8个商品
-    		   xh : [[]],
-    		   index : 1,  //页数
-    		   size : 8,  //每页显示数量
-    		   typeid : "", //蛋糕类型id
-    		   count : 0, //尾页
-    		   maxPrice : "10000",
-    		   minPrice : "0",
-    		   cname : ""
+    		   list : [], //8个蛋糕
+    		   xh : [[0,1],[2,3],[4,5],[6,7]]
     	   },
-    	  
-  	
     	   created(){
-    		   this.query();
-    		   this.queryCount();
-    	   },
-    	   methods : {
-    		   search(){
-    			   var name=document.getElementById('value').value;
-    			   this.cname = name;
-    			   console.info(this.cname);
-    			   var options=$("#citySel option:selected");
-   		  		   this.typeid=options.val();   //拿到选中项的值
-   		  		   console.info(this.typeid);
-    			   this.index=1;
-    			   this.queryCount();
-    			   this.query();
-   		  		
-    		   },
-    		   changetypeid(){
-    			 var options=$("#citySel option:selected");
-    		     this.typeid=options.val();   //拿到选中项的值
-    			 this.queryCount();
-    		     this.index=1;	
-    		     this.cname="";
-  		  		 this.query();
-    		   },
-    		   query(){
-    		   axios.get("querycake.s?op=queryAllBy",{
-    			   params : {
-   					index : this.index,
-   					size : this.size,
-   				    typeid : this.typeid,
-   				    cname : this.cname,
-   				    maxPrice : this.maxPrice,
-   				    minPrice : this.minPrice
-   				}
-    		   }).then(res=>{
+    		   //axios
+    		   axios.get("querycake.s?op=query").then(res=>{
     			   this.list = res.data;
-    			   if(this.list==0){
-    				   alert("暂无该商品！");
-    			   }else{
-    				   if(this.list.length%this.size==0){
-        				   this.xh = [[0,1],[2,3],[4,5],[6,7]];
-        			   }else if(this.list.length%this.size==1){
-        				   this.xh = [[0]];
-        			   }else if(this.list.length%this.size==2){
-        				   this.xh = [[0,1]];
-        			   }else if(this.list.length%this.size==3){
-        				   this.xh = [[0,1],[2]];
-        			   }else if(this.list.length%this.size==4){
-        				   this.xh = [[0,1],[2,3]];
-        			   }else if(this.list.length%this.size==5){
-        				   this.xh = [[0,1],[2,3],[4]];
-        			   }else if(this.list.length%this.size==6){
-        				   this.xh = [[0,1],[2,3],[4,5]];
-        			   }else if(this.list.length%this.size==7){
-        				   this.xh = [[0,1],[2,3],[4,5],[6]];
-        			   }
-    			   }
-    		   })
-    	   },
-    	   queryCount(){
-    		   axios.get("querycake.s?op=queryCountAll",{
-    			   params : {
-   				    typeid : this.typeid,
-   				    size : this.size,
-   				    cname : this.cname,
-   				}
-    		   }).then(res=>{
-    			   this.count = res.data;
-    			   console.info(this.count);
-    		   })
-    	   },
-    	   first(){
-    		   this.index=1;
-    		   this.query();
-    	   },
-    	   last(){
-    		  this.queryCount();
-    		  this.index = this.count;
-   			  
-   			   this.query();
-    	   },
-    		 up(){
-    			 if(this.index==1){
-    				 alert("已到第一页");
-    				 this.index=1;
-    			 }else{
-    				 this.index-=1;  				 
-    			 } 
-    			 this.query();
-    		 },
-    		 
-    		 next(){
-    			 if(this.index>=this.count){
-    				this.index=this.count;
-    				alert("已到最后一页")
-    			 }else{
-    				 this.index+=1; 
-    			 }
-    			 this.query();
-    		 } ,
-    		 
+    			   console.info(this.list);
+    		   });
     	   }
-    	  
-      })
+       })
        </script>
+				<hr>
+				<article>
+					<div class="heading">
+						<h2>
+							<span class="hr">Donuts</span>
+						</h2>
+					</div>
+					<div class="row">
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+							<div class="item-container">
+								<a href="#">
+									<div class="item-caption">
+										<div class="item-caption-inner">
+											<div class="item-caption-inner1">
+												<h3>$45</h3>
+												<span>Only</span>
+											</div>
+										</div>
+									</div> <img src="images/menu-13.jpg" />
+								</a>
+							</div>
+							<div class="item-container">
+								<a href="#">
+									<div class="item-caption">
+										<div class="item-caption-inner">
+											<div class="item-caption-inner1">
+												<h3>$45</h3>
+												<span>Only</span>
+											</div>
+										</div>
+									</div> <img src="images/menu-14.jpg" />
+								</a>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+							<div class="item-container">
+								<a href="#">
+									<div class="item-caption">
+										<div class="item-caption-inner">
+											<div class="item-caption-inner1">
+												<h3>$45</h3>
+												<span>Only</span>
+											</div>
+										</div>
+									</div> <img src="images/menu-1.jpg" />
+								</a>
+							</div>
+							<div class="item-container">
+								<a href="#">
+									<div class="item-caption">
+										<div class="item-caption-inner">
+											<div class="item-caption-inner1">
+												<h3>$45</h3>
+												<span>Only</span>
+											</div>
+										</div>
+									</div> <img src="images/menu-15.jpg" />
+								</a>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+							<div class="item-container">
+								<a href="#">
+									<div class="item-caption">
+										<div class="item-caption-inner">
+											<div class="item-caption-inner1">
+												<h3>$45</h3>
+												<span>Only</span>
+											</div>
+										</div>
+									</div> <img src="images/menu-16.jpg" />
+								</a>
+							</div>
+							<div class="item-container">
+								<a href="#">
+									<div class="item-caption">
+										<div class="item-caption-inner">
+											<div class="item-caption-inner1">
+												<h3>$45</h3>
+												<span>Only</span>
+											</div>
+										</div>
+									</div> <img src="images/menu-12.jpg" />
+								</a>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+							<div class="item-container">
+								<a href="#">
+									<div class="item-caption">
+										<div class="item-caption-inner">
+											<div class="item-caption-inner1">
+												<h3>$45</h3>
+												<span>Only</span>
+											</div>
+										</div>
+									</div> <img src="images/menu-15.jpg" />
+								</a>
+							</div>
+							<div class="item-container">
+								<a href="#">
+									<div class="item-caption">
+										<div class="item-caption-inner">
+											<div class="item-caption-inner1">
+												<h3>$45</h3>
+												<span>Only</span>
+											</div>
+										</div>
+									</div> <img src="images/menu-9.jpg" />
+								</a>
+							</div>
+						</div>
+					</div>
+				</article>
 			</div>
-			</div>
+		</div>
 	</div>
 
 	<!-- FOOTER -->
