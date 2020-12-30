@@ -11,7 +11,7 @@ letter-spacing: 1px;}
 html, body {width:100%; padding:0; margin:0;}
 
 ::-moz-selection{background:#816943;color:#fff;text-shadow:none}
-::selection{background:#816943;color:#fff;text-shadow:none}
+::selection{background:#816943;color:#fff;text-shadow:none;width:300px;height:50px}
 /* ---------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------- */
@@ -27,7 +27,24 @@ h5 {font-size: 24px;}
 h6 {font-size: 20px;}
 
 h1,h2,h3,h4,h5,h6 {font-weight: 600;color: #111;}
-
+input:not([type]), input[type="color"], input[type="email"], input[type="number"], input[type="password"], input[type="tel"], input[type="url"], input[type="text"], textarea, .form-control, select {
+    border: 2px solid #E7E7E7;
+    border-radius: 0 0 0 0;
+    box-shadow: none;
+    color: #999999;
+    display: block;
+    font-size: 20px;
+    font-weight: normal;
+    height: 30px;
+    line-height: 5px;
+    margin: 10px 0;
+    outline: medium none;
+    padding: 7px 10px 4px;
+    transition: border-color 0.2s ease-in-out 0s, color 0.2s ease-in-out 0s;
+    width: 40%;
+	background-color: transparent;
+    border: 2px solid #444444;
+}
 p { color:#816943;}
 
 a {
@@ -40,24 +57,7 @@ a {
 a:hover,
 a:focus {color: #666;text-decoration: none;}
 
-input:not([type]), input[type="color"], input[type="email"], input[type="number"], input[type="password"], input[type="tel"], input[type="url"], input[type="text"], input[type="search"], textarea, .form-control, select {
-    border: 2px solid #E7E7E7;
-    border-radius: 0 0 0 0;
-    box-shadow: none;
-    color: #999999;
-    display: block;
-    font-size: 20px;
-    font-weight: normal;
-    height: 40px;
-    line-height: 1.2;
-    margin: 10px 0;
-    outline: medium none;
-    padding: 7px 10px 4px;
-    transition: border-color 0.2s ease-in-out 0s, color 0.2s ease-in-out 0s;
-    width: 100%;
-	background-color: transparent;
-    border: 2px solid #444444;
-}
+
 
 .f-right{float: right;}
 .f-left{float: left;}
@@ -389,8 +389,8 @@ a.btn:focus{outline: 0;}
 }
 .item-container img {
 	display: block;
-	width: 50px;
-	height: 50px;
+	width: 200px;
+	height: 200px;
 }
 .item-container .item-caption {
 	position: absolute;
@@ -408,15 +408,13 @@ a.btn:focus{outline: 0;}
 }
 .item-caption:hover{opacity: 0.9;}
 
-.item-caption:after{
-	width:300px; height:100px
-}
+.item-caption:after,
 .item-caption:before {
 border: 1px solid rgba(255, 255, 255, 0.7);bottom: 1em;content: '';left: 500px;opacity: 0;position: absolute;right: 1em;top: 1em;
 -webkit-transform: scale(1.5);-ms-transform: scale(1.5);transform: scale(1.5);-webkit-transition: 0.6s 0.2s;transition: 0.6s 0.2s;
 }
 .item-caption:before {border-bottom: none;border-top: none;left: 500px;right: 2em;}
-.item-caption:after {margin-left:100px;border-left: 500px;border-right: none;bottom: 2em;top: 2em;}
+.item-caption:after {border-left: none;border-right: none;bottom: 2em;top: 2em;}
 .item-caption:hover:after,
 .item-caption:hover:before {-webkit-transform: scale(1);-ms-transform: scale(1);transform: scale(1);opacity: 1;}
 
@@ -493,8 +491,8 @@ border: 1px solid rgba(255, 255, 255, 0.7);bottom: 1em;content: '';left: 500px;o
 
 @media (min-width: 992px){
 .col-md-3 {
-    width: 30%;
-    margin-left: 160px;
+    width: 25%;
+    padding-left : 50px;
 }
 }
 @media(min-width:1000px) {
@@ -599,8 +597,8 @@ border: 1px solid rgba(255, 255, 255, 0.7);bottom: 1em;content: '';left: 500px;o
   transition: all 0.5s;
   cursor: pointer;
   margin-top:20px;
-  margin-left : 30px;
-  padding-top:7px;
+  margin-left : -10px;
+  padding-top:9px;
 }
 
 #loginbtn span {
@@ -641,8 +639,8 @@ border: 1px solid rgba(255, 255, 255, 0.7);bottom: 1em;content: '';left: 500px;o
   transition: all 0.5s;
   cursor: pointer;
   margin-top:20px;
-  margin-left: 50px;
-  padding-top:7px;
+  margin-left: 55px;
+  padding-top:9px;
 }
 
 #registerbtn span {
@@ -683,7 +681,7 @@ border: 1px solid rgba(255, 255, 255, 0.7);bottom: 1em;content: '';left: 500px;o
   transition: all 0.5s;
   cursor: pointer;
   margin-top:20px;
-  margin-left: 100px;
+  margin-left: 230px;
   padding-top:7px;
 }
 
@@ -712,8 +710,108 @@ border: 1px solid rgba(255, 255, 255, 0.7);bottom: 1em;content: '';left: 500px;o
   right: 0;
 }
 .t{
-	width: 300px;
-	line-height: 30px;
+	display : block;
+	width: 600px;
+	line-height: 25px;
 	float : left;
-	margin-left : 420px;
+	margin-left : 450px;
+}
+.t label{
+	width:150px;
+	text-align:right;
+	margin-left : -390px;
+}
+.t1{
+	display : block;
+	width: 600px;
+	line-height: 25px;
+	float : left;
+	margin-left : 250px;
+}
+.t1 label{
+	width:150px;
+	text-align:right;
+	margin-left : -390px;
+}
+.btn-10{
+	width : 100%;
+	margin-top : 50px;
+}
+
+
+#btn-f{
+  display: block;
+  border-radius: 4px;
+  background-color: #816943;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 18px; 
+  float : left;
+  width: 100px;
+  height : 50px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin-top:0px;
+  margin-left : 30px;
+  padding-top:7px;
+}
+
+#btn-f span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+#btn-f span:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+#btn-f:hover span {
+  padding-right: 25px;
+}
+
+#btn-f:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+/*搜索框7*/
+      
+.bar7 form {
+	height:62px;
+}
+.bar7 input {
+	width:240px;
+	border-radius:42px;
+	border:2px solid #324B4E;
+	background:#F9F0DA;
+	transition:.3s linear;
+	float:right;
+}
+.bar7 input:focus {
+	width:300px;
+}
+.bar7 button {
+	background:none;
+	border : none;
+	top:6px;
+	right:0px;
+	position : relative;
+	left : 1050px;
+}
+.bar7 button:before {
+	content:"Search";
+	font-family:FontAwesome;
+	color:#324b4e;
+}
+
+#citySel {
+width: 200px;
+height : 50px
 }

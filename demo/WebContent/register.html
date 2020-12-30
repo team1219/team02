@@ -75,28 +75,28 @@
     </nav>
 	<!-- Navigation -->
 	<header class="container">
-	<div align="center" class="t">
+	<div align="center" class="t1">
 			<form id="regForm" name="regForm" action="" method="post">
 				<br>
-				<label>用户名</label>
-				<input v-model="user.uName" tabindex="1" type="text" maxlength="20" size="35" name="uName" class="input">
+				<label>用户名:</label>
+				<input v-model="user.uName" tabindex="1" type="text" maxlength="20" size="20" name="uName" class="input">
 				<br>
-				<label>密 码</label>
-				<input v-model="user.uPass" tabindex="2" type="password" maxlength="20" size="35" name="uPass" class="input">
+				<label>密  码:</label>
+				<input v-model="user.uPass" tabindex="2" type="password" maxlength="20" size="20" name="uPass" class="input">
 				<br>
-				<label>重复密码</label>
-				<input v-model="user.uPass1" tabindex="3" type="password" maxlength="20" size="35" name="uPass1" class="input">
+				<label>重复密码:</label>
+				<input v-model="user.uPass1" tabindex="3" type="password" maxlength="20" size="20" name="uPass1" class="input">
 				<br>
-				<label>性别</label>
-				<span  style="width: 248px; display: inline-block; margin: 5px;">
+				<span  style="width: 248px; display: inline-block; margin: 10px;">
 					女
 					<input v-model="user.gender" type="radio" name="gender" value="0">
+					
 					男
 					<input v-model="user.gender" type="radio" name="gender" value="1">
 				</span>
 				<br />
 				<fieldset style="display: inline-block; margin: 5px;">
-					<legend> 请选择头像 </legend>
+					<legend> 请选择头像:</legend>
 					<img src="image/head/1.gif">
 					<input v-model="user.head" type="radio" name="head" value="1.gif">
 					<img src="image/head/2.gif">

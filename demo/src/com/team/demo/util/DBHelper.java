@@ -2,7 +2,14 @@ package com.team.demo.util;
 
 import java.io.InputStream;
 import java.lang.reflect.Field;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -67,6 +74,7 @@ public class DBHelper {
 		try {
 			// 创建语句对象
 			PreparedStatement ps = conn.prepareStatement(sql);
+			
 			// 设置查询参数
 			for (int i = 0; i < params.length; i++) {
 				ps.setObject(i + 1, params[i]);
@@ -230,6 +238,26 @@ public class DBHelper {
 		Map<String, Object> ret = selectOneMap(sql, params);
 		// 将 值 集合转换成数组，返回第一个值（查询结果中的第一列的值）
 		return ret.values().toArray()[0];
+	}
+	
+	/**
+	 * 查询数量
+	 * @return
+	 * @throws SQLException
+	 */
+	public static int count(String sql) throws SQLException{   
+		    int count=0;
+		    try {  
+		        	Connection conn=getConnection();
+		            PreparedStatement pstmt=conn.prepareStatement(sql);  
+		            ResultSet rs=pstmt.executeQuery();  
+		            while(rs.next()){  
+		                count=rs.getInt(1);  
+		            }  
+		        } catch (SQLException e) {  
+		            e.printStackTrace();  
+		        }  
+		        return count;  
 	}
 
 	/**
