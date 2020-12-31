@@ -138,4 +138,14 @@ public class CakeDAO {
 			return 0;
 		}
 	}
+	
+	public List<?> queryCid(int cid){
+		String sql = "select * from cake where cid = " + cid;
+		try {
+			return DBHelper.selectListMap(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
