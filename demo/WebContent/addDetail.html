@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>蛋糕信息添加</title>
+	<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
+	<script type="text/javascript" src="easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
+	
+	<script type="text/javascript">
+	
+	function fmtcz(value,row,index){
+		//函数的返回值 会被解析成html 元素
+		return "<button onclick='del("+index+")'>删除</button>";
+		
+	}
+	
+	function del(index){
+		$.messager.confirm('确认对话框','您确认删除该订单吗？',function(r){
+		    if (r){
+		    	//根据index值删除记录
+				//根据index获取当前行的id值
+				var rows=$("#table").datagrid('getRows');
+				var did=rows[index].did;		
+				//发起ajax请求 删除数据库的记录
+				//调用ajax方法删除歌手信息
+				
+				//jquery的post方法 3个参数 url，param，回调函数
+				var url="delDetail.s";
+				var params={did:did};  //jquery使用对象传入参数
+				function callback(data){
+					//刷新表格数据
+					$("#table").datagrid('reload');
+					$.messager.show({
+					    title:'系统提示',
+					    msg:data,
+					    timeout:5000,
+					    showType:'slide'
+					});
+				}
+				$.post(url,params,callback);
+		    }
+		});
+	
+	}
+	
+	function edit(){
+		$("#dd").dialog('open');
+	}
+	
+	function save(){
+		$('#ff').form('submit',{
+			url:"addDetail.s",
+			success:function(data){
+				$("table").datagrid('reload');
+				$.messager.show({
+					title:'系统提示',
+					msg:data,
+					timeout:5000,
+					showType:'slide'
+				});
+			}
+			
+		});
+		
+	}
+	</script>
+</head>
+<body>
+<div id="cc" class="easyui-layout" data-options="fit:true">
+     <div data-options="region:'north',title:'查询条件' " style="height:100px;">
+     <a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
+     <a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'"
+     onClick="edit()">新增</a>
+     </div>
+     <div data-options="region:'center',title:'查询结果' "   style="padding:5px;background:#eee;">
+     <table id="table" class="easyui-datagrid" data-options="
+     fit:true,
+     url:'detailQueryPage.s',
+     fitColumns:true,singleSelect:true,
+     pagination:true">
+    <thead>
+        <tr>
+           <th data-options="field:'did',width:35">编码</th> 
+           <th data-options="field:'typename',width:70">种类</th>
+            <th data-options="field:'cname',width:70">名称</th>
+            <th data-options="field:'pid',width:80">订单编号</th>
+            <th data-options="field:'pretime',width:150">订购时间</th>
+            <th data-options="field:'gettime',width:150">取货时间</th>
+            <th data-options="field:'cnum',width:50">数量</th>
+            <th data-options="field:'cprice',width:50">总价</th>
+            <th data-options="field:'tel',width:100">电话</th>
+            <th data-options="field:'uname',width:70">姓名</th>
+            <th data-options="field:'addr',width:150">地址</th>
+            <th data-options="field:'unlive',width:30,formatter:fmtcz">操作</th>
+        </tr>
+    </thead>
+   </table>
+   </div>
+   </div>
+   <div id="dd"
+    class="easyui-dialog"
+    title="My Dialog"
+	style="width:400px;height:400px;"
+	 data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
+  <form style="text-align: center; " id="ff">
+
+  <input name="cname" id="tb" class="easyui-textbox" prompt="名称"><br>
+  <input  name="pretime" id="tb" class="easyui-textbox" prompt="订购时间"><br>
+  <input  name="gettim" id="tb" class="easyui-textbox" prompt="取货时间"><br>
+  <input  name="cnum" id="tb" class="easyui-textbox" prompt="数量"><br>
+  <input  name="cprice" id="tb" class="easyui-textbox" prompt="总价"><br>
+  <input  name="tel" id="tb" class="easyui-textbox" prompt="电话"><br>
+  <input  name="uname" id="tb" class="easyui-textbox" prompt="姓名"><br>
+  <input  name="addr" id="tb" class="easyui-textbox" prompt="地址"><br>
+  <a id='btn' href="#" class="easyui-linkbutton" 
+  data-options="
+  iconCls:'icon-save',
+  onClick:save">保存</a>
+  <a id='btn' href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">取消</a>
+  </form>
+  
+  
+  
+</div>
+</body>
+</html>
