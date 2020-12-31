@@ -61,4 +61,9 @@ public class CakeQueryServlet extends BaseServlet {
 		write(response, totalPage);
 	}
 
+	public void queryCid(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		String cid = request.getParameter("cid");
+		System.out.println(cdao.queryCid(Integer.parseInt(cid)));
+		write(response,cdao.queryCid(Integer.parseInt(cid)));
+	}
 }
