@@ -64,7 +64,7 @@
 					<li><a class="page-scroll" href="single.html">About</a></li>
 					<li><a class="page-scroll" href="menu.html">Menu</a></li>
 					<li><a class="page-scroll" href="blog.html">Blog</a></li>
-					<li><a class="page-scroll" href="contact.html">Contact</a></li>
+					<li><a class="page-scroll" href="details.html">Details</a></li>
 					<li><a class="page-scroll" href="login.html">Login</a></li>
 					<li><a class="page-scroll" href="register.html">Register</a></li>
 				</ul>
@@ -192,7 +192,7 @@
          </div>     
          <div class="bar8">
          <input type="text" id="value" placeholder="搜索" name="crid">
-         <button type="button" @click="search" ></button>
+         <button id="btn-search" v-on:keyup.13.native="btnsearch" type="button"  @click="search" ></button>
          </div> 
          
         </form>
@@ -204,7 +204,7 @@
 							<div class="item-container" v-for="idx in row">
 							<div id="heading" class="heading">
 					</div>
-								<a :href="'contact.html#' + list[idx].cid">
+								<a :href="'details.html#' + list[idx].cid">
 									<div class="item-caption">
 										<div class="item-caption-inner">
 											<div class="item-caption-inner1">
@@ -248,10 +248,19 @@
     		   this.query();
     		   this.queryCount();
     		   this.show();
+    		   var _this = this;
+    		    document.onkeydown = function(e) {
+    		      let key = window.event.keyCode;
+    		      if (key == 13) {
+    		        _this.btnsearch();
+    		      }
+    		    };
     	   },
-    	   methods : {
+    	   methods : {   
+    		   btnsearch(){
+    			   this.search();
+    		   },
     		   show(){
-    			   console.info("+++"+this.typeid);
     			   if(this.typeid==""){
     				   this.typename = "甜品展示";
     			   }else if(this.typeid==1){
@@ -271,7 +280,6 @@
     			   }else if(this.typeid==8){
     				   this.typename="甜品";
     			   }
-    			   console.info("+++"+this.typename);
     		   },
     		   search(){
     			   this.show();
