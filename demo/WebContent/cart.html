@@ -3,11 +3,15 @@
   <!-- META DATA -->
 	<meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Free Responsive Html5 Templates">
     <meta name="author" content="">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
 
-	<title></title>
+<!--css类引用-->
+<link rel="stylesheet" href="js/layui/css/layui.css" />
+<link rel="stylesheet" href="js/eleme-ui/index.css" />
+<link rel="stylesheet" href="css/ShoppingCart.css" />
+	<title>购物车</title>
   
 	<!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css"  type="text/css">
@@ -29,7 +33,53 @@
         <script src="js/html5shiv.js"></script>
         <script src="js/respond.min.js"></script>
     <![endif]-->
-	
+	<link rel="stylesheet" href="css/shouye.css">
+
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/modernizr-custom-v2.7.1.min.js"></script>
+<script>
+	$(document).ready(function() {
+		var $miaobian = $('.Xcontent08>div');
+		var $huantu = $('.Xcontent06>img');
+		var $miaobian1 = $('.Xcontent26>div');
+		$miaobian.mousemove(function() {
+			miaobian(this);
+		});
+		$miaobian1.click(function() {
+			miaobian1(this);
+		});
+		function miaobian(thisMb) {
+			for (var i = 0; i < $miaobian.length; i++) {
+				$miaobian[i].style.borderColor = '#dedede';
+			}
+			thisMb.style.borderColor = '#cd2426';
+
+			$huantu[0].src = thisMb.children[0].src;
+		}
+		function miaobian1(thisMb1) {
+			for (var i = 0; i < $miaobian1.length; i++) {
+				$miaobian1[i].style.borderColor = '#dedede';
+			}
+			//thisMb.style.borderColor = '#cd2426';
+			$miaobian.css('border-color', '#dedede');
+			thisMb1.style.borderColor = '#cd2426';
+			$huantu[0].src = thisMb1.children[0].src;
+		}
+		$(".Xcontent33").click(function() {
+			var value = parseInt($('.input').val()) + 1;
+			$('.input').val(value);
+		})
+
+		$(".Xcontent32").click(function() {
+			var num = $(".input").val()
+			if (num > 0) {
+				$(".input").val(num - 1);
+			}
+
+		})
+
+	})
+</script>
 </head>
 
  <body>
@@ -52,7 +102,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                     <li class="hidden">
+                    <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
                     <li>
@@ -70,7 +120,7 @@
                     <li>
                         <a class="page-scroll" href="details.html">Details</a>
                     </li>
-                    <li>
+                     <li>
                         <a class="page-scroll" href="login.html">Login</a>
                     </li>
                     <li>
@@ -82,6 +132,7 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
+    
 	<!-- Navigation -->
 	<header class="container">
 		<p class="text-center">Monday - Friday <strong>11AM to 2PM</strong>, Saturday - Sunday <strong>9Am to 2PM</strong></p>
@@ -141,89 +192,88 @@
 		<div id="main-content">
 			<div class="container">
 				<article>
-					<div class="row">
-						<div class="col-lg-12">
-							<ul class="timeline">
-								<li class="blue">
-									<div class="timeline-image">
-										<img class="img-circle img-responsive" src="images/time-1.jpg" alt="">
-									</div>
-									<div class="timeline-panel">
-										<div class="timeline-heading">
-											<h4>2008-2009</h4>
-											<h4 class="subheading">Aquatic Environment</h4>
-										</div>
-										<div class="timeline-body">
-											<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-										</div>
-									</div>
-								</li>
-								<li class="timeline-inverted red">
-									<div class="timeline-image">
-										<img class="img-circle img-responsive" src="images/time-2.jpg" alt="">
-									</div>
-									<div class="timeline-panel">
-										<div class="timeline-heading">
-											<h4>2010-2011</h4>
-											<h4 class="subheading">Aquatic Environment</h4>
-										</div>
-										<div class="timeline-body">
-											<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-										</div>
-									</div>
-								</li>
-								<li class="green">
-									<div class="timeline-image">
-										<img class="img-circle img-responsive" src="images/time-3.jpg" alt="">
-									</div>
-									<div class="timeline-panel">
-										<div class="timeline-heading">
-											<h4>2012-2013</h4>
-											<h4 class="subheading">Transitional period</h4>
-										</div>
-										<div class="timeline-body">
-											<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-										</div>
-									</div>
-								</li>
-								<li class="timeline-inverted yellow">
-									<div class="timeline-image">
-										<img class="img-circle img-responsive" src="images/time-4.jpg" alt="">
-									</div>
-									<div class="timeline-panel">
-										<div class="timeline-heading">
-											<h4>July 2014</h4>
-											<h4 class="subheading">Terrestrial Environment</h4>
-										</div>
-										<div class="timeline-body">
-											<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-										</div>
-									</div>
-								</li>
-								<li class="green">
-									<div class="timeline-image">
-										<img class="img-circle img-responsive" src="images/time.jpg" alt="">
-									</div>
-									<div class="timeline-panel">
-										<div class="timeline-heading">
-											<h4>2015</h4>
-											<h4 class="subheading">Terrestrial Environment</h4>
-										</div>
-										<div class="timeline-body">
-											<p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
-										</div>
-									</div>
-								</li>
-								<li class="timeline-inverted ">
-									<div class="timeline-image">
-										<h4>To
-										<br>Be
-										<br>Continue!</h4>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>	
+					<div class="heading">
+						<h2>
+							<span class="hr" style="color: #5D5454;text-transform: uppercase;font-size: 55px;">购物车</span>
+						</h2>
+					</div>
+					<!--主要内容-->
+<div class="row " id="myVue" v-cloak>
+	<div class="col-lg-10 col-lg-offset-1" >
+		<div class="layui-form">
+			<table class="ShopCartTable layui-table">
+				<thead>
+					<tr>
+						<th class="selectLeft">
+							<template>
+								<el-checkbox  @change="checkedAllBtn(checkedAll)" v-model="checkedAll">全选</el-checkbox>
+							</template>
+							<span class="selectLeftGoods">甜品图片及名称</span>
+						</th>
+						<th>单价</th>
+						<th>数量</th>
+						<th>小计</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="(tabledatas,index) in shopTableDatas">
+						<td  class="selectLeft">
+							<template>
+								<el-checkbox @change="checkedRadioBtn(tabledatas)" v-model="tabledatas.checked"></el-checkbox>
+							</template>
+							<span class="goodName">
+								<img class="goodImg" :src="tabledatas.src" />
+							</span>
+							<span class="goodName goodsName">
+								<h2 class="goodname" v-text="tabledatas.name"></h2>
+								<p class="goodGary">
+									<span>供应商：</span>
+									<span v-text="tabledatas.supplier"></span>
+								</p>
+								<p class="goodGary">
+									<span>发货地：</span>
+									<span v-text="tabledatas.ConPlace"></span>
+								</p>
+							</span>
+						</td>
+						<td class="danPrice">{{tabledatas.price | moneyFiler}}</td>
+						<td >
+						<div class="num">
+						<i class="num-jian" @click="goodNum(tabledatas,-1)" class="fa  deleteBtn" aria-hidden="true">-</i>
+							<input class="num-n" v-model="tabledatas.num" type="text" class="form-control numInput" aria-label="...">
+							<i class="num-jia" @click="goodNum(tabledatas,1)" class="fa  addBtn" aria-hidden="true">+</i>
+						</div>			
+						</td>
+						<td>
+							<p class="totalPrice">{{tabledatas.price*tabledatas.num | moneyFiler}}</p>
+						</td>
+						<td class="gongneng">
+							<p class="deletegoods" @click="alertRadio(index)">删除</p>
+							<p @click="alertmovesSavegoods(index)">移到我的收藏</p>
+							<template v-if="tabledatas.saveandremove">
+								<p @click="tabledatas.saveandremove = false">加入收藏</p>
+							</template>
+							<template v-else>
+								<p :class="{'saveCheck':!tabledatas.saveandremove}" @click="tabledatas.saveandremove = true">取消收藏</p>
+							</template>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="row tablefooter">
+				<template>
+					<el-checkbox style="padding-left:16px" @change="checkedAllBtn(checkedAll)" v-model="checkedAll">全选</el-checkbox>
+				</template>
+				<span class="removeMuch" @click="alertMuch">删除选中的商品或服务</span>
+				<span class="removeSaves" @click="alertMuchgoods">移到我的收藏</span>
+				<span class="servicenum">已选择<span class="goodsNum">{{goodsNum}}</span>件商品<span class="goodsNum">{{serviceNum}}</span>项服务</span>
+				<span class="totalclassPoin">总价：<span class="totalMoneyClass">{{totalMoney | moneyFiler}}</span></span>
+				<span @click="saveData" class="SettlementBtn">去结算</span>
+			</div>
+		</div>
+	</div>
+</div>
 				</article>
 			</div>
 		</div>
@@ -290,35 +340,6 @@
 				</div>
 			</div>
 		</div>
-		<div class="bottom-footer">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4">
-						<p>Copyright &copy; 2019.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
-					</div>
-					<div class="col-md-4">
-						<ul class="list-inline social-buttons">
-							<li><a href="#"><i class="fa fa-twitter"></i></a>
-							</li>
-							<li><a href="#"><i class="fa fa-facebook"></i></a>
-							</li>
-							<li><a href="#"><i class="fa fa-linkedin"></i></a>
-							</li>
-							<li><a href="#"><i class="fa fa-pinterest"></i></a>
-							</li>
-						</ul>
-					</div>
-					<div class="col-md-4">
-						<ul class="list-inline quicklinks">
-							<li><a href="#">Privacy Policy</a>
-							</li>
-							<li><a href="#">Terms of Use</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
 	</footer>
   
 	<!-- jQuery -->
@@ -357,5 +378,11 @@
 	  $('.maps iframe').css("pointer-events", "none"); 
 	});
 	</script>
+	<!--js类引用-->
+<script type="text/javascript" src="js/vue/vue.min.js" ></script>
+<script type="text/javascript" src="js/eleme-ui/index.js" ></script>
+<script type="text/javascript" src="js/ShoppingCart.js" ></script>
+
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
 </body>
 </html>

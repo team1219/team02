@@ -64,7 +64,7 @@
 					<li><a class="page-scroll" href="single.html">About</a></li>
 					<li><a class="page-scroll" href="menu.html">Menu</a></li>
 					<li><a class="page-scroll" href="blog.html">Blog</a></li>
-					<li><a class="page-scroll" href="details.html">Contact</a></li>
+					<li><a class="page-scroll" href="details.html">Details</a></li>
 					<li><a class="page-scroll" href="login.html">Login</a></li>
 					<li><a class="page-scroll" href="register.html">Register</a></li>
 				</ul>
@@ -204,7 +204,7 @@
 							<div class="item-container" v-for="idx in row">
 							<div id="heading" class="heading">
 					</div>
-								<a href="#">
+								<a :href="'details.html#' + list[idx].cid">
 									<div class="item-caption">
 										<div class="item-caption-inner">
 											<div class="item-caption-inner1">
