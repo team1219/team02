@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>用户信息添加</title>
+	<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
+	<script type="text/javascript" src="easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
+	
+	<script type="text/javascript">
+	function fmtcz(value,row,index){
+		//函数的返回值 会被解析成html 元素
+		return "<button onclick='del("+index+")'>删除</button>";
+		
+	}
+	
+	function del(index){
+		$.messager.confirm('确认对话框','您确认删除该用户吗？',function(r){
+		    if (r){
+		    	//根据index值删除记录
+				//根据index获取当前行的id值
+				var rows=$("#table").datagrid('getRows');
+				var uid=rows[index].uid;		
+				//发起ajax请求 删除数据库的记录
+				//调用ajax方法删除歌手信息
+				//jquery的post方法 3个参数 url，param，回调函数
+				var url="delUser.s";
+				var params={uid:uid};  //jquery使用对象传入参数
+				function callback(data){
+					//刷新表格数据
+					$("#table").datagrid('reload');
+					$.messager.show({
+					    title:'系统提示',
+					    msg:data,
+					    timeout:5000,
+					    showType:'slide'
+					});
+				}
+				$.post(url,params,callback);
+		    }
+		});
+	
+	}
+	
+	function edit(){
+		$("#dd").dialog('open');
+	}
+	
+	function save(){
+		$('#ff').form('submit',{
+			url:"addUser.s",
+			success:function(data){
+				$("table").datagrid('reload');
+				$.messager.show({
+					title:'系统提示',
+					msg:data,
+					timeout:5000,
+					showType:'slide'
+				});
+			}
+			
+		});
+	}
+	</script>
+</head>
+<body>
+<div id="cc" class="easyui-layout" data-options="fit:true">
+     <div data-options="region:'north',title:'查询条件' " style="height:100px;">
+     <a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
+     <a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'"
+     onClick="edit()">新增</a>
+     </div>
+     <div data-options="region:'center',title:'查询结果' "   style="padding:5px;background:#eee;">
+     <table id="table" class="easyui-datagrid" data-options="
+     fit:true,
+     url:'addUserQuery.s',
+     fitColumns:true,singleSelect:true,
+     pagination:true">
+    <thead>
+        <tr>
+            <th data-options="field:'uid',width:35">编码</th>
+            <th data-options="field:'uname',width:70">姓名</th>
+            <th data-options="field:'upass',width:80">密码</th>
+            <th data-options="field:'gender',width:80">性别</th>
+            <th data-options="field:'status',width:80">状态</th>
+            <th data-options="field:'unlive',width:30,formatter:fmtcz">操作</th>
+        </tr>
+    </thead>
+   </table>
+   </div>
+   </div>
+   <div id="dd"
+    class="easyui-dialog"
+    title="My Dialog"
+	style="width:400px;height:250px;"
+	 data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
+  <form style="text-align: center; " id="ff">
+  <input name="uname" id="tb" class="easyui-textbox" prompt="姓名"><br>
+  <input name="upass" id="tb" class="easyui-textbox" prompt="密码"><br>
+  <input  name="gender" id="tb" class="easyui-textbox" prompt="性别（0：男 1：女）"><br>
+  <input  name="ustatus" id="tb" class="easyui-textbox" prompt="状态（0：禁用1：允许）"><br>
+  <a id='btn' href="#" class="easyui-linkbutton" 
+  data-options="
+  iconCls:'icon-save',
+  onClick:save">保存</a>
+  <a id='btn' href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">取消</a>
+  </form>
+</div>
+</body>
+</html>

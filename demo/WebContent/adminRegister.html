@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
+	<script type="text/javascript" src="easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+</head>
+<body class="easyui-layout" style="background: no-repeat;background-size: 100%;">
+		<div id="w" class="easyui-window" title="用户注册" collapsible="false"
+			minimizable="false" maximizable="false" icon="icon-save"
+			style="width: 450px; height: 330px; padding: 30px; background: #fafafa;"
+			data-options="closable:false,draggable:false">
+			<form id="register" action="adminLogin.html">
+			<!-- menulogin -->
+				<div style="margin-bottom: 20px">
+					<input v-model="aname" id="aname" 
+					class="easyui-textbox" 
+						prompt="usercode" iconWidth="28" 
+						data-options="label:'用户名:',required:true"
+						style="width: 300px; height: 34px; padding: 10px;">
+				</div>
+				<div style="margin-bottom: 20px">
+					<input v-model="apwd" id="apwd" 
+					 class="easyui-passwordbox" 
+						prompt="password" iconWidth="28"
+						data-options="label:'密码:',required:true"
+						style="width: 300px; height: 34px; padding: 10px">
+				</div>
+			
+				<div style="margin-bottom: 20px">
+					<input v-model="atel" id="atel" 
+					 class="easyui-textbox"  
+						prompt="telphone" iconWidth="28"
+						data-options="label:'联系电话:',required:true"
+						style="width: 300px; height: 34px; padding: 10px">
+				</div>
+				<div style="margin-bottom: 20px">
+					<input v-model="aemail" id="aemail" 
+					 class="easyui-textbox"  
+						prompt="email" iconWidth="28"
+						data-options="label:'电子邮箱:',required:true"
+						style="width: 300px; height: 34px; padding: 10px">
+				</div>
+			<div style="text-align: center; padding: 5px 0">
+				<a @click="register" id="regbtn" style="vertical-align:middle ;width: 80px"
+					class="easyui-linkbutton" ><span>确定</span></a>
+				<a href="adminLogin.html" id="registerbtn" style="vertical-align:middle ;width: 80px"
+					class="easyui-linkbutton" ><span>退出</span></a>
+				
+			</div>
+			</form>
+		   
+		</div>
+	</body>
+	<script type="text/javascript">
+	    var v = new Vue({
+	    	el : "#register",
+	    	data : {
+	    		aname: "",
+	    		apwd : "",
+	    		atel: "",
+	    		aemail: "",
+	    		ret : 0
+	    	},
+	    	methods : {
+	    		register(){
+	    			// post 请求 发送的数据量没有限制
+	    			var p = new URLSearchParams(); //用于封装post请求参数
+	    			//p.append("参数名","参数值");
+	    			p.append("aname",$("#aname").textbox("getValue"));
+	    			p.append("apwd",$("#apwd").textbox("getValue"));
+	    			p.append("atel",$("#atel").textbox("getValue"));
+	    			p.append("aemail",$("#aemail").textbox("getValue"));
+	    			axios.post("admin.s?op=register",p).then(res=>{
+	    				this.ret = res.data;
+		    			if(this.ret==1){
+		    				alert("注册成功");
+		    				location.href="adminLogin.html";
+		    			}else if(this.ret==0){
+		    				alert("注册失败!用户名已存在!");
+		    			}else if(this.ret==-1){
+		    				alert("注册失败!用户名不能为空!");
+		    			}else if(this.ret==-2){
+		    				alert("注册失败!两次密码不同!");
+		    			}
+		    		})
+	    		}
+	    	}
+	    })
+	    
+	    /*当打开页面时,检查cookie 是否有loginedAccount   "loginAccount=aaa; a=1"*/
+	    //通过正则表达式,获取cookie中存储的值
+	    var la = document.cookie.replace(/.*loginedAname=(\w*).*/,"$1");
+	    if(la){
+	    	 //输出该值
+	    	 console.info("==========="+la);
+	    	 //account.value=la;
+	    }
+	</script>
+	
+</html>
