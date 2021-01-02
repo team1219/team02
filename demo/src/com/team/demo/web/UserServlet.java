@@ -21,20 +21,19 @@ public class UserServlet extends BaseServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	
 	/**
-	 * 注意：不能重写doGet 和 doPost
-	 */
-
-	/**
-	 * 查询所以用户信息 必须提供请求和响应对象参数
+	 * 查询用户uid 订购商品
 	 * 
 	 * @param request
 	 * @param response
 	 * @throws SQLException
 	 * @throws IOException
 	 */
-	public void query(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-		String sql = "select * from tbl_user";
+	public void queryByName(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+		HttpSession session = request.getSession();
+		String name = (String) session.getAttribute("loginedAccount");
+		String sql = "select uid from cake_user where name= "+name;
 		List<?> ret = DBHelper.selectListMap(sql);
 		write(response, ret);
 	}
@@ -69,7 +68,7 @@ public class UserServlet extends BaseServlet {
 
 		String uname = request.getParameter("account");
 		String upass = request.getParameter("pwd");
-		String sql = "select * from user where uname=? and upass=?";
+		String sql = "select * from cake_user where uname=? and upass=?";
 		List<?> ret = DBHelper.selectListMap(sql, uname, upass);
 		if (ret.isEmpty() || ret == null) {
 			System.out.println("登录失败");
@@ -99,7 +98,7 @@ public class UserServlet extends BaseServlet {
 		String upass1 = request.getParameter("uPass1");
 		String gender = request.getParameter("gender");
 		String head = request.getParameter("head");
-		String sql1 = "select uname from user where uname=?";
+		String sql1 = "select uname from cake_user where uname=?";
 		try {
 			List<?> ret1 = DBHelper.selectListMap(sql1, uname);
 			if (ret1 == null || ret1.isEmpty()) {
@@ -112,7 +111,7 @@ public class UserServlet extends BaseServlet {
 					write(response, "-2");
 					return;
 				} else {
-					String sql2 = "insert into user(uname,upass,head,gender) values(?,?,?,?)";
+					String sql2 = "insert into cake_user(uname,upass,head,gender) values(?,?,?,?)";
 					int ret2 = DBHelper.update(sql2, uname, upass, head, Integer.parseInt(gender));
 					if (ret2 > 0) {
 						System.out.println("注册成功!");

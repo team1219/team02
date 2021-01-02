@@ -1236,7 +1236,8 @@ area{outline: none;}
 }
 #img-1 {
 margin-left: 90px;
-margin-top: -50px;
+width: 400px;
+height: 400px;
 }
 .Xcontent02>a>p{
 	font-family: "微软雅黑";

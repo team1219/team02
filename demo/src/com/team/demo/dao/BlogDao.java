@@ -6,7 +6,7 @@ import java.util.List;
 import com.team.demo.util.DBHelper;
 
 public class BlogDao {
-	public List<?> query(){
+	public List<?> query(int tid){
 		String sql = "select * from topic where tid = " + tid;
 		try {
 			return DBHelper.selectListMap(sql);

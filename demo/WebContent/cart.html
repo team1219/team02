@@ -1,39 +1,47 @@
 <html>
 <head>
-  <!-- META DATA -->
-	<meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="Free Responsive Html5 Templates">
-    <meta name="author" content="">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+<!-- META DATA -->
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="description" content="Free Responsive Html5 Templates">
+<meta name="author" content="">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
 
 <!--css类引用-->
 <link rel="stylesheet" href="js/layui/css/layui.css" />
 <link rel="stylesheet" href="js/eleme-ui/index.css" />
 <link rel="stylesheet" href="css/ShoppingCart.css" />
-	<title>购物车</title>
-  
-	<!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css"  type="text/css">
-	
-	<!-- Owl Carousel Assets -->
-    <link href="owl-carousel/owl.carousel.css" rel="stylesheet">
-    <link href="owl-carousel/owl.theme.css" rel="stylesheet">
-	
-	<!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
-	
-	<!-- Custom Fonts -->
-    <link rel="stylesheet" href="font-awesome-4.4.0/css/font-awesome.min.css"  type="text/css">
-	<link href='http://fonts.googleapis.com/css?family=Asap:400,700' rel='stylesheet' type='text/css'>
-	
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+<title>购物车</title>
+
+<!-- 引入vue 和 axios -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+<script
+	src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+
+<!-- Owl Carousel Assets -->
+<link href="owl-carousel/owl.carousel.css" rel="stylesheet">
+<link href="owl-carousel/owl.theme.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="css/style.css">
+
+<!-- Custom Fonts -->
+<link rel="stylesheet"
+	href="font-awesome-4.4.0/css/font-awesome.min.css" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Asap:400,700'
+	rel='stylesheet' type='text/css'>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
         <script src="js/html5shiv.js"></script>
         <script src="js/respond.min.js"></script>
     <![endif]-->
-	<link rel="stylesheet" href="css/shouye.css">
+<link rel="stylesheet" href="css/shouye.css">
 
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/modernizr-custom-v2.7.1.min.js"></script>
@@ -82,111 +90,150 @@
 </script>
 </head>
 
- <body>
+<body>
 
 
 	<!-- /////////////////////////////////////////Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand page-scroll" href="#page-top">SweetCake</a>
-            </div>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header page-scroll">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand page-scroll" href="#page-top">SweetCake</a>
+			</div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden">
-                        <a href="#page-top"></a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="index.html">Home</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="single.html">About</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="menu.html">Menu</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="blog.html">Blog</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="details.html">Details</a>
-                    </li>
-                     <li>
-                        <a class="page-scroll" href="login.html">Login</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="register.html">Register</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
-    
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="hidden"><a href="#page-top"></a></li>
+					<li><a class="page-scroll" href="index.html">Home</a></li>
+					<li><a class="page-scroll" href="single.html">About</a></li>
+					<li><a class="page-scroll" href="menu.html">Menu</a></li>
+					<li><a class="page-scroll" href="blog.html">Blog</a></li>
+					<li><a class="page-scroll" href="cart.html">Cart</a></li>
+					<li><a class="page-scroll" href="login.html">Login</a></li>
+					<li><a class="page-scroll" href="register.html">Register</a></li>
+					<li><a class="page-scroll" @click="clearCookie" href="index.html">Exit</a></li>
+				</ul>
+				
+			</div>
+			<script type="text/javascript">
+			var v = new Vue({
+				el : "#bs-example-navbar-collapse-1",
+				data :{
+					
+				},
+			
+				methods :{
+					clearCookie: function() {
+		                this.setCookie("", "", -1); //修改2值都为空，天数为负1天就好了
+		            }
+				}
+			
+				
+			})
+			
+			
+			</script>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+
 	<!-- Navigation -->
 	<header class="container">
-		<p class="text-center">Monday - Friday <strong>11AM to 2PM</strong>, Saturday - Sunday <strong>9Am to 2PM</strong></p>
+		<p class="text-center">
+			Monday - Friday <strong>11AM to 2PM</strong>, Saturday - Sunday <strong>9Am
+				to 2PM</strong>
+		</p>
 		<!-- CAROUSEL -->
-		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="4000">
+		<div id="carousel-example-generic" class="carousel slide"
+			data-ride="carousel" data-interval="4000">
 			<!-- Indicators -->
 			<ol class="carousel-indicators">
-				<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+				<li data-target="#carousel-example-generic" data-slide-to="0"
+					class="active"></li>
 				<li data-target="#carousel-example-generic" data-slide-to="1"></li>
 				<li data-target="#carousel-example-generic" data-slide-to="2"></li>
 			</ol>
-		 
+
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner">
 				<div class="item active">
 					<img src="images/banner1.jpg" alt="...">
 					<!-- Static Header -->
 					<div class="header-text hidden-xs">
-						<h1>Great service and <br/>atmosphere</h1></br>
-						<p>Start Bootstrap can help you build better websites using the Bootstrap CSS framework! <br/>Just download your template and start going, no strings attached!</p></br>
-						<a href="" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
-					</div><!-- /header-text -->
+						<h1>
+							Great service and <br />atmosphere
+						</h1>
+						</br>
+						<p>
+							Start Bootstrap can help you build better websites using the
+							Bootstrap CSS framework! <br />Just download your template and
+							start going, no strings attached!
+						</p>
+						</br> <a href="" class="btn btn-primary btn-xl page-scroll">Find
+							Out More</a>
+					</div>
+					<!-- /header-text -->
 				</div>
 				<div class="item">
 					<img src="images/banner2.jpg" alt="...">
 					<!-- Static Header -->
 					<div class="header-text hidden-xs">
-						<h1>Great service and <br/>atmosphere</h1></br>
-						<p>Start Bootstrap can help you build better websites using the Bootstrap CSS framework! <br/>Just download your template and start going, no strings attached!</p></br>
-						<a href="" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
-					</div><!-- /header-text -->
+						<h1>
+							Great service and <br />atmosphere
+						</h1>
+						</br>
+						<p>
+							Start Bootstrap can help you build better websites using the
+							Bootstrap CSS framework! <br />Just download your template and
+							start going, no strings attached!
+						</p>
+						</br> <a href="" class="btn btn-primary btn-xl page-scroll">Find
+							Out More</a>
+					</div>
+					<!-- /header-text -->
 				</div>
 				<div class="item">
 					<img src="images/banner3.jpg" alt="...">
 					<!-- Static Header -->
 					<div class="header-text hidden-xs">
-						<h1>Great service and <br/>atmosphere</h1></br>
-						<p>Start Bootstrap can help you build better websites using the Bootstrap CSS framework! <br/>Just download your template and start going, no strings attached!</p></br>
-						<a href="" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
-					</div><!-- /header-text -->
+						<h1>
+							Great service and <br />atmosphere
+						</h1>
+						</br>
+						<p>
+							Start Bootstrap can help you build better websites using the
+							Bootstrap CSS framework! <br />Just download your template and
+							start going, no strings attached!
+						</p>
+						</br> <a href="" class="btn btn-primary btn-xl page-scroll">Find
+							Out More</a>
+					</div>
+					<!-- /header-text -->
 				</div>
 			</div>
-		 
+
 			<!-- Controls -->
-			<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-				<span class="glyphicon glyphicon-chevron-left"></span>
+			<a class="left carousel-control" href="#carousel-example-generic"
+				role="button" data-slide="prev"> <span
+				class="glyphicon glyphicon-chevron-left"></span>
+			</a> <a class="right carousel-control" href="#carousel-example-generic"
+				role="button" data-slide="next"> <span
+				class="glyphicon glyphicon-chevron-right"></span>
 			</a>
-			<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-				<span class="glyphicon glyphicon-chevron-right"></span>
-			</a>
-		</div> <!-- Carousel -->
+		</div>
+		<!-- Carousel -->
 	</header>
 
-	
+
 	<!-- /////////////////////////////////////////Content -->
 	<div id="page-content">
 		<div id="main-content">
@@ -194,158 +241,235 @@
 				<article>
 					<div class="heading">
 						<h2>
-							<span class="hr" style="color: #5D5454;text-transform: uppercase;font-size: 55px;">购物车</span>
+							<span class="hr"
+								style="color: #5D5454; text-transform: uppercase; font-size: 55px;">购物车</span>
 						</h2>
 					</div>
 					<!--主要内容-->
-<div class="row " id="myVue" v-cloak>
-	<div class="col-lg-10 col-lg-offset-1" >
-		<div class="layui-form">
-			<table class="ShopCartTable layui-table">
-				<thead>
-					<tr>
-						<th class="selectLeft">
+					<div class="row " id="myVue">
+						<div class="col-lg-10 col-lg-offset-1">
+							<div class="layui-form">
+								<table class="ShopCartTable layui-table" >
+									<thead>
+										<tr >
+										<th>购物车编号</th>
+									    <th class="selectLeft">
+							            <template>
+								        <el-checkbox  @change="" v-model="checkedAll">全选</el-checkbox>
+						            	</template>
+							          
+						                </th>
+						                <th> <span>商品名称和图片</span></th>
+										<th>单价</th>
+										<th>数量</th>
+										<th>小计</th>
+										<th>操作</th>
+										</tr>
+									</thead>
+									<tbody>
+					<tr v-for="(item,index) in list" :key="index">
+					<td>
+					<span>{{item.oid}}</span>
+					</td>
+					<td  class="selectLeft">
 							<template>
-								<el-checkbox  @change="checkedAllBtn(checkedAll)" v-model="checkedAll">全选</el-checkbox>
+								<el-checkbox @change="" v-model="checked"></el-checkbox>
 							</template>
-							<span class="selectLeftGoods">甜品图片及名称</span>
-						</th>
-						<th>单价</th>
-						<th>数量</th>
-						<th>小计</th>
-						<th>操作</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr v-for="(tabledatas,index) in shopTableDatas">
-						<td  class="selectLeft">
-							<template>
-								<el-checkbox @change="checkedRadioBtn(tabledatas)" v-model="tabledatas.checked"></el-checkbox>
-							</template>
-							<span class="goodName">
-								<img class="goodImg" :src="tabledatas.src" />
-							</span>
-							<span class="goodName goodsName">
-								<h2 class="goodname" v-text="tabledatas.name"></h2>
-								<p class="goodGary">
-									<span>供应商：</span>
-									<span v-text="tabledatas.supplier"></span>
-								</p>
-								<p class="goodGary">
-									<span>发货地：</span>
-									<span v-text="tabledatas.ConPlace"></span>
-								</p>
+					</td>
+						<td>
+						<span class="goodName">
+								<img class="goodImg" :src="item.cimg" />{{item.cname}}
 							</span>
 						</td>
-						<td class="danPrice">{{tabledatas.price | moneyFiler}}</td>
-						<td >
+						<td class="danPrice">￥：{{item.cprice}}</td>
+						<td>
 						<div class="num">
-						<i class="num-jian" @click="goodNum(tabledatas,-1)" class="fa  deleteBtn" aria-hidden="true">-</i>
-							<input class="num-n" v-model="tabledatas.num" type="text" class="form-control numInput" aria-label="...">
-							<i class="num-jia" @click="goodNum(tabledatas,1)" class="fa  addBtn" aria-hidden="true">+</i>
-						</div>			
+						<i class="num-jian" @click="goodNum(item,-1)" class="fa  deleteBtn" aria-hidden="true">-</i>
+					    <input  class="num-n" v-model="item.cnum" type="text" class="form-control numInput" aria-label="...">
+						<i class="num-jia" @click="goodNum(item,1)" class="fa  addBtn" aria-hidden="true">+</i>
+						</div>	
 						</td>
 						<td>
-							<p class="totalPrice">{{tabledatas.price*tabledatas.num | moneyFiler}}</p>
+							<p class="totalPrice">{{item.cprice*item.cnum | moneyFiler}}</p>
 						</td>
 						<td class="gongneng">
-							<p class="deletegoods" @click="alertRadio(index)">删除</p>
-							<p @click="alertmovesSavegoods(index)">移到我的收藏</p>
-							<template v-if="tabledatas.saveandremove">
-								<p @click="tabledatas.saveandremove = false">加入收藏</p>
-							</template>
-							<template v-else>
-								<p :class="{'saveCheck':!tabledatas.saveandremove}" @click="tabledatas.saveandremove = true">取消收藏</p>
-							</template>
+							<p class="deletegoods" @click="deleteOrder(item,item.oid)">移出购物车</p>
 						</td>
 					</tr>
+					<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td><span class="servicenum">共<span class="goodsNum">{{list.length}}</span>个订单</span></td>
+					<td>	
+							<span class="totalclassPoin">总价：<span
+										class="totalMoneyClass">{{totalMoney | moneyFiler}}</span></span>
+				    </td>
+					<td>
+					<a :href="'order.html#'+ totalMoney " class="SettlementBtn">去结算</a>
+					</td>
+					</tr>
 				</tbody>
+				
 			</table>
-			<div class="row tablefooter">
-				<template>
-					<el-checkbox style="padding-left:16px" @change="checkedAllBtn(checkedAll)" v-model="checkedAll">全选</el-checkbox>
-				</template>
-				<span class="removeMuch" @click="alertMuch">删除选中的商品或服务</span>
-				<span class="removeSaves" @click="alertMuchgoods">移到我的收藏</span>
-				<span class="servicenum">已选择<span class="goodsNum">{{goodsNum}}</span>件商品<span class="goodsNum">{{serviceNum}}</span>项服务</span>
-				<span class="totalclassPoin">总价：<span class="totalMoneyClass">{{totalMoney | moneyFiler}}</span></span>
-				<span @click="saveData" class="SettlementBtn">去结算</span>
-			</div>
-		</div>
-	</div>
-</div>
+								
+							</div>
+						</div>
+					</div>
+					<script type="text/javascript">
+	    var v = new Vue({
+	    	el : "#myVue",
+	    	data : {
+	    		list : [],
+	    		name : "", 
+	    		checked : [],
+	    		checkedAll : [],
+		        totalMoney:0, //总价格
+		       
+	    	},
+	    	
+	    	/*金额过滤器*/
+	    	filters:{
+	    		moneyFiler:function(value){
+	    			
+	    			return "￥"+value.toFixed(2);
+	    		}
+	    	},
+	    	
+	    	created(){
+	    		this.getCookies();
+	    		this.query();	
+	    	},
+	    	methods : {
+				deleteOrder:function(item,oid){
+	    			axios.get("order.s?op=deleteOrder",{
+	    				params : {
+	    					oid : item.oid,
+	    				}	
+	    			}).then(res=>{
+	     			   this.status = res.data;
+	     			   console.info(this.status);
+	     			   this.query();
+	     		   })
+	    		},
+	    		updateOrder:function(item){
+	    			axios.get("order.s?op=updateOrder",{
+	    				params : {
+	    					cnum : item.cnum,
+	    					oid : item.oid,	
+	    				}	
+	    			}).then(res=>{
+	     			   this.status = res.data;
+	     			   console.info(this.status);		  
+	     		   })
+	    		},
+	    		goodNum:function(item,way){
+	    			if(way == 1){
+	    				 item.cnum++;	 
+	    			}else{
+	    				if(item.num < 1){
+	    					item.num =0;
+	    				}else{
+	    					item.cnum--;
+	    				}
+	    			}
+	    			console.info(item.cnum);
+	    			this.updateOrder(item);
+	    			this.query();
+	    			
+	    		},
+	    		
+	    		getCookies(){
+	    			this.name= document.cookie.replace(/.*loginedAccount=(\w*).*/,"$1");
+	    			console.info(this.name);
+	    		},
+	    		query(){
+	    			axios.get("order.s?op=queryOrder",{
+	    				params : {
+	    					name : this.name,
+	    				}	
+	    			}).then(res=>{
+	     			   this.list = res.data;
+	     			   this.totalMoney = 0;
+	     			  for (let i = 0; i < this.list.length; i++) {
+							this.totalMoney += (this.list[i].cnum) * (this.list[i].cprice);
+						}
+	     			 console.info(this.totalMoney);
+	     			   console.info(this.list);
+	     		   })
+	    		},
+	    		
+	    	},
+
+	    	
+	    })
+	</script>
 				</article>
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- FOOTER -->
 	<footer>
 		<div class="wrap-footer">
 			<div class="container">
-				<div class="row"> 
+				<div class="row">
 					<div class="col-footer col-md-3">
 						<h2 class="footer-title">About Us</h2>
-						<div class="textwidget">Aenean feugiat in ante et blandit. Vestibulum posuere molestie risus, ac interdum magna porta non. Pellentesque rutrum fringilla elementum. Curabitur tincidunt porta lorem vitae accumsan. <br> <br> 
-						Aenean feugiat in ante et blandit. Vestibulum posuere molestie risus, ac interdum magna porta non.</div>
-					</div> 
+						<div class="textwidget">
+							Aenean feugiat in ante et blandit. Vestibulum posuere molestie
+							risus, ac interdum magna porta non. Pellentesque rutrum fringilla
+							elementum. Curabitur tincidunt porta lorem vitae accumsan. <br>
+							<br> Aenean feugiat in ante et blandit. Vestibulum posuere
+							molestie risus, ac interdum magna porta non.
+						</div>
+					</div>
 					<div class="col-footer col-md-3 widget_recent_entries">
 						<h2 class="footer-title">Recent Posts</h2>
 						<ul>
 							<li><a href="#">MOST VISITED COUNTRIES</a></li>
 							<li><a href="#">5 PLACES THAT MAKE A GREAT HOLIDAY</a></li>
-							<li><a href="#">PEBBLE TIME STEEL IS ON TRACK TO SHIP IN JULY</a></li>
-							<li><a href="#">STARTUP COMPANY&#8217;S CO-FOUNDER TALKS ON HIS NEW PRODUCT</a></li>
+							<li><a href="#">PEBBLE TIME STEEL IS ON TRACK TO SHIP IN
+									JULY</a></li>
+							<li><a href="#">STARTUP COMPANY&#8217;S CO-FOUNDER TALKS
+									ON HIS NEW PRODUCT</a></li>
 						</ul>
 					</div>
 					<div class="col-footer col-md-3">
 						<h2 class="footer-title">CONTACT</h2>
 						<div class='embed-container maps'>
-							<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.289259162295!2d-120.7989351!3d37.5246781!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8091042b3386acd7%3A0x3b4a4cedc60363dd!2sMain+St%2C+Denair%2C+CA+95316%2C+Hoa+K%E1%BB%B3!5e0!3m2!1svi!2s!4v1434016649434" width="100%" height="200px" frameborder="0" style="border: 0"></iframe>
+							<iframe
+								src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.289259162295!2d-120.7989351!3d37.5246781!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8091042b3386acd7%3A0x3b4a4cedc60363dd!2sMain+St%2C+Denair%2C+CA+95316%2C+Hoa+K%E1%BB%B3!5e0!3m2!1svi!2s!4v1434016649434"
+								width="100%" height="200px" frameborder="0" style="border: 0"></iframe>
 						</div>
 						<span>JL.Kemacetan timur no.23. block.Q3<br>
-							Jakarta-Indonesia</span>
-						   <span>+6221 888 888 90 <br>
-							+6221 888 88891</span>
-						<span>info@yourdomain.com</span>
+							Jakarta-Indonesia
+						</span> <span>+6221 888 888 90 <br> +6221 888 88891
+						</span> <span>info@yourdomain.com</span>
 					</div>
 					<div class="col-footer col-md-3">
 						<h2 class="footer-title">Tags</h2>
 						<div class="footer-tags">
-							<a href="#">animals</a>
-							<a href="#">cooking</a>
-							<a href="#">countries</a>
-							<a href="#">city</a>
-							<a href="#">children</a>
-							<a href="#">home</a>
-							<a href="#">likes</a>
-							<a href="#">photo</a>
-							<a href="#">link</a>
-							<a href="#">law</a>
-							<a href="#">shopping</a>
-							<a href="#">skate</a>
-							<a href="#">scholl</a>
-							<a href="#">video</a>
-							<a href="#">travel</a>
-							<a href="#">images</a>
-							<a href="#">love</a>
-							<a href="#">lists</a>
-							<a href="#">makeup</a>
-							<a href="#">media</a>
-							<a href="#">password</a>
-							<a href="#">pagination</a>
-							<a href="#">wildlife</a>
+							<a href="#">animals</a> <a href="#">cooking</a> <a href="#">countries</a>
+							<a href="#">city</a> <a href="#">children</a> <a href="#">home</a>
+							<a href="#">likes</a> <a href="#">photo</a> <a href="#">link</a>
+							<a href="#">law</a> <a href="#">shopping</a> <a href="#">skate</a>
+							<a href="#">scholl</a> <a href="#">video</a> <a href="#">travel</a>
+							<a href="#">images</a> <a href="#">love</a> <a href="#">lists</a>
+							<a href="#">makeup</a> <a href="#">media</a> <a href="#">password</a>
+							<a href="#">pagination</a> <a href="#">wildlife</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</footer>
-  
+
 	<!-- jQuery -->
 	<script type="text/javascript" src="js/jquery-2.1.1.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	
+
 	<!-- Custom Theme JavaScript -->
 	<script src="js/agency.js"></script>
 
@@ -353,36 +477,33 @@
 	<script src="js/jquery.easing.min.js"></script>
 	<script src="js/classie.js"></script>
 	<script src="js/cbpAnimatedHeader.js"></script>
-	
+
 	<!-- carousel -->
 	<script src="owl-carousel/owl.carousel.js"></script>
-    <script>
-    $(document).ready(function() {
-      $("#owl-brand").owlCarousel({
-        autoPlay: 3000,
-        items : 1,
-		itemsDesktop : [1199,1],
-        itemsDesktopSmall : [979,2],
-		navigation: false,
-      });
-    });
-    </script>
-	
+	<script>
+		$(document).ready(function() {
+			$("#owl-brand").owlCarousel({
+				autoPlay : 3000,
+				items : 1,
+				itemsDesktop : [ 1199, 1 ],
+				itemsDesktopSmall : [ 979, 2 ],
+				navigation : false,
+			});
+		});
+	</script>
+
 	<!-- Google Map -->
 	<script>
-		$('.maps').click(function () {
-		$('.maps iframe').css("pointer-events", "auto");
-	});
+		$('.maps').click(function() {
+			$('.maps iframe').css("pointer-events", "auto");
+		});
 
-	$( ".maps" ).mouseleave(function() {
-	  $('.maps iframe').css("pointer-events", "none"); 
-	});
+		$(".maps").mouseleave(function() {
+			$('.maps iframe').css("pointer-events", "none");
+		});
 	</script>
 	<!--js类引用-->
-<script type="text/javascript" src="js/vue/vue.min.js" ></script>
-<script type="text/javascript" src="js/eleme-ui/index.js" ></script>
-<script type="text/javascript" src="js/ShoppingCart.js" ></script>
-
-<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+	<script type="text/javascript" src="js/vue/vue.min.js"></script>
+	<script type="text/javascript" src="js/eleme-ui/index.js"></script>
 </body>
 </html>
