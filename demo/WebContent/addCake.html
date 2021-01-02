@@ -10,10 +10,6 @@
 	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
 	
 	<script type="text/javascript">
-	
-	
-	
-	
 	function fmtcz(value,row,index){
 		//函数的返回值 会被解析成html 元素
 		return "<button onclick='del("+index+")'>删除</button>";
@@ -91,7 +87,7 @@
             <th data-options="field:'cid',width:35">编码</th>
             <th data-options="field:'cname',width:70">名称</th>
             <th data-options="field:'cprice',width:80">价格</th>
-            <th data-options="field:'cimg',width:200">图片</th>
+            <th data-options="field:'cimg',width:200">图片地址</th>
             <th data-options="field:'size',width:50">尺寸</th>
             <th data-options="field:'unlive',width:30,formatter:fmtcz">操作</th>
         </tr>
@@ -102,15 +98,15 @@
    <div id="dd"
     class="easyui-dialog"
     title="My Dialog"
-	style="width:400px;height:250px;"
+	style="width:420px;height:400px;"
 	 data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
   <form style="text-align: center; " id="ff">
   <input name="typeid" id="tb" class="easyui-textbox" prompt="种类（填写编号）"><br>
   <div >提示:     1:生日蛋糕 2:杯子蛋糕 3:甜甜圈 </div>
   <div >4:面包 5:饮品 6:小吃 7:冰淇淋 8:甜品</div>
-  <input name="cname" id="tb" class="easyui-textbox" prompt="名称"><br>
+  <input name="cname" id="cname" class="easyui-textbox" prompt="名称"><br>
   <input  name="cprice" id="tb" class="easyui-textbox" prompt="价格"><br>
-  <input  name="ccontent" id="tb" class="easyui-textbox" prompt="描述"><br>
+  <input  name="ccontent" id="ccontent" class="easyui-textbox" prompt="描述"><br>
   <input  name="cimg" id="tb" class="easyui-textbox" prompt="图片（填写网络地址）"><br>
   <input  name="size" id="tb" class="easyui-textbox" prompt="尺寸"><br>
   <a id='btn' href="#" class="easyui-linkbutton" 

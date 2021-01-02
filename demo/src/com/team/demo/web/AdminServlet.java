@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -57,7 +58,6 @@ public class AdminServlet extends BaseServlet {
 			HttpSession session = request.getSession();
 			// 存入当前登录的对象名
 			session.setAttribute("loginedAname", aname);
-
 			// 将账号保存到cookie中
 			Cookie cookie = new Cookie("loginedAname", aname);
 			cookie.setMaxAge(60 * 60 * 24 * 7);
@@ -97,5 +97,38 @@ public class AdminServlet extends BaseServlet {
 			e1.printStackTrace();
 		}
 	}
-
+	public void replace(HttpServletRequest request, HttpServletResponse response) {
+		String aname = request.getParameter("aname");
+		String oldapwd = request.getParameter("oldapwd");
+		String apwd = request.getParameter("apwd");
+		String sql1 = "select aname from admin where aname=?";
+		String sql3="select aname from admin where aname=? and apwd=?";
+		try {
+			List<?> ret1 = DBHelper.selectListMap(sql1, aname);
+			if (ret1 != null) {
+				if (aname == null || aname.isEmpty()) {
+					System.out.println("用户名不能为空!");
+					write(response, "-1");
+					return;
+				}
+				if(oldapwd!=null){
+					List<?> ret3=DBHelper.selectListMap(sql3, aname,oldapwd);
+					if(ret3==null) {
+						System.out.println("oldapwd:++++"+oldapwd);
+						System.out.println("旧密码错误");
+						write(response, "0");
+						return ;
+					}
+			}  
+			String sql2 = "update admin set apwd=? where aname=?";
+			int ret2 = DBHelper.update(sql2, apwd,aname);
+			if (ret2 > 0) {
+					System.out.println("修改成功!");
+					write(response, "1");
+			}	
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+	}
 }

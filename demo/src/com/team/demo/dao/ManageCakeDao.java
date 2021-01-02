@@ -53,6 +53,14 @@ public class ManageCakeDao {
 		dbh.update(sql, cid);
 		
 	}
+	public void updateById(Cake cake) throws SQLException {
+		DBHelper db=new DBHelper();
+		
+		String sql="update cake set typeid=?,cname=?,cprice=?,ccontent=?,cimg=?,size=?  where cid=?";
+		db.update(sql,cake.getTypeid(),cake.getCname(),cake.getCprice(),cake.getContent(),cake.getCimg(),cake.getSize(),cake.getCid());
+		
+		
+	}
 }
 class CakeMapper implements ResultSetMapper<Cake> {
 	public Cake map(ResultSet rs){

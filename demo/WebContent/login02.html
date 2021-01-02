@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>企业MIS</title>
+<link rel="stylesheet" href="style.css">
+<script type="text/javascript">
+function login(){
+	var url="login.s?account="+account.value+"pwd="+pwd.value;
+		post(url,function(){
+			if((xmlhttp.readyState==4)&&(xmlhttp.status==200)){
+				if(xmlhttp.responseText==1){
+					alert("登录成功");
+					
+				}else{
+					alert("登录失败");
+				}	
+			}
+		});
+}
+
+var xmlhttp;
+function post(url,callback){
+	//创建XMLHttpReaquest对象
+	//浏览器兼容性问题
+	try{
+		xmlhttp=new ActiveXObject("MSxml2.XMLHTTP");
+	}catch(e){
+		try{
+			xmlhttp=new ActiveXObject("Mircrosoft.XMLHTTP");
+		}catch(e){
+			try{
+				xmlhttp=new XMLHttpRequest();
+				if(xmlhttp.overrideMimeType){
+					xmlhttp.overrideMimeType("text/xml");
+				}
+			}catch(e){
+				alert("浏览器不支持AJAX");
+			}
+		}
+	}
+	//回调函数，当收到服务器返回数据时，执行的函数
+	xmlhttp.onreadystatechange=callback;
+	xmlhttp.open("post",url,true);//第三个参数表示异步执行
+	//如果以post方式请求，必须要添加
+	xmlhttp.send(null);
+}
+/*
+ * 当打开页面时。检查cookie中是否有logined
+ */
+var la=document.cookie.replace(/.*loginedAccount=(\w*).*/, "$1");
+if(la){
+	console.info("============"+la);
+}
+</script>
+</head>
+<body>
+	<h2>登录页面</h2>
+	
+		<h2>登陆界面</h2>
+	<form action="main.html">
+		账号:<input id="account" value=""><br>
+		密码:<input id="pwd"><br>
+		<img src="/VerifyCodeServlet" height="25px">
+		<input id="ecode"><br>
+		<button type="button onclick="login()">登录</button>
+		<button formaction="register.html">注册</button>
+	
+	</form>
+</body>
+</html>

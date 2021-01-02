@@ -19,7 +19,7 @@ public class DetailDao {
 		String sql="SELECT did,\n" + 
 				"typename, \n" + 
 				"	cname, \n" + 
-				"	p.pid, \n" + 
+				"	o.oid, \n" + 
 				"	pretime, \n" + 
 				"	gettime, \n" + 
 				"	cnum, \n" + 
@@ -31,14 +31,14 @@ public class DetailDao {
 				"FROM \n" + 
 				"	cake c, \n" + 
 				"	caketype t, \n" + 
-				"	preced p, \n" + 
-				"	predetail d, \n" + 
+				"	cake_order o, \n" + 
+				"	d_order d, \n" + 
 				"	user u \n" + 
 				"WHERE \n" + 
 				"	c.typeid = t.typeid \n" + 
-				"AND d.pid = p.pid \n" + 
-				"AND d.cid = c.cid \n" + 
-				"AND u.uid = p.pid limit ?,10";
+				"AND d.oid = o.oid \n" + 
+				"AND d.cid = o.cid \n" + 
+				"AND u.uid = o.uid limit ?,10";
 		return DBHelper.selectList(sql,detailMapper,begin);
 	}
 	public int selectCount() {
