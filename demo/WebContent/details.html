@@ -7,7 +7,11 @@
     <meta name="description" content="Free Responsive Html5 Templates">
     <meta name="author" content="">
 
-	<title></title>
+	<title>甜品详情</title>
+  <!-- 引入vue 和 axios -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+<script
+	src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
   
 	<!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css"  type="text/css">
@@ -114,7 +118,7 @@
                         <a class="page-scroll" href="blog.html">Blog</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="details.html">Details</a>
+                        <a class="page-scroll" href="cart.html">Cart</a>
                     </li>
                      <li>
                         <a class="page-scroll" href="login.html">Login</a>
@@ -181,25 +185,25 @@
 			</a>
 		</div> <!-- Carousel -->
 	</header>
-<div class="Xcontent">
+<div class="Xcontent" id="details" v-for="good in list">
 		<ul class="Xcontent01">
 			<div class="Xcontent06">
-				<div ><img id="img-1" src="images/shangpinxiangqing/X1.png"></div>
+				<div ><img id="img-1" :src="good.cimg"></div>
 			</div>
 			<ol class="Xcontent13">
 				<div class="Xcontent14">
-					<a><p>新物品</p></a>
+					<a><p>{{good.cname}}</p></a>
 				</div>
 				<div class="Xcontent15">
 					<img src="images/shangpinxiangqing/X11.png">
 				</div>
 				<div class="Xcontent16">
-					<p>香浓诱人的巧克力口味；柔软的口感、甜蜜的味道,完美的全巧克力蛋糕经得起各种口味的挑剔.表面富有曲线美的巧克力花纹与蛋糕的名称相得益彰</p>
+					<p>{{good.ccontent}}</p>
 				</div>
 				<div class="Xcontent17">
 					<p class="Xcontent18">售价</p>
 					<p class="Xcontent19">
-						￥<span>69.00</span>
+						￥<span>{{good.cprice}}</span>
 					</p>
 					<div class="Xcontent20">
 						<p class="Xcontent21">促销</p>
@@ -213,25 +217,81 @@
 				</div>
 				<div class="Xcontent30">
 					<p class="Xcontent31">数量</p>
-					<div class="Xcontent32">
+					<div class="Xcontent32" @click="increase">
 						<img src="images/shangpinxiangqing/X15.png">
 					</div>
 					<form>
-						<input class="input" value="1" style="margin-top: 35px;width:80px">
+						<input v-model="num" class="input" value="1" style="margin-top: 35px;width:80px">
 					</form>
-					<div class="Xcontent33">
+					<div class="Xcontent33"  @click="add">
 						<img src="images/shangpinxiangqing/16.png">
 					</div>
 				</div>
 				<div class="Xcontent34">
-					<a href="#"><img src="images/shangpinxiangqing/X17.png"></a>
+					<a :href="'order.html#' + cid"><img src="images/shangpinxiangqing/X17.png"></a>
 				</div>
-				<div class="Xcontent35">
-					<a href="cart.html"><img src="images/shangpinxiangqing/X18.png"></a>
+				<div class="Xcontent35" @click="addCarts">
+					<a :href="'cart.html#' + cid "><img src="images/shangpinxiangqing/X18.png"></a>
 				</div>
 			</ol>
 		</ul>
 	</div>
+	<script type="text/javascript">
+	    var v = new Vue({
+	    	el : "#details",
+	    	data : {
+	    		list : [],
+	    		orderstatus : "",
+	    		cid : location.hash.substring(1),
+	    		num : 0,
+	    		name : ""
+	    	},
+	    	created(){
+	    		this.query();
+	    		this.add();
+	    		this.increase();
+	    		this.getCookies();
+	    	},
+	    	methods : {
+	    		query(){
+	    			axios.get("querycake.s?op=queryCid",{
+	     			   params : {
+	    					cid : this.cid,
+	    				}
+	     		   }).then(res=>{
+	     			   this.list = res.data;
+	     			   console.info(this.list);
+	     		   })
+	    		},
+	    		add(){
+	    			this.num++;
+	    		},
+	    		increase(){
+	    			if(this.num==0){
+	    				return ;
+	    			}else{
+	    				this.num--;
+	    			}
+	    		},
+	    		getCookies(){
+	    			this.name= document.cookie.replace(/.*loginedAccount=(\w*).*/,"$1");
+	    			console.info(this.name);
+	    		},
+	    		addCarts(){
+	    			axios.get("order.s?op=addOrder",{
+		     			   params : {
+		    					cid : this.cid,
+		    					num : this.num,
+		    					name : this.name
+		    				}
+		     		   }).then(res=>{
+		     			   this.orderstatus = res.data;
+		     		   })
+		    		}
+	    	}
+	    })
+	</script>
+	
 	
 	<!-- /////////////////////////////////////////Content -->
 	<div id="page-content">

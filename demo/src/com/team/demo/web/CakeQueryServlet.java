@@ -43,7 +43,6 @@ public class CakeQueryServlet extends BaseServlet {
 		String maxPrice = request.getParameter("maxPrice");
 		String minPrice = request.getParameter("minPrice");
 		String name = request.getParameter("cname");
-		System.out.println(cdao.queryAllBy(typeid,minPrice,maxPrice,name,Integer.parseInt(index),Integer.parseInt(size)).size());
 		write(response, cdao.queryAllBy(typeid,minPrice,maxPrice,name,Integer.parseInt(index),Integer.parseInt(size)));
 	}
 	
@@ -56,7 +55,6 @@ public class CakeQueryServlet extends BaseServlet {
 		String minPrice = request.getParameter("minPrice");
 		
 		int count = cdao.queryCountAll(typeid,name,minPrice,maxPrice);
-		System.out.println(count);
 		int totalPage = (count%Integer.parseInt(size)==0)?(count/Integer.parseInt(size)):((count/Integer.parseInt(size)+1));
 		write(response, totalPage);
 	}
