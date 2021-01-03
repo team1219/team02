@@ -56,8 +56,8 @@ public class ManageCakeDao {
 	public void updateById(Cake cake) throws SQLException {
 		DBHelper db=new DBHelper();
 		
-		String sql="update cake set typeid=?,cname=?,cprice=?,ccontent=?,cimg=?,size=?  where cid=?";
-		db.update(sql,cake.getTypeid(),cake.getCname(),cake.getCprice(),cake.getContent(),cake.getCimg(),cake.getSize(),cake.getCid());
+		String sql="update cake set typeid=?,cname=?,cprice=?,cimg=?,size=?  where cid=?";
+		db.update(sql,cake.getTypeid(),cake.getCname(),cake.getCprice(),cake.getCimg(),cake.getSize(),cake.getCid());
 		
 		
 	}
@@ -74,7 +74,6 @@ class CakeMapper implements ResultSetMapper<Cake> {
 			cake.setCimg(rs.getString("cimg"));
 			cake.setEmp(rs.getString("emp"));
 			cake.setSize(rs.getString("size"));
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

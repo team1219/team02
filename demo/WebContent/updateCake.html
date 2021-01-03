@@ -16,13 +16,27 @@
 	}
 	
 	function update(index){
+		var rows=$("#table").datagrid('getRows');
+		var cid=rows[index].cid;	
+		$("#cid").textbox("setValue",cid);
+		var cname=rows[index].cname;
+		$("#cname").textbox("setValue",cname);
+		var typeid=rows[index].typeid;
+		$("#typeid").textbox("setValue",typeid);
+		var cprice=rows[index].cprice;
+		$("#cprice").textbox("setValue",cprice);
+		var cimg=rows[index].cimg;
+		$("#cimg").textbox("setValue",cimg);
+		var size=rows[index].size;
+		$("#size").textbox("setValue",size);
+
 		$("#dd").dialog('open');
 	}
 	function save(){
 		$('#ff').form('submit',{
 			url:"updateCake.s",
 			success:function(data){
-				$("table").datagrid('reload');
+				$("#table").datagrid('reload');
 				$.messager.show({
 					title:'系统提示',
 					msg:data,
@@ -34,6 +48,7 @@
 		});
 		
 	}
+
 	 
 	</script>
 </head>
@@ -52,7 +67,7 @@
             <th data-options="field:'cname',width:70">名称</th>
             <th data-options="field:'typeid',width:70">种类编号</th>
             <th data-options="field:'cprice',width:80">价格</th>
-            <th data-options="field:'cimg',width:200">图片地址</th>
+            <th data-options="field:'cimg',width:200" id="src">图片地址</th>
             <th data-options="field:'size',width:50">尺寸</th>
             <th data-options="field:'unlive',width:30,formatter:fmtcz">操作</th>
         </tr>
@@ -66,15 +81,12 @@
 	style="width:400px;height:250px;"
 	 data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
   <form style="text-align: center; " id="ff">
-  <input name="cid"  id="tb" class="easyui-textbox" prompt="编号"><br>
-  <input name="typeid" id="tb" class="easyui-textbox" prompt="种类（填写编号）"><br>
-  <div >提示:     1:生日蛋糕 2:杯子蛋糕 3:甜甜圈 </div>
-  <div >4:面包 5:饮品 6:小吃 7:冰淇淋 8:甜品</div>
-  <input name="cname" id="tb" class="easyui-textbox" prompt="名称"><br>
-  <input  name="cprice" id="tb" class="easyui-textbox" prompt="价格"><br>
-  <input  name="ccontent" id="tb" class="easyui-textbox" prompt="描述"><br>
-  <input  name="cimg" id="tb" class="easyui-textbox" prompt="图片（填写图片地址）"><br>
-  <input  name="size" id="tb" class="easyui-textbox" prompt="尺寸"><br>
+  <input name="cid"  id="cid" class="easyui-textbox" prompt="编号"><br>
+  <input name="cname" id="cname" class="easyui-textbox" prompt="名称"><br>
+  <input name="typeid" id="typeid" class="easyui-textbox" prompt="种类（填写编号）"><br>
+  <input  name="cprice" id="cprice" class="easyui-textbox" prompt="价格"><br>
+  <input  name="cimg" id="cimg" class="easyui-textbox" prompt="图片（填写图片地址）"><br>
+  <input  name="size" id="size" class="easyui-textbox" prompt="尺寸"><br>
   <a id='btn' href="#" class="easyui-linkbutton" 
   data-options="
   iconCls:'icon-save',

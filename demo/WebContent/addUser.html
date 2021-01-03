@@ -52,7 +52,7 @@
 		$('#ff').form('submit',{
 			url:"addUser.s",
 			success:function(data){
-				$("table").datagrid('reload');
+				$("#table").datagrid('reload');
 				$.messager.show({
 					title:'系统提示',
 					msg:data,
@@ -98,8 +98,7 @@
 </head>
 <body>
 <div id="cc" class="easyui-layout" data-options="fit:true">
-     <div data-options="region:'north',title:'查询条件' " style="height:100px;">
-     <a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
+     <div data-options="region:'north',title:'查询条件' " style="height:64px;">
      <a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'"
      onClick="edit()">新增</a>
      </div>

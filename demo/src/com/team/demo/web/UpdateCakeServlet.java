@@ -27,9 +27,7 @@ public class UpdateCakeServlet extends HttpServlet {
 		cake.setTypeid(Integer.parseInt(request.getParameter("typeid")));
 		cake.setCname(request.getParameter("cname"));
 		cake.setCprice(request.getParameter("cprice"));
-		cake.setContent(request.getParameter("ccontent"));
 		cake.setCimg(request.getParameter("cimg"));
-	//	cake.setEmp(request.getParameter("emp"));
 		cake.setSize(request.getParameter("size"));
 		ssBiz.update(cake);
 		response.getWriter().append("保存成功");			

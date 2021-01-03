@@ -60,7 +60,7 @@ public class ManagerUserDao {
 	}
 	public void updateById(User user) throws SQLException {
 		DBHelper db=new DBHelper();
-		String sql="update user set uname=?,upass=?,gender=?,ustatus=? where uid=?";
+		String sql="update cake_user set uname=?,upass=?,gender=?,ustatus=? where uid=?";
 		db.update(sql,user.getUname(),user.getUpass(),user.getGender(),user.getStatus(),user.getUid());
 	}
 }

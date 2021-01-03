@@ -53,7 +53,7 @@
 		$('#ff').form('submit',{
 			url:"addCake.s",
 			success:function(data){
-				$("table").datagrid('reload');
+				$("#table").datagrid('reload');
 				$.messager.show({
 					title:'系统提示',
 					msg:data,
@@ -65,14 +65,19 @@
 		});
 		
 	}
-
-	
 	</script>
 </head>
+<style>
+ body {
+   background:url("images/chocodonut.jpg")  no-repeat center center;   /*加载背景图*/   /* 背景图不平铺 */
+   background-size:cover;  /* 让背景图基于容器大小伸缩 */
+   background-attachment:fixed;        /* 当内容高度大于图片高度时，背景图像的位置相对于viewport固定 */    //此条属性必须设置否则可能无效/
+   background-color:#CCCCCC;   /* 设置背景颜色，背景图加载过程中会显示背景色 */
+ }
+ </style>
 <body>
 <div id="cc" class="easyui-layout" data-options="fit:true">
-     <div data-options="region:'north',title:'查询条件' " style="height:100px;">
-     <a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
+     <div data-options="region:'north',title:'查询条件' " style="height:64px;">
      <a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'"
      onClick="edit()">新增</a>
      </div>
@@ -83,11 +88,11 @@
      fitColumns:true,singleSelect:true,
      pagination:true">
     <thead>
-        <tr>
+        <tr >
             <th data-options="field:'cid',width:35">编码</th>
             <th data-options="field:'cname',width:70">名称</th>
             <th data-options="field:'cprice',width:80">价格</th>
-            <th data-options="field:'cimg',width:200">图片地址</th>
+            <th data-options="field:'cimg',width:200" >图片地址</th>
             <th data-options="field:'size',width:50">尺寸</th>
             <th data-options="field:'unlive',width:30,formatter:fmtcz">操作</th>
         </tr>

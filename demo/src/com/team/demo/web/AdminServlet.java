@@ -109,11 +109,11 @@ public class AdminServlet extends BaseServlet {
 				if (aname == null || aname.isEmpty()) {
 					System.out.println("用户名不能为空!");
 					write(response, "-1");
-					return;
+					return ;
 				}
 				if(oldapwd!=null){
 					List<?> ret3=DBHelper.selectListMap(sql3, aname,oldapwd);
-					if(ret3==null) {
+					if(ret3.isEmpty()) {
 						System.out.println("oldapwd:++++"+oldapwd);
 						System.out.println("旧密码错误");
 						write(response, "0");
@@ -126,6 +126,33 @@ public class AdminServlet extends BaseServlet {
 					System.out.println("修改成功!");
 					write(response, "1");
 			}	
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+	}
+	public void update(HttpServletRequest request, HttpServletResponse response) {
+		String aname = request.getParameter("aname");
+		String atel=request.getParameter("atel");
+		String aemail=request.getParameter("aemail");
+		String sql1 = "select aname from admin where aname=?";
+		try {
+			List<?> ret1 = DBHelper.selectListMap(sql1, aname);
+			if (aname == null || aname.isEmpty()) {
+				System.out.println("用户名不能为空!");
+				write(response, "-1");
+				return ;
+			}
+			if (ret1.isEmpty()) {
+					System.out.println("用户名不存在!");
+					write(response, "0");
+					return ;
+			}
+			String sql2 = "update admin set atel=? and aemail=? where aname=?";
+			int ret2 = DBHelper.update(sql2,atel,aemail,aname);
+			if (ret2 > 0) {
+					System.out.println("修改成功!");
+					write(response, "1");
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();

@@ -12,17 +12,25 @@
 	<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
 	
 </head>
-<body class="easyui-layout" style="background: no-repeat;background-size: 100%;">
+<style> 
+ body {
+   background:url("images/chocodonut.jpg")  no-repeat center center;   /*加载背景图*/   /* 背景图不平铺 */
+   background-size:cover;  /* 让背景图基于容器大小伸缩 */
+   background-attachment:fixed;        /* 当内容高度大于图片高度时，背景图像的位置相对于viewport固定 */    //此条属性必须设置否则可能无效/
+   background-color:#CCCCCC;   /* 设置背景颜色，背景图加载过程中会显示背景色 */
+ }
+</style>
+<body class="easyui-layout">
 		<div id="w" class="easyui-window" title="用户登录" collapsible="false"
 			minimizable="false" maximizable="false" icon="icon-save"
-			style="width: 450px; height: 330px; padding: 30px; background: #fafafa;"
+			style="width: 450px; height: 250px; padding: 30px; background: #fafafa;"
 			data-options="closable:false,draggable:false">
 			<form id="login" action="manage.html">
 			<!-- menulogin -->
 				<div style="margin-bottom: 20px">
 					<input v-model="aname" id="aname" 
 					class="easyui-textbox" 
-						prompt="usercode" iconWidth="28" 
+						prompt="name" iconWidth="28" 
 						data-options="label:'用户名:',required:true"
 						style="width: 300px; height: 34px; padding: 10px;">
 				</div>

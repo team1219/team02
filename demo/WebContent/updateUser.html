@@ -16,13 +16,24 @@
 	}
 	
 	function update(index){
+		var rows=$("#table").datagrid('getRows');
+		var uid=rows[index].uid;	
+		$("#uid").textbox("setValue",uid);
+		var uname=rows[index].uname;
+		$("#uname").textbox("setValue",uname);
+		var upass=rows[index].upass;
+		$("#upass").textbox("setValue",upass);
+		var gender=rows[index].gender;
+		$("#gender").textbox("setValue",gender);
+		var status=rows[index].status;
+		$("#ustatus").textbox("setValue",status);
 		$("#dd").dialog('open');
 	}
 	function save(){
 		$('#ff').form('submit',{
 			url:"updateUser.s",
 			success:function(data){
-				$("table").datagrid('reload');
+				$("#table").datagrid('reload');
 				$.messager.show({
 					title:'系统提示',
 					msg:data,
@@ -34,7 +45,6 @@
 		});
 		
 	}
-	 
 	</script>
 </head>
 <body>
@@ -52,7 +62,7 @@
             <th data-options="field:'uname',width:70">名称</th>
             <th data-options="field:'upass',width:70">密码</th>
             <th data-options="field:'gender',width:70">性别</th>
-            <th data-options="field:'ustatus',width:80">状态</th>
+            <th data-options="field:'status',width:80">状态</th>
             <th data-options="field:'unlive',width:30,formatter:fmtcz">操作</th>
         </tr>
     </thead>
@@ -65,11 +75,11 @@
 	style="width:400px;height:250px;"
 	 data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
   <form style="text-align: center; " id="ff">
-  <input name="uid" id="tb" class="easyui-textbox" prompt="编号"><br>
-   <input name="uname" id="tb" class="easyui-textbox" prompt="姓名"><br>
-  <input name="upass" id="tb" class="easyui-textbox" prompt="密码"><br>
-  <input  name="gender" id="tb" class="easyui-textbox" prompt="性别（0：男 1：女）"><br>
-  <input  name="ustatus" id="tb" class="easyui-textbox" prompt="状态（0：禁用1：允许）"><br>
+  <input name="uid" id="uid" class="easyui-textbox" prompt="编号"><br>
+   <input name="uname" id="uname" class="easyui-textbox" prompt="姓名"><br>
+  <input name="upass" id="upass" class="easyui-textbox" prompt="密码"><br>
+  <input  name="gender" id="gender" class="easyui-textbox" prompt="性别（0：男 1：女）"><br>
+  <input  name="ustatus" id="ustatus" class="easyui-textbox" prompt="状态（0：禁用1：允许）"><br>
   <a id='btn' href="#" class="easyui-linkbutton" 
   data-options="
   iconCls:'icon-save',

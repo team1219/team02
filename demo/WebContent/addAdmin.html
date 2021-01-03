@@ -51,16 +51,16 @@
 		//根据index值修改记录
 		//根据index获取当前行的id值
 		var rows=$("#table").datagrid('getRows');
-		//var res=$("#pwd");
-		//var apwd=res.val();
-		var apwd = $("#pwd").textbox('getValue')//取值
 		var aid=rows[index].aid;
 		//发起ajax请求 修改数据库的记录
 		//jquery的post方法 3个参数 url，param，回调函数
 		var url="updatePwd.s";
-		var params={apwd:apwd,aid:aid};  //jquery使用对象传入参数
+		
 		$("#save").click(function () {
+			var apwd = $("#pwd").textbox('getValue')//取值
+			var params={apwd:apwd,aid:aid};  //jquery使用对象传入参数
 			function callback(data){
+				
 				//刷新表格数据
 				$("#table").datagrid('reload');
 				$.messager.show({
@@ -81,7 +81,7 @@
 		$('#xx').form('submit',{
 			url:"addAdmin.s",
 			success:function(data){
-				$("table").datagrid('reload');
+				$("#table").datagrid('reload');
 				$.messager.show({
 					title:'系统提示',
 					msg:data,
@@ -94,10 +94,9 @@
 	}
 	</script>
 </head>
-<body>
+<body >
 <div id="cc" class="easyui-layout" data-options="fit:true">
-     <div data-options="region:'north',title:'查询条件' " style="height:100px;">
-     <a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
+     <div data-options="region:'north',title:'查询条件' " style="height:64px;">
      <a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'"
      onClick="add()">新增</a>
      </div>

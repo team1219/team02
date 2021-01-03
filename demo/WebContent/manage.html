@@ -108,7 +108,7 @@
 		post("GetLoginedAname",function(){
 			if(xmlhttp.readyState==4&&xmlhttp.status==200){
 				var myname=document.getElementById('aname');
-				myname.innerText="欢迎:"+xmlhttp.responseText;
+				myname.innerText="管理员:"+xmlhttp.responseText;
 				
 			}
 		})
@@ -121,11 +121,13 @@
 	</head>
 <body>
   <div id="cc" class="easyui-layout" data-options="fit:true">
-		<div data-options="region:'north',title:'North Title',collapsible:false" style="height:20px">
-		<span style="position: absolute; left: 230px; top: 8px;" id="aname">欢迎：XXX</span>
-		<a href="adminReplace.html" style="position: absolute; right: 30px; top: 8px;">修改密码</a>
+		<div data-options="region:'north',title:'管理员操作界面',collapsible:false" style="height:20px">
+		<span style="position: absolute; left: 230px; top: 8px;font-weight: 1000" id="aname">管理员：XXX</span>
+		<a href="adminUpdate.html" style="position: absolute; right: 185px; top: 8px;font-weight: 600" >修改个人信息</span>
+		<a href="adminReplace.html" style="position: absolute; right: 110px; top: 8px;font-weight: 600">修改密码</a>
+		<a href="adminLogin.html" style="position: absolute; right: 20px; top: 8px;font-weight: 600">退出该账号</a>
 		</div>
-		<div data-options="region:'west',title:'West',split:true,minWidth:'200px'"
+		<div data-options="region:'west',title:'信息栏',split:true,minWidth:'200px'"
 		 class="easyui-accordion" style="width:115px;">
 		 <!-- 抽屉控件实现菜单分页管理 -->
 		 <div title="蛋糕信息管理" data-options="iconCls:'icon-save'" style="overflow:auto;padding:3px;text-align:center;line-height:40px">
