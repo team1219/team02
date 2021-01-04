@@ -2,57 +2,22 @@ package com.team.demo.util;
 
 public class Detail {
 	private Integer did;
-	private String typename;
-	private String cname;
-	private Integer pid;
-	private String pretime;
-	private String gettime;
-	private String cnum;
-	private String cprice;
+	private Integer uid;
 	private String tel;
-	private String uname;
+	private String pretime;
+	private String ptotal;
 	private String addr;
-	public String getTypename() {
-		return typename;
+	public Integer getDid() {
+		return did;
 	}
-	public void setTypename(String typename) {
-		this.typename = typename;
+	public void setDid(Integer did) {
+		this.did = did;
 	}
-	public String getCname() {
-		return cname;
+	public Integer getUid() {
+		return uid;
 	}
-	public void setCname(String cname) {
-		this.cname = cname;
-	}
-	public Integer getPid() {
-		return pid;
-	}
-	public void setPid(Integer pid) {
-		this.pid = pid;
-	}
-	public String getPretime() {
-		return pretime;
-	}
-	public void setPretime(String pretime) {
-		this.pretime = pretime;
-	}
-	public String getGettime() {
-		return gettime;
-	}
-	public void setGettime(String gettime) {
-		this.gettime = gettime;
-	}
-	public String getCnum() {
-		return cnum;
-	}
-	public void setCnum(String cnum) {
-		this.cnum = cnum;
-	}
-	public String getCprice() {
-		return cprice;
-	}
-	public void setCprice(String cprice) {
-		this.cprice = cprice;
+	public void setUid(Integer uid) {
+		this.uid = uid;
 	}
 	public String getTel() {
 		return tel;
@@ -60,11 +25,17 @@ public class Detail {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	public String getUname() {
-		return uname;
+	public String getPretime() {
+		return pretime;
 	}
-	public void setUname(String uname) {
-		this.uname = uname;
+	public void setPretime(String pretime) {
+		this.pretime = pretime;
+	}
+	public String getPtotal() {
+		return ptotal;
+	}
+	public void setPtotal(String ptotal) {
+		this.ptotal = ptotal;
 	}
 	public String getAddr() {
 		return addr;
@@ -72,13 +43,7 @@ public class Detail {
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
-	public Integer getDid() {
-		return did;
-	}
-	public void setDid(Integer did) {
-		this.did = did;
-	}
-	
+
 	
 
 }

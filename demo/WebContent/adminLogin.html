@@ -70,7 +70,8 @@
 	    			axios.post("admin.s?op=login",p).then(res=>{
 		    			this.ret = res.data;
 		    			if(this.ret == 1){
-		    				alert("登录成功!");
+		    				$.messager.show("登陆成功");
+		    				
 		    				//直接通过js 跳转到main.html
 		    				//location 是 JS BOM 模型中的对象, 对于表示浏览器当前的网址
 		    				location.href="manage.html";

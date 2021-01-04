@@ -16,6 +16,14 @@
 		
 	}
 	
+	function fmtcz2(value,row,index){
+		//函数的返回值 会被解析成html 元素
+		var rows=$("#table").datagrid('getRows');
+		var cimg=rows[index].cimg;
+		return "<img src="+cimg+" style='width:100px; height:100px'> ";
+			
+	}
+	
 	function del(index){
 		$.messager.confirm('确认对话框','您确认删除该食品吗？',function(r){
 		    if (r){
@@ -89,12 +97,12 @@
      pagination:true">
     <thead>
         <tr >
-            <th data-options="field:'cid',width:35">编码</th>
-            <th data-options="field:'cname',width:70">名称</th>
+            <th data-options="field:'cid',width:40">编码</th>
+            <th data-options="field:'cname',width:80">名称</th>
             <th data-options="field:'cprice',width:80">价格</th>
-            <th data-options="field:'cimg',width:200" >图片地址</th>
+            <th data-options="field:'cimg',width:100,formatter:fmtcz2"  >图片</th>
             <th data-options="field:'size',width:50">尺寸</th>
-            <th data-options="field:'unlive',width:30,formatter:fmtcz">操作</th>
+            <th data-options="field:'unlive',width:70,formatter:fmtcz">操作</th>
         </tr>
     </thead>
    </table>
