@@ -247,19 +247,6 @@ public class OrderServlet extends BaseServlet {
 		}
 	}
 
-	public void deleteCarts(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
-		int oid = 0;
-		String deleteData[] = request.getParameterValues("deleteData[]");
-		if(deleteData!=null && deleteData.length!=0) {
-		for (int i = 0; i < deleteData.length; i++) {
-			oid = Integer.parseInt(deleteData[i].toString());
-			write(response, dao.deleteOrder(oid));
-		}
-		}else {
-			write(response, "-1");
-		}
-	}
-
 	
 
 	public void updateOrder(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
