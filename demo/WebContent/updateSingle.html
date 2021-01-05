@@ -7,7 +7,7 @@
     <meta name="description" content="Free Responsive Html5 Templates">
     <meta name="author" content="">
 
-	<title>登录</title>
+	<title>注册</title>
   
 	<!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css"  type="text/css">
@@ -47,25 +47,25 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="index.html">首页</a>
+                        <a class="page-scroll" href="index.html">Home</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="single.html">关于我们</a>
+                        <a class="page-scroll" href="single.html">About</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="menu.html">菜单</a>
+                        <a class="page-scroll" href="menu.html">Menu</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="blog.html">博客</a>
+                        <a class="page-scroll" href="blog.html">Blog</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="cart.html">购物车</a>
+                        <a class="page-scroll" href="cart.html">Cart</a>
                     </li>
                      <li>
-                        <a class="page-scroll" href="login.html">登录</a>
+                        <a class="page-scroll" href="login.html">Login</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="register.html">注册</a>
+                        <a class="page-scroll" href="register.html">Register</a>
                     </li>
                 </ul>
             </div>
@@ -75,81 +75,98 @@
     </nav>
 	<!-- Navigation -->
 	<header class="container">
-	<form id="login" action="index.html">
-		<div class="t">
-		账号：<input v-model="account" id="account" value=""><br>
-		密码：<input v-model="pwd" id="pwd"><br>
-       验证码:
-       <input  v-model="vcode" id="vcode" maxlength="4" placeholder="点击图片更换验证码">
-       <img src="VerifyCodeServlet" height="20px"
-           onclick="this.src='VerifyCodeServlet?a=' + new Date(); time=60">
-        
-        <span v-model="vtime" id="timer"></span>
-        <br>
-		<!-- button 默认时提交按钮 -->
-		<a @click="login" id="loginbtn" style="vertical-align:middle"  ><span>登录</span></a>
-		<a href="register.html" id="registerbtn" style="vertical-align:middle"><span>注册</span></a>
-		</div>
-	</form>    
+	<div align="center" class="t1">
+			<form id="regForm" name="regForm" action="" method="post">
+				<br>
+				<label>用户名:</label>
+				<input v-model="user.uName" tabindex="1" type="text" maxlength="20" size="20" name="uName" class="input">
+				<br>				
+				<span  style="width: 248px; display: inline-block; margin: 10px;">
+					女
+					<input v-model="user.gender" type="radio" name="gender" value="0">
+					
+					男
+					<input v-model="user.gender" type="radio" name="gender" value="1">
+				</span>
+				<br />
+				<fieldset style="display: inline-block; margin: 5px;">
+					<legend> 请选择头像:</legend>
+					<img src="image/head/1.gif">
+					<input v-model="user.head" type="radio" name="head" value="1.gif">
+					<img src="image/head/2.gif">
+					<input v-model="user.head" type="radio" name="head" value="2.gif">
+					<img src="image/head/3.gif">
+					<input v-model="user.head" type="radio" name="head" value="3.gif">
+					<img src="image/head/4.gif">
+					<input v-model="user.head" type="radio" name="head" value="4.gif">
+					<img src="image/head/5.gif">
+					<input v-model="user.head" type="radio" name="head" value="5.gif">
+					<br> <img src="image/head/6.gif">
+					<input v-model="user.head" type="radio" name="head" value="6.gif">
+					<img src="image/head/7.gif">
+					<input v-model="user.head" type="radio" name="head" value="7.gif">
+					<img src="image/head/8.gif">
+					<input v-model="user.head" type="radio" name="head" value="8.gif">
+					<img src="image/head/9.gif">
+					<input v-model="user.head" type="radio" name="head" value="9.gif">
+					<img src="image/head/10.gif">
+					<input v-model="user.head" type="radio" name="head" value="10.gif">
+					<br> <img src="image/head/11.gif">
+					<input v-model="user.head" type="radio" name="head" value="11.gif">
+					<img src="image/head/12.gif">
+					<input v-model="user.head" type="radio" name="head" value="12.gif">
+					<img src="image/head/13.gif">
+					<input v-model="user.head" type="radio" name="head" value="13.gif">
+					<img src="image/head/14.gif">
+					<input v-model="user.head" type="radio" name="head" value="14.gif">
+					<img src="image/head/15.gif">
+					<input v-model="user.head" type="radio" name="head" value="15.gif">
+				</fieldset>
+				<br>
+				<a id="registerbtn-1" style="vertical-align:middle;margin-right:10px" tabindex="4" type="button" @click="register"><span>注 册</span></a>
+			</form>
+		</div>	
 	</header>
-	<script type="text/javascript">
+<script type="text/javascript">
 	    var v = new Vue({
-	    	el : "#login",
+	    	el : "#regForm",
 	    	data : {
-	    		account : "",
-	    		pwd : "",
-	    		vcode : "",
-	    		vtime : "",
-	    		ret : 0
+	    		user : {
+	    			uName : "",
+		    		uPass : "",
+		    		uPass1 : "",
+		    		gender : "",
+		    		head : "",		
+	    		},
+	    		ret : ""	
 	    	},
 	    	methods : {
-	    		login(){
+	    		register(){
 	    			// post 请求 发送的数据量没有限制
 	    			var p = new URLSearchParams(); //用于封装post请求参数
 	    			//p.append("参数名","参数值");
-	    			p.append("account",this.account);
-	    			p.append("pwd",this.pwd);
-	    			p.append("vcode",this.vcode);
-	    			p.append("vtime",this.vtime);
-	    			p.append("ret",this.ret);
-	    			axios.post("user.s?op=login",p).then(res=>{
+	    			p.append("uName",this.user.uName);
+	    			p.append("uPass",this.user.uPass);
+	    			p.append("uPass1",this.user.uPass1);
+	    			p.append("gender",this.user.gender);
+	    			p.append("head",this.user.head);
+	    			axios.post("user.s?op=register",p).then(res=>{
 		    			this.ret = res.data;
-		    			if(this.ret == 1){
-		    				alert("登录成功!");
-		    				//直接通过js 跳转到main.html
-		    				//location 是 JS BOM 模型中的对象, 对于表示浏览器当前的网址
-		    				location.href="index.html";
-		    			}else if(this.ret == -2){
-		    				alert("验证码超时!");
-		    			}else if(this.ret == -1){
-		    				alert("验证码错误");
-		    			}else{
-		    				alert("登录失败!");
+		    			if(this.ret==1){
+		    				alert("注册成功");
+		    				location.href="login.html";
+		    			}else if(this.ret==0){
+		    				alert("注册失败!用户名已存在!");
+		    			}else if(this.ret==-1){
+		    				alert("注册失败!用户名不能为空!");
+		    			}else if(this.ret==-2){
+		    				alert("注册失败!两次密码不同!");
 		    			}
 		    		})
 	    		}
 	    	}
 	    })
-	    var time=60;
-
-	    setInterval(function(){
-	    	if(time > 0){
-	    		time--;
-	    		timer.innerText = time;
-	    	}else{
-	    		timer.innerText="请刷新验证码";
-	    	}
-	    }, 1000);
-	    /*当打开页面时,检查cookie 是否有loginedAccount   "loginAccount=aaa; a=1"*/
-	    //通过正则表达式,获取cookie中存储的值
-	    var la = document.cookie.replace(/.*loginedAccount=(\w*).*/,"$1");
-	    if(la){
-	    	 //输出该值
-	    	 console.info("==========="+la);
-	    	 //account.value=la;
-	    }
 	</script>
-
 	
 	<!-- /////////////////////////////////////////Content -->
 	<div id="page-content">
