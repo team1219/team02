@@ -83,7 +83,7 @@
             <input type="button" value="搜索" class="input_btn fr">
         </div>
     </div>
-     <div id="submit0">
+     <div id="submit1">
     <!-- 收货地址 -->
     <h3 class="common_title">确认收货地址</h3>
 
@@ -123,7 +123,7 @@
 										<th>小计</th>
 										</tr>
 									</thead>
-					<tbody >
+					<tbody  >
 					<tr v-for="(list,index) in list" :key="index">
 						<td>
 						<span class="goodName">
@@ -141,23 +141,30 @@
 						</td>
 	
 					</tr>
-						
+						<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>	<span class="servicenum">共<span class="goodsNum">1</span>个商品</span></td>
+					
+					<td>
+					<span class="totalclassPoin">总价：<span
+										class="totalMoneyClass">￥:{{totalMoney}}</span></span></td>
+							
+					</tr>
 				</tbody>
 				
-			</table>
-
-					<span class="servicenum">共<span class="goodsNum">{{list.length}}</span>个商品</span>
-					
-							<span class="totalclassPoin">总价：<span
-										class="totalMoneyClass">￥:{{totalMoney}}</span></span>
 			
 				
+			</table>
+<div class="order_submit clearfix">
+		<a  id="order_btn" @click="submit">提交订单</a>
+	</div>	
+					
 							</div>
 						</div>
 					</div>
-	<div class="order_submit clearfix">
-		<a  id="order_btn" @click="submit">提交订单</a>
-	</div>	
+	
     
     <div class="popup_con">
 		<div class="popup">
@@ -169,57 +176,57 @@
 	</div>
 	<script type="text/javascript">   
 		 var v = new Vue({
-	    	el : "#submit0",
+	    	el : "#submit1",
 	    	data : {
 	    		list : [],
 		        tel : "",
-		        name : "",
 		        sname : "",
 		        addr : ""  ,
 		        totalMoney : 0,
-		        status : 0,
 	    	},	
-	    	
 	    	created(){
+	    		this.reload();
 	    		setTimeout(() =>{
 	    			this.query();	
 	    		},1000);
 	    		
 	    	},
-	    	methods : {	
+	    	methods : {
+	    		reload(){
+	    			this.isRouterAlive = false
+	    			this.$nextTick(function () {
+	    			  this.isRouterAlive = true
+	    			})
+	    		},
 	    		query(){
-	    			axios.get("order.s?op=queryDetail").then(res=>{
-		     				 this.list = res.data;
-			     			   console.info(this.list);
-			     			  if(this.list==-1){
-			    					alert("未登录！");
-			    					location.href="login.html";
-			    				}else{
-			    					var arry =[];
-			    					for(var i=0;i<this.list.length;i++){
-	    	    						
-	    	    							
-	    	    					   arry[i]=parseFloat(this.list[i].cnum)*parseFloat(this.list[i].price);	
-	    	    					    	
-		    	    				}
-		    	    				this.totalMoney=arry.reduce((count,v)=>count+v,0);
-			    				}
-			     			 
+	    				axios.get("order.s?op=queryDetail").then(res=>{				
+		    				this.list = res.data;
+		    				if(this.list==-1){
+		    					alert("未登录！");
+		    					location.href="login.html";
+		    				}else{
+		    					var arry =[];
+		    					for(var i=0;i<this.list.length;i++){
+    	    						
+    	    							
+    	    					   arry[i]=parseFloat(this.list[i].cnum)*parseFloat(this.list[i].price);	
+    	    					    	
+	    	    				}
+	    	    				this.totalMoney=arry.reduce((count,v)=>count+v,0);
+		    				}
 		     		   })
     		    },
-
 	    		submit(){
-	    				axios.get("order.s?op=buy",{
+	    				axios.get("order.s?op=buyNow",{
 		    				params : {
-		    					name : this.name,
 		    					sname : this.sname,
 		    					tel : this.tel,
 		    					addr : this.tel,
 		    				}	
 		    			}).then(res=>{
-		     			   this.status = res.data;
-		     			   console.info(this.status);
-		     		   }) 
+		     			   var i = res.data;
+		     			   console.info(i);
+		     		   })		  
     		    },
 	    		
 	    	}

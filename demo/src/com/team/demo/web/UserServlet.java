@@ -81,7 +81,7 @@ public class UserServlet extends BaseServlet {
 			HttpSession session = request.getSession();
 			// 存入当前登录的对象名
 			session.setAttribute("loginedAccount", uname);
-
+			session.setMaxInactiveInterval(30);
 			// 将账号保存到cookie中
 			Cookie cookie = new Cookie("loginedAccount", uname);
 			cookie.setMaxAge(60 * 60 * 24 * 7);

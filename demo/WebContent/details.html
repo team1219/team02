@@ -227,8 +227,8 @@
 						<img src="images/shangpinxiangqing/16.png">
 					</div>
 				</div>
-				<div class="Xcontent34">
-					<a :href="'order.html#' + cid"><img src="images/shangpinxiangqing/X17.png"></a>
+				<div class="Xcontent34" @click="addDetails">
+					<a  :href="'order1.html#' + cid"><img src="images/shangpinxiangqing/X17.png"></a>
 				</div>
 				<div class="Xcontent35" @click="addCarts">
 					<a :href="'cart.html#' + cid "><img src="images/shangpinxiangqing/X18.png"></a>
@@ -244,13 +244,12 @@
 	    		orderstatus : "",
 	    		cid : location.hash.substring(1),
 	    		num : 0,
-	    		name : ""
+	    		price : 0,
 	    	},
 	    	created(){
 	    		this.query();
 	    		this.add();
 	    		this.increase();
-	    		this.getCookies();
 	    	},
 	    	methods : {
 	    		query(){
@@ -260,7 +259,10 @@
 	    				}
 	     		   }).then(res=>{
 	     			   this.list = res.data;
-	     			   console.info(this.list);
+	     			   for(x in this.list){
+	     				  this.price = this.list[x].cprice;
+	     			   }
+	     			   console.info(this.price);
 	     		   })
 	    		},
 	    		add(){
@@ -273,21 +275,36 @@
 	    				this.num--;
 	    			}
 	    		},
-	    		getCookies(){
-	    			this.name= document.cookie.replace(/.*loginedAccount=(\w*).*/,"$1");
-	    			console.info(this.name);
-	    		},
 	    		addCarts(){
-	    			axios.get("order.s?op=addOrder",{
+	    			axios.get("order.s?op=addCartOrder",{
 		     			   params : {
 		    					cid : this.cid,
 		    					num : this.num,
-		    					name : this.name
+		    					price : this.price,
 		    				}
-		     		   }).then(res=>{
-		     			   this.orderstatus = res.data;
+		     		   }).then(res=>{ 
+		     			  this.orderstatus = res.data;
+		     			  if(this.orderstatus=="-1"){
+		     				   alert("账号已失效!");
+		     				  location.href="login.html";
+		     			   }
 		     		   })
-		    		}
+		    		},
+		    		addDetails(){
+		    			axios.get("order.s?op=addOrder",{
+			     			   params : {
+			    					cid : this.cid,
+			    					num : this.num,
+			    					price : this.price,
+			    				}
+			     		   }).then(res=>{
+			     			   this.orderstatus = res.data;
+			     			  if(this.orderstatus=="-1"){
+			     				   alert("账号已失效!");
+			     				  location.href="login.html";
+			     			   }
+			     		   })
+			    		}
 	    	}
 	    })
 	</script>
