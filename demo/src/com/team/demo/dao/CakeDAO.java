@@ -2,6 +2,7 @@ package com.team.demo.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import com.team.demo.util.DBHelper;
 
@@ -136,16 +137,6 @@ public class CakeDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return 0;
-		}
-	}
-	
-	public List<?> queryCid(int cid){
-		String sql = "select * from cake where cid = " + cid;
-		try {
-			return DBHelper.selectListMap(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
 		}
 	}
 }

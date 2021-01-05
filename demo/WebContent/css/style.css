@@ -15,8 +15,8 @@ html, body {width:100%; padding:0; margin:0;}
 /* ---------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------- */
-html { -webkit-text-size-adjust: none;}
-.video embed,.video object,.video iframe { width: 100%;  height: auto;}
+html {聽-webkit-text-size-adjust: none;}
+.video embed,.video object,.video iframe {聽width: 100%;聽聽height: auto;}
 img{max-width:100%;	height: auto;width: auto\9; /* ie8 */}
 
 h1 {font-size: 38px;}
@@ -25,7 +25,6 @@ h3 {font-size: 32px;}
 h4 {font-size: 28px;}
 h5 {font-size: 24px;}
 h6 {font-size: 20px;}
-
 h1,h2,h3,h4,h5,h6 {font-weight: 600;color: #111;}
 input:not([type]), input[type="color"], input[type="email"], input[type="number"], input[type="password"], input[type="tel"], input[type="url"], input[type="text"], textarea, .form-control, select {
     border: 2px solid #E7E7E7;
@@ -319,7 +318,7 @@ footer ul.social-buttons li a i{margin-top: 7px;}
 	 border-bottom: none;
 }
  .widget_recent_entries li a:before {
-    content: "";
+    content: "飫�";
     font-family: "FontAwesome";
     left: 0;
     line-height: 1;
@@ -609,7 +608,7 @@ border: 1px solid rgba(255, 255, 255, 0.7);bottom: 1em;content: '';left: 500px;o
 }
 
 #loginbtn span:after {
-  content: '»';
+  content: '禄';
   position: absolute;
   opacity: 0;
   top: 0;
@@ -651,7 +650,7 @@ border: 1px solid rgba(255, 255, 255, 0.7);bottom: 1em;content: '';left: 500px;o
 }
 
 #registerbtn span:after {
-  content: '»';
+  content: '禄';
   position: absolute;
   opacity: 0;
   top: 0;
@@ -693,7 +692,7 @@ border: 1px solid rgba(255, 255, 255, 0.7);bottom: 1em;content: '';left: 500px;o
 }
 
 #registerbtn-1 span:after {
-  content: '»';
+  content: '禄';
   position: absolute;
   opacity: 0;
   top: 0;
@@ -765,7 +764,7 @@ border: 1px solid rgba(255, 255, 255, 0.7);bottom: 1em;content: '';left: 500px;o
 }
 
 #btn-f span:after {
-  content: '»';
+  content: '禄';
   position: absolute;
   opacity: 0;
   top: 0;
@@ -781,7 +780,7 @@ border: 1px solid rgba(255, 255, 255, 0.7);bottom: 1em;content: '';left: 500px;o
   opacity: 1;
   right: 0;
 }
-/*搜索框7*/
+/*鎼滅储妗�7*/
       
 .bar7 form {
 	height:170px;

@@ -31,7 +31,10 @@
     <![endif]-->
 	
 </head>
-
+<!-- 引入vue 和 axios -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+<script
+	src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
  <body>
 
 
@@ -68,7 +71,7 @@
                         <a class="page-scroll" href="blog.html">Blog</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="cart.html">Cart</a>
+                        <a class="page-scroll" href="details.html">Details</a>
                     </li>
                      <li>
                         <a class="page-scroll" href="login.html">Login</a>
@@ -140,127 +143,23 @@
 	<div id="page-content">
 		<div id="main-content">
 			<div class="container">
-				<article>
+				<article id="blog" >
 					<div class="heading">
 						<h2>
 							<span class="hr">Blog</span>
 						</h2>
 					</div>
 					<div class="row">
-						<div class="col-md-6">
-							<div class="clearfix box-archive">
+						<div class="col-md-6" v-for="xh in list"  >
+							<div class="clearfix box-archive" >
 								<div class="col-md-6">
-									<img src="images/menu-1.jpg"/>
+									<img :src="xh.timg"/>
 								</div>
 								<div class="col-md-6">
 									<div class="wrapper">
-										<h3>The title on the article</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam viverra convallis auctor. Sed accumsan libero.</p>
-										<a class="btn btn-1" href="#">Read More</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="clearfix box-archive">
-								<div class="col-md-6">
-									<img src="images/menu-2.jpg"/>
-								</div>
-								<div class="col-md-6">
-									<div class="wrapper">
-										<h3>The title on the article</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam viverra convallis auctor. Sed accumsan libero.</p>
-										<a class="btn btn-1" href="#">Read More</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<div class="clearfix box-archive">
-								<div class="col-md-6">
-									<img src="images/menu-3.jpg"/>
-								</div>
-								<div class="col-md-6">
-									<div class="wrapper">
-										<h3>The title on the article</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam viverra convallis auctor. Sed accumsan libero.</p>
-										<a class="btn btn-1" href="#">Read More</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="clearfix box-archive">
-								<div class="col-md-6">
-									<img src="images/menu-4.jpg"/>
-								</div>
-								<div class="col-md-6">
-									<div class="wrapper">
-										<h3>The title on the article</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam viverra convallis auctor. Sed accumsan libero.</p>
-										<a class="btn btn-1" href="#">Read More</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<div class="clearfix box-archive">
-								<div class="col-md-6">
-									<img src="images/menu-5.jpg"/>
-								</div>
-								<div class="col-md-6">
-									<div class="wrapper">
-										<h3>The title on the article</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam viverra convallis auctor. Sed accumsan libero.</p>
-										<a class="btn btn-1" href="#">Read More</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="clearfix box-archive">
-								<div class="col-md-6">
-									<img src="images/menu-6.jpg"/>
-								</div>
-								<div class="col-md-6">
-									<div class="wrapper">
-										<h3>The title on the article</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam viverra convallis auctor. Sed accumsan libero.</p>
-										<a class="btn btn-1" href="#">Read More</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<div class="clearfix box-archive">
-								<div class="col-md-6">
-									<img src="images/menu-7.jpg"/>
-								</div>
-								<div class="col-md-6">
-									<div class="wrapper">
-										<h3>The title on the article</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam viverra convallis auctor. Sed accumsan libero.</p>
-										<a class="btn btn-1" href="#">Read More</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="clearfix box-archive">
-								<div class="col-md-6">
-									<img src="images/menu-8.jpg"/>
-								</div>
-								<div class="col-md-6">
-									<div class="wrapper">
-										<h3>The title on the article</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam viverra convallis auctor. Sed accumsan libero.</p>
-										<a class="btn btn-1" href="#">Read More</a>
+										<h3>{{xh.topic}}</h3>
+										<p>{{xh.tcontent}}</p>
+										<a class="btn btn-1" :href="'discuss.html#' + xh.tid">立即去发表</a>
 									</div>
 								</div>
 							</div>
@@ -270,6 +169,26 @@
 			</div>
 		</div>
 	</div>
+<script type="text/javascript">
+	var vue = new Vue({
+		el : "#blog",
+		data : {
+			list : [],
+			xh : [[0,1]]
+		},
+		created(){
+			this.query();
+		},
+		methods : {
+			query(){
+				axios.get("querycake.s?op=queryTid").then(res=>{
+					this.list=res.data;
+					console.info(this.list);
+				});
+			}
+		}
+	})
+	</script>
 	
 	<!-- FOOTER -->
 	<footer>
