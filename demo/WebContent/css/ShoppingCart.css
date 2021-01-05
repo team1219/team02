@@ -5,6 +5,27 @@
 .logoTit{margin-left: 20px;}
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{padding-right: 0px;padding-left: 0px;}
 /*tooper*/
+.ShopCartTable > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(3) > span:nth-child(1) {
+width: 200px;
+}
+.ShopCartTable > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(2) > input:nth-child(1) {
+display: inherit;
+}
+ShoppingCart.css
+.ShopCartTable .selectLeft {
+width: 60px;
+width: 100%;
+}
+.ShopCartTable > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(2) {
+width: 100%;
+padding-left: 0px;
+}
+th.selectLeft > input:nth-child(1) {
+display: inherit;
+}
+.tablefooter > input:nth-child(1) {
+margin-left: 135px;
+}
 .layui-tab-title{border-bottom: 0px;}
 .layui-tab-title li{color: white;margin-top: -5px;margin-right: 50px;vertical-align:inherit;}
 .toper_btm_nav{height:45px;background: #05226C;} 
@@ -21,8 +42,9 @@
 .ShopCartTable th{text-align: center;border: 0px;color: #999999;font-weight: 200;}
 .ShopCartTable td{border: 0px;border-bottom: 1px solid #EDEDED;padding:10px 0;}
 .ShopCartTable > thead:nth-child(1) > tr:nth-child(1) > th:nth-child(1) {
-width: 160px;
-display: block;
+    width: 120px;
+    display: block;
+    top: 10px;
 }
 .ShopCartTable > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(6) {
 width: 100px;
@@ -31,7 +53,7 @@ width: 100px;
 right: 45%;
 }
 .totalclassPoin {
-right: 0px;
+right: 120px;
 }
 
 .servicenum {
@@ -69,14 +91,14 @@ width: 200px;
 .goodname{font-language-override: 16px;}
 .danPrice{color: #999999;}
 .totalPrice{font-size: 14px;font-weight: bold;}
-.SettlementBtn{height: 50px;width: 100px;color: white;background: #209ceb;padding-top:14px;
+.SettlementBtn{height: 50px;width: 100px;color: white;background: #209ceb;padding-top:2px;
     display: inline-block;text-align: center;float: right;position: relative;font-size:18px;margin-top:-1px;}
 .totalclassPoin{color: #999999;position: absolute;font-size: 30px;}
 .servicenum{    position: absolute;
-    right: 35%;
+    right: 22%;
     color: #999999;
-    font-size: 30px;}
-.removeMuch{position: absolute;left: 90px;cursor: pointer;color: #999999;}
+    font-size: 20px;}
+.removeMuch{position: absolute;left: 130px;cursor: pointer;color: #999999;}
 .removeSaves{position: absolute;left: 250px;cursor: pointer;color: #999999;}
 .deletegoods{color: #999999;cursor: pointer;}
 .ShopCartTable .selectLeft
@@ -95,8 +117,8 @@ width: 180px;
 .gongneng p{cursor: pointer;color: #999999;}
 .gongneng .saveCheck{color: red;}
 .tablefooter{height: 50px;line-height:50px;border: 1px solid #EDEDED;margin-top: 20px;margin-bottom:30px;}
-.totalMoneyClass{color: red;font-weight: 500;font-size:25px;}
-.goodsNum{color: red;font-size: 25px;}
+.totalMoneyClass{color: red;font-weight: 500;font-size:20px;}
+.goodsNum{color: red;font-size: 20px;}
 .is-null{
     font-weight:500;
     color:#ccc;
