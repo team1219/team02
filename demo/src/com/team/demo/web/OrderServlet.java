@@ -65,10 +65,7 @@ public class OrderServlet extends BaseServlet {
 		Map<String, Object> map2 = list1.get(0);
 		did = (int) map2.get("max(did)");
 		int i = dao.addOrder(uid, Integer.parseInt(cid), Integer.parseInt(cnum), price, did);
-		List<Map<String, Object>> list2 = (List<Map<String, Object>>) dao.queryOid(uid);
-		Map<String, Object> map3 = list2.get(0);
-		int oid = (int) map2.get("oid");
-		dao.addCart(oid, did, cid, cnum, price, did);
+		
 		if (i > 0 && j > 0) {
 			write(response, "1");
 		} else {
@@ -104,7 +101,12 @@ public class OrderServlet extends BaseServlet {
 		oid = (int) map1.get("max(oid)");
 		System.out.println("++++" + did);
 		System.out.println("++++" + oid);
-		
+		List<Map<String, Object>> list3 = (List<Map<String, Object>>) dao.queryByOid(oid);
+		Map<String, Object> map3 = list3.get(0);
+		int cid = (int) map3.get("cid");
+		String price = (String) map3.get("price");
+		String cnum  = (String) map3.get("cnum");
+		dao.addCart(oid, uid, cid, cnum, price, did);
 		int i = dao.addLupdate(tel, Utils.getNowTime(), addr, sname, did);
 		int j = dao.deleteOrder(oid);
 		if(i>0 && j>0) {
@@ -171,7 +173,7 @@ public class OrderServlet extends BaseServlet {
 				oid = Integer.parseInt(userBuyData[i].toString());
 				num = Integer.parseInt(cnum[i].toString());
 				int j = dao.updateOrder(num, oid);
-				dao.addCart(oid, uid, cid[i], cnum[i], price[i], did);
+				dao.addCart(oid, uid, Integer.parseInt(cid[i]), cnum[i], price[i], did);
 				if (j > 0) {
 					write(response, "1");
 					System.out.println("修改成功");
@@ -239,6 +241,15 @@ public class OrderServlet extends BaseServlet {
 		int did = (int) map2.get("max(did)");
 		System.out.println(did);
 		write(response, ddao.queryDetailOrder(did));
+		}else {
+			write(response, "-1");
+		}
+	}
+	
+	public void queryDetailOrder(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, SQLException {
+		if(uid>0) {
+		write(response, ddao.queryOrder(uid));
 		}else {
 			write(response, "-1");
 		}

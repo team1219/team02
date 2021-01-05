@@ -13,7 +13,7 @@ public class OrderDAO {
 	}
 	
 	
-	public int  addCart(int oid,int uid,String cid,String cnum,String price,int did) throws SQLException {
+	public int  addCart(int oid,int uid,int cid,String cnum,String price,int did) throws SQLException {
 		String sql = "insert into cake_Cart(oid,uid,cid,u_cnum,price,did) values(?,?,?,?,?,?)";
 		return DBHelper.update(sql,oid, uid,cid,cnum,price,did);
 	}
