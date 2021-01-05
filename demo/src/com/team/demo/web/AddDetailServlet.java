@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.team.demo.dao.DetailDao;
 import com.team.demo.util.Detail;
+import com.team.demo.util.Detail;
 
 
 /**
@@ -21,9 +22,9 @@ import com.team.demo.util.Detail;
 @WebServlet("/addDetail.s")
 public class AddDetailServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-	 
+	 	DetailDao detailDao=new DetailDao();
 		protected void doQuery(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			DetailDao detailDao=new DetailDao();
+		
 			response.setContentType("text/html;charset=utf-8");
 			String page=request.getParameter("page");
 			int ipage=page==null? 1:Integer.parseInt(page);
@@ -43,8 +44,11 @@ public class AddDetailServlet extends BaseServlet {
 					e.printStackTrace();
 				}
 			}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doQuery(request, response);
-	}
+		protected void upOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+			response.setContentType("text/html;charset=utf-8");
+			String did=request.getParameter("did");
+			detailDao.upOrder(did);
+			response.getWriter().append("发货成功");	
+		}
+	
 }

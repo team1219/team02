@@ -8,6 +8,57 @@
 	<script type="text/javascript" src="easyui/jquery.min.js"></script>
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
+	<script>
+	function fmtcz(value,row,index){
+		//函数的返回值 会被解析成html 元素
+		return "<button onclick='up("+index+")'>发货</button>";
+		
+	}
+	function up(index){
+		$.messager.confirm('确认对话框','您确认发货吗？',function(r){
+		    if (r){
+		    	//根据index值删除记录
+				//根据index获取当前行的id值
+				var rows=$("#table").datagrid('getRows');
+				var did=rows[index].did;		
+				//发起ajax请求 删除数据库的记录
+				//调用ajax方法删除歌手信息
+				//jquery的post方法 3个参数 url，param，回调函数
+				var url="addDetail.s?op=upOrder";
+				var params={did:did};  //jquery使用对象传入参数
+				function callback(data){
+					//刷新表格数据
+					$("#table").datagrid('reload');
+					$.messager.show({
+					    title:'系统提示',
+					    msg:data,
+					    timeout:5000,
+					    showType:'slide'
+					});
+				}
+				$.post(url,params,callback);
+		    }
+		});
+	
+	}
+	function fmtcz2(value,row,index){
+		//函数的返回值 会被解析成html 元素
+		var rows=$("#table").datagrid('getRows');
+		var emp=rows[index].emp;
+		if(emp==0){
+			return "<p>已下单</p>";
+		}
+		else if(emp=='1'){
+			return "<p>未发货</p>";
+		}else if(emp==2){
+			return "<p>已发货</p>";
+		}else if(emp==3){
+			return "<p>已收货</p>";
+		}
+			
+	}
+	
+	</script>
 	
 
 </head>
@@ -27,6 +78,8 @@
             <th data-options="field:'pretime',width:150">订购时间</th>
             <th data-options="field:'ptotal',width:50">总价</th>
             <th data-options="field:'addr',width:150">地址</th>
+            <th data-options="field:'emp',width:150,formatter:fmtcz2">状态</th>
+             <th data-options="field:'unlive',width:70,formatter:fmtcz">操作</th>
         </tr>
     </thead>
    </table>
