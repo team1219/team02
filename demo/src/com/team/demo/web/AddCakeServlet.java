@@ -16,11 +16,11 @@ import com.team.demo.util.Cake;
  * Servlet implementation class CreateSingerServlet
  */
 @WebServlet("/addCake.s")
-public class AddCakeServlet extends HttpServlet {
+public class AddCakeServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 	private CakeBiz ssBiz=new CakeBiz();
    
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doSave(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
 		Cake cake=new Cake();
 		cake.setTypeid(Integer.parseInt(request.getParameter("typeid")));
@@ -33,6 +33,10 @@ public class AddCakeServlet extends HttpServlet {
 		ssBiz.create(cake);
 		response.getWriter().append("保存成功");			
 	}
+	
+	
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
