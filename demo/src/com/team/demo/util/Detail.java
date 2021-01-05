@@ -7,7 +7,7 @@ public class Detail {
 	private String pretime;
 	private String ptotal;
 	private String addr;
-	private String emp;
+	private String  d_status;
 	public Integer getDid() {
 		return did;
 	}
@@ -44,11 +44,12 @@ public class Detail {
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
-	public String getEmp() {
-		return emp;
+	
+	public String getD_status() {
+		return d_status;
 	}
-	public void setEmp(String emp) {
-		this.emp = emp;
+	public void setD_status(String d_status) {
+		this.d_status = d_status;
 	}
 
 	
