@@ -87,14 +87,12 @@
 		<!-- /.container-fluid -->
 	</nav>
 	<!-- Navigation -->
-	<header class="container">
+	<header class="container"  >
 		<p class="text-center">
-			Monday - Friday <strong>11AM to 2PM</strong>, Saturday - Sunday <strong>9Am
-				to 2PM</strong>
+			Monday - Friday <strong>11AM to 2PM</strong>, Saturday - Sunday <strong>9Am to 2PM</strong>
 		</p>
 		<!-- CAROUSEL -->
-		<div id="carousel-example-generic" class="carousel slide"
-			data-ride="carousel" data-interval="4000">
+		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="4000">
 			<!-- Indicators -->
 			<ol class="carousel-indicators">
 				<li data-target="#carousel-example-generic" data-slide-to="0"
@@ -110,7 +108,7 @@
 					<!-- Static Header -->
 					<div class="header-text hidden-xs">
 						<h1>
-							优质的服务
+							甜甜圈
 						</h1>
 						</br>
 						<p>
@@ -125,7 +123,7 @@
 					<!-- Static Header -->
 					<div class="header-text hidden-xs">
 						<h1>
-							优质的服务
+							蛋糕
 						</h1>
 						</br>
 						<p>
@@ -139,7 +137,7 @@
 					<!-- Static Header -->
 					<div class="header-text hidden-xs">
 						<h1>
-							优质的服务
+							纸杯蛋糕
 						</h1>
 						</br>
 						<p>
@@ -150,8 +148,7 @@
 					<!-- /header-text -->
 				</div>
 			</div>
-
-			<!-- Controls -->
+		<!-- Controls -->
 			<a class="left carousel-control" href="#carousel-example-generic"
 				role="button" data-slide="prev"> <span
 				class="glyphicon glyphicon-chevron-left"></span>
@@ -159,10 +156,26 @@
 				role="button" data-slide="next"> <span
 				class="glyphicon glyphicon-chevron-right"></span>
 			</a>
-		</div>
-		<!-- Carousel -->
 	</header>
 
+<script type="text/javascript">
+var vue = new Vue({
+	el : "#head",
+	data : {
+		list : [],
+	},
+	created(){
+		this.query();
+	},
+	methods : {
+		query(){
+			axios.get("querycake.s?op=queryLimit").then(res=>{
+				this.list=res.data;
+			});
+		}
+	}
+})
+</script>
 
  
 	<!-- /////////////////////////////////////////Content -->
@@ -205,8 +218,7 @@
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"
 							v-for="row in xh">
 							<div class="item-container" v-for="idx in row">
-							<div id="heading" class="heading">
-					</div>
+							<div id="heading" class="heading"></div>
 								<a :href="'details.html#' + list[idx].cid">
 									<div class="item-caption">
 										<div class="item-caption-inner">

@@ -9,7 +9,7 @@
 	content="width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
 
 <!--css类引用-->
-<link rel="stylesheet" href="js/layui/css/layui.css" />
+
 <link rel="stylesheet" href="js/eleme-ui/index.css" />
 <link rel="stylesheet" href="css/ShoppingCart.css" />
 <title>购物车</title>
@@ -135,24 +135,7 @@
                 </ul>
 				
 			</div>
-			<script type="text/javascript">
-			var v = new Vue({
-				el : "#bs-example-navbar-collapse-1",
-				data :{
-					
-				},
 			
-				methods :{
-					clearCookie: function() {
-		                this.setCookie("", "", -1); //修改2值都为空，天数为负1天就好了
-		            }
-				}
-			
-				
-			})
-			
-			
-			</script>
 			<!-- /.navbar-collapse -->
 		</div>
 		<!-- /.container-fluid -->
@@ -237,7 +220,7 @@
 
 
 	<!-- /////////////////////////////////////////Content -->
-	<div id="page-content">
+	<div id="page-content" >
 		<div id="main-content">
 			<div class="container">
 				<article>
@@ -248,7 +231,7 @@
 						</h2>
 					</div>
 					<!--主要内容-->
-					<div class="row " id="myVue">
+					<form id="myVue" class="row " method="post" action="url">
 						<div class="col-lg-10 col-lg-offset-1">
 							<div class="layui-form">
 								<table class="ShopCartTable layui-table" >
@@ -256,10 +239,7 @@
 										<tr >
 										<th>购物车编号</th>
 									    <th class="selectLeft">
-							            <template>
-								        <el-checkbox  @change="" v-model="checkedAll">全选</el-checkbox>
-						            	</template>
-							          
+								        <input type="checkBox"  @click="checkedAllBtn" v-model="checkedAll"/>全选
 						                </th>
 						                <th> <span>商品名称和图片</span></th>
 										<th>单价</th>
@@ -269,141 +249,248 @@
 										</tr>
 									</thead>
 									<tbody>
-					<tr v-for="(item,index) in list" :key="index">
+					<tr v-for="(tabledatas,index) in list" :key="index">
 					<td>
-					<span>{{item.oid}}</span>
+					<span>{{tabledatas.oid}}</span>
 					</td>
 					<td  class="selectLeft">
-							<template>
-								<el-checkbox @change="" v-model="checked"></el-checkbox>
-							</template>
+						<input type="checkbox" style="display: inherit;" @change="checkedRadioBtn(tabledatas)" v-model="tabledatas.checked" :value="tabledatas.oid" />	
 					</td>
 						<td>
 						<span class="goodName">
-								<img class="goodImg" :src="item.cimg" />{{item.cname}}
+								<img class="goodImg" :src="tabledatas.cimg" />{{tabledatas.cname}}
 							</span>
 						</td>
-						<td class="danPrice">￥：{{item.cprice}}</td>
+						<td class="danPrice">￥{{tabledatas.price}}</td>
 						<td>
 						<div class="num">
-						<i class="num-jian" @click="goodNum(item,-1)" class="fa  deleteBtn" aria-hidden="true">-</i>
-					    <input  class="num-n" v-model="item.cnum" type="text" class="form-control numInput" aria-label="...">
-						<i class="num-jia" @click="goodNum(item,1)" class="fa  addBtn" aria-hidden="true">+</i>
+						<i class="num-jian" @click="goodNum(tabledatas,-1)" class="fa  deleteBtn" aria-hidden="true">-</i>
+					    <input  class="num-n" v-model="tabledatas.cnum" type="text" class="form-control numInput" aria-label="...">
+						<i class="num-jia" @click="goodNum(tabledatas,1)" aria-hidden="true">+</i>
 						</div>	
 						</td>
 						<td>
-							<p class="totalPrice">{{item.cprice*item.cnum | moneyFiler}}</p>
+							<p class="totalPrice">￥{{tabledatas.price*tabledatas.cnum}}</p>
 						</td>
 						<td class="gongneng">
-							<p class="deletegoods" @click="deleteOrder(item,item.oid)">移出购物车</p>
+							<p class="deletegoods" @click="deletegoods(tabledatas,tabledatas.oid)">移出购物车</p>
 						</td>
 					</tr>
-					<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><span class="servicenum">共<span class="goodsNum">{{list.length}}</span>个订单</span></td>
-					<td>	
-							<span class="totalclassPoin">总价：<span
-										class="totalMoneyClass">{{totalMoney | moneyFiler}}</span></span>
-				    </td>
-					<td>
-					<a :href="'order.html#'+ totalMoney " class="SettlementBtn">去结算</a>
-					</td>
-					</tr>
+					
+				
 				</tbody>
 				
 			</table>
-								
+				<div class="row tablefooter">
+
+				<span class="removeMuch" @click="deleteSelectAll">删除选中的商品</span>
+				<span class="servicenum">已选择<span class="goodsNum">{{goodsNum}}</span>件商品</span>
+				<span class="totalclassPoin">总价：<span class="totalMoneyClass">￥:{{totalMoney}}</span></span>
+				<span @click="saveData" class="SettlementBtn">去结算</span>
+			</div>		
 							</div>
+		
+							
 						</div>
-					</div>
+					</form>
 					<script type="text/javascript">
 	    var v = new Vue({
 	    	el : "#myVue",
 	    	data : {
-	    		list : [],
-	    		name : "", 
-	    		checked : [],
-	    		checkedAll : [],
-		        totalMoney:0, //总价格
-		       
+	    		list :[],
+	    		name : "",
+	    		userBuyData : [],
+	    		deleteData : [],
+	    		totalPrice : 0,
+	    		submit : [],
+	    		goodsNum : 0,
+	    		totalMoney : 0,
+	    		checkedAll : false,
+                num : [],
 	    	},
-	    	
-	    	/*金额过滤器*/
-	    	filters:{
-	    		moneyFiler:function(value){
-	    			
-	    			return "￥"+value.toFixed(2);
-	    		}
-	    	},
-	    	
 	    	created(){
-	    		this.getCookies();
-	    		this.query();	
+	    		this.query();
 	    	},
-	    	methods : {
-				deleteOrder:function(item,oid){
-	    			axios.get("order.s?op=deleteOrder",{
-	    				params : {
-	    					oid : item.oid,
-	    				}	
-	    			}).then(res=>{
-	     			   this.status = res.data;
-	     			   console.info(this.status);
-	     			   this.query();
-	     		   })
-	    		},
-	    		updateOrder:function(item){
-	    			axios.get("order.s?op=updateOrder",{
-	    				params : {
-	    					cnum : item.cnum,
-	    					oid : item.oid,	
-	    				}	
-	    			}).then(res=>{
-	     			   this.status = res.data;
-	     			   console.info(this.status);		  
-	     		   })
-	    		},
-	    		goodNum:function(item,way){
-	    			if(way == 1){
-	    				 item.cnum++;	 
-	    			}else{
-	    				if(item.num < 1){
-	    					item.num =0;
-	    				}else{
-	    					item.cnum--;
-	    				}
-	    			}
-	    			console.info(item.cnum);
-	    			this.updateOrder(item);
-	    			this.query();
-	    			
-	    		},
-	    		
-	    		getCookies(){
-	    			this.name= document.cookie.replace(/.*loginedAccount=(\w*).*/,"$1");
-	    			console.info(this.name);
-	    		},
-	    		query(){
-	    			axios.get("order.s?op=queryOrder",{
-	    				params : {
-	    					name : this.name,
-	    				}	
-	    			}).then(res=>{
-	     			   this.list = res.data;
-	     			   this.totalMoney = 0;
-	     			  for (let i = 0; i < this.list.length; i++) {
-							this.totalMoney += (this.list[i].cnum) * (this.list[i].cprice);
-						}
-	     			 console.info(this.totalMoney);
-	     			   console.info(this.list);
-	     		   })
-	    		},
-	    		
-	    	},
+	    	
+	    	    		methods: {
+	 
+	    	    	    	  query(){
+	    	    	    	    axios.get("order.s?op=queryOrder",{
+	    	    	    	    				params : {
+	    	    	    	    					name : this.name,
+	    	    	    	    					price : this.list.cprice
+	    	    	    	    				}	
+	    	    	    	    			}).then(res=>{
+	    	    	    	     			   this.list = res.data;
+	    	    	    	     			   console.info(this.list);
+	    	    	    	     			  if(this.list=="-1"){
+	    	    			     				   alert("账号已失效!");
+	    	    			     				  location.href="login.html";
+	    	    			     			   }
+	    	    	    	     		   })
+	    	    	    	    		},
 
+	    	    			/*商品数量增加减少函数*/
+	    	    			goodNum:function(item,way){
+	    	    				if(way == 1){
+	    	    					 item.cnum++;
+	    	    					
+	    	    				}else{
+	    	    					if(item.cnum < 1){
+	    	    						item.cnum =0;
+	    	    					}else{
+	    	    						item.cnum--;
+	    	    						
+	    	    					}
+	    	    					
+	    	    				}
+	    	    				v.countTotalMoney()
+	    	    			},
+	    	    			/*单选函数*/
+	    	    			checkedRadioBtn:function(tabledatas){
+	    	    				this.countTotalMoney()
+	    	    				/*单选计算商品或服务数量*/
+	    	    				if(tabledatas.checked == true){
+	    	    					
+	    	    					if(this.goodNum==this.list.length){
+	    	    						this.goodNum=this.list.length;
+	    	    					}else{
+	    	    						this.goodsNum += 1;
+	    	    					}
+	    	    				}else if(tabledatas.checked == false){
+	    	    					if(this.goodsNum>0){
+	    	    						this.goodsNum -= 1;
+	    	    					}else{
+	    	    						this.goodsNum=0;
+	    	    					}
+	    	    					
+	    	    				}else{
+	    	    					console.log("未知错误！")
+	    	    				}
+	    	    				if(this.goodsNum==this.list.length){
+	    	    					this.checkedAll=true;
+	    	    				}else{
+	    	    					this.checkedAll=false;
+	    	    				}
+	    	    				v.countTotalMoney()
+	    	    				console.info("+++"+this.checkedAll)
+	    	    			},
+	    	    			/*全选函数*/
+	    	    			checkedAllBtn:function(){
+	    	    				this.checkedAll = !this.checkedAll;
+	    	    				for(y in this.list){
+    	    						this.list[y].checked = this.checkedAll;
+    	    						if(this.list[y].checked==true){
+    	    							this.goodsNum++;
+    	    							this.userBuyData =this.list[y].oid; 
+    	    						}else{
+    	    							this.goodsNum=0;
+    	    							this.userBuyData=[];
+    	    						}
+    	    					}
+	    	    				console.info(this.checkedAll);
+	    	    				v.countTotalMoney();
+	    	    			},
+	    	    			
+	    	    			/*删除单个选中函数*/
+	    	    			deletegoods:function(item,index){
+	    	    				console.log(index);
+	    	    				this.list.splice(index, 1); 
+	    	    				let i  = [index];
+	    	    				this.goodsNum--;
+	    	    				 axios.get("order.s?op=delete",{
+		    		    				params : {
+		    		    					deleteData : i,
+		    		    				}	
+		    		    			}).then(res=>{
+		    		    				this.submit=res.data;
+		    		    				 if(this.submit=="-1"){
+  	    			     				   alert("未选中!");
+  	    			     				 
+  	    			     			   }
+		    		     		   })
+	    	    				v.countTotalMoney();
+                           
+	    	    		},
+	    	    		/*删除多个选中函数*/
+    	    			deleteSelectAll:function(index){
+    	    					for(var i=0;i<this.list.length;i++){
+    	    						 this.list.splice(index, 1);
+    	    						 this.goodsNum--;
+    	    						if(this.list[i].checked==true){
+    	    						console.info(this.list[i].oid);
+    	    						this.deleteData=this.list[i].oid;
+    	    					}	
+    	    				}
+    	    					
+    	    				axios.get("order.s?op=delete",{
+	    		    				params : {
+	    		    					deleteData : this.deleteData,
+	    		    				}	
+	    		    			}).then(res=>{
+	    		    				this.submit=res.data;
+	    		    				 if(this.submit=="-1"){
+	    			     				   alert("未选中!");
+	    			     				  
+	    			     			   }
+	    		     		   })
+    	    				  v.countTotalMoney();
+                       
+    	    		},
+	    	    		
+	    	    	      /*计算商品总价函数*/
+	    	    			countTotalMoney:function(){
+	    	    				var arry = [];
+	    	    				for(var i=0;i<this.list.length;i++){
+    	    						if(this.list[i].checked==true){
+    	    							
+    	    								arry[i]=parseFloat(this.list[i].cnum)*parseFloat(this.list[i].price);	
+    	    					    }		
+	    	    				}
+	    	    				this.totalMoney=arry.reduce((count,v)=>count+v,0);
+	    	    				console.info("======"+this.totalMoney);
+	    	    
+    	    						
+	    	    			},
+	    	    			/*传递购买数据*/
+	    	    			saveData:function(){
+	    	    				let id =[]; 
+	    	    				let cnum =[]; 
+	    	    				this.list.forEach(function(item,index){
+	    	    					if(item.checked == true){
+	    	    						id.push(
+	    	    							 item.oid
+	    	    						);
+	    	    						
+	    	    						cnum.push(
+	    	    								item.cnum
+	    	    								);
+	    	    					}
+	    	    				})	
+	    	    				this.userBuyData=id;
+	    	    				this.num = cnum;
+	    	    				axios.get("order.s?op=update",{
+	    	    					
+	    		    				params : {
+	    		    					userBuyData : this.userBuyData,
+	    		    					totalMoney : this.totalMoney,
+	    		    					cnum :this.num ,
+	    		    				}	
+	    		    			}).then(res=>{
+	    		    				window.location.href='order.html#'+0;
+	    		    				console.info(this.userBuyData);
+	    		    				console.info( this.totalMoney);
+	    		    				console.info(this.num);
+	    		     		   })
+	    		    		},
+	    	    		},
+	    		    mounted:function(){
+	    		      //为list添加select（是否选中字段，初始值为true）
+	    		      var _this=this;
+	    		      this.list.map(function(item){    //map:'键值对'
+	    		        _this.$set(item,'checked',false)      //往item添加select属性，默认为true
+	    		      })
+	    		    }
 	    	
 	    })
 	</script>
@@ -505,7 +592,7 @@
 		});
 	</script>
 	<!--js类引用-->
-	<script type="text/javascript" src="js/vue/vue.min.js"></script>
-	<script type="text/javascript" src="js/eleme-ui/index.js"></script>
+<script type="text/javascript" src="js/vue/vue.min.js" ></script>
+<script type="text/javascript" src="js/eleme-ui/index.js" ></script>
 </body>
 </html>
