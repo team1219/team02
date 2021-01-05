@@ -14,7 +14,9 @@
 }
 
 img {
-	border: none;
+    border: none;
+    width: 50px;
+    height: 32px;
 }
 .img-1{
 	display : blcok;

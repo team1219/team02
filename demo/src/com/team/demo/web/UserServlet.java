@@ -81,7 +81,7 @@ public class UserServlet extends BaseServlet {
 			HttpSession session = request.getSession();
 			// 存入当前登录的对象名
 			session.setAttribute("loginedAccount", uname);
-
+			session.setMaxInactiveInterval(30);
 			// 将账号保存到cookie中
 			Cookie cookie = new Cookie("loginedAccount", uname);
 			cookie.setMaxAge(60 * 60 * 24 * 7);
@@ -126,48 +126,5 @@ public class UserServlet extends BaseServlet {
 			e1.printStackTrace();
 		}
 	}
-	/**
-	 * 根据用户名修改密码
-	 * @param request
-	 * @param response
-	 */
-	public void updatePwd(HttpServletRequest request, HttpServletResponse response) {
-		String uname = request.getParameter("uName");
-		String upass = request.getParameter("uPass");//旧密码
-		String upass1 = request.getParameter("uPass1");//新密码
-		String sql1 = "select uname from cake_user where uname=?";
-		String sql3= " select * from cake_user where uname=? and upass=?";
-		try {
-			List<?> ret1 = DBHelper.selectListMap(sql1, uname);
-			List<?> ret3=DBHelper.selectListMap(sql3, uname,upass);
-			if (ret1.isEmpty()) {
-				System.out.println("用户名不存在!");
-				write(response, "0");
-			} else {
-				if (uname == null || uname.isEmpty()) {
-					System.out.println("用户名不能为空!");
-					write(response, "-1");
-					return;
-				} else if (ret3.isEmpty()) {
-					System.out.println("旧密码错误!");
-					write(response, "-2");
-					return;
-				} else {
-					String sql2 = "update cake_user set upass=? where uname=? ";
-					
-					int ret2 = DBHelper.update(sql2, upass1,uname);
-					if (ret2 > 0) {
-						System.out.println("修改成功!");
-						write(response, "1");
-					}
-				}
-				
-			}
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
-		
-	}
-
 
 }
