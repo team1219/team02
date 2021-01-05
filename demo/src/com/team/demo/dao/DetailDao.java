@@ -47,10 +47,10 @@ public class DetailDao {
 			Detail detail=new Detail();
 			try {
 				detail.setDid(rs.getInt("did"));
-				//detail.setUid(rs.getUid("uid"));
+				detail.setUid(rs.getInt("uid"));
 				detail.setTel(rs.getString("tel"));
 				detail.setPretime(rs.getString("pretime"));
-				//detail.setPtotal(rs.getPtotal("ptotal"));
+				detail.setPtotal( rs.getString("ptotal"));
 				detail.setAddr(rs.getString("addr"));
 			} catch (SQLException e) {
 				e.printStackTrace();

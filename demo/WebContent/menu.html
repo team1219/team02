@@ -59,29 +59,40 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="hidden"><a href="#page-top"></a></li>
-					<li><a class="page-scroll" href="index.html">Home</a></li>
-					<li><a class="page-scroll" href="single.html">About</a></li>
-					<li><a class="page-scroll" href="menu.html">Menu</a></li>
-					<li><a class="page-scroll" href="blog.html">Blog</a></li>
-					<li><a class="page-scroll" href="cart.html">Cart</a></li>
-					<li><a class="page-scroll" href="login.html">Login</a></li>
-					<li><a class="page-scroll" href="register.html">Register</a></li>
-				</ul>
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="index.html">首页</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="single.html">关于我们</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="menu.html">菜单</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="blog.html">博客</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="cart.html">购物车</a>
+                    </li>
+                     <li>
+                        <a class="page-scroll" href="updatePwd.html">个人中心</a>
+                    </li>
+                </ul>
 			</div>
 			<!-- /.navbar-collapse -->
 		</div>
 		<!-- /.container-fluid -->
 	</nav>
 	<!-- Navigation -->
-	<header class="container">
+	<header class="container"  >
 		<p class="text-center">
-			Monday - Friday <strong>11AM to 2PM</strong>, Saturday - Sunday <strong>9Am
-				to 2PM</strong>
+			Monday - Friday <strong>11AM to 2PM</strong>, Saturday - Sunday <strong>9Am to 2PM</strong>
 		</p>
 		<!-- CAROUSEL -->
-		<div id="carousel-example-generic" class="carousel slide"
-			data-ride="carousel" data-interval="4000">
+		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="4000">
 			<!-- Indicators -->
 			<ol class="carousel-indicators">
 				<li data-target="#carousel-example-generic" data-slide-to="0"
@@ -97,16 +108,13 @@
 					<!-- Static Header -->
 					<div class="header-text hidden-xs">
 						<h1>
-							Great service and <br />atmosphere
+							甜甜圈
 						</h1>
 						</br>
 						<p>
-							Start Bootstrap can help you build better websites using the
-							Bootstrap CSS framework! <br />Just download your template and
-							start going, no strings attached!
+							百分百幸福的味道
 						</p>
-						</br> <a href="" class="btn btn-primary btn-xl page-scroll">Find
-							Out More</a>
+						
 					</div>
 					<!-- /header-text -->
 				</div>
@@ -115,16 +123,12 @@
 					<!-- Static Header -->
 					<div class="header-text hidden-xs">
 						<h1>
-							Great service and <br />atmosphere
+							蛋糕
 						</h1>
 						</br>
 						<p>
-							Start Bootstrap can help you build better websites using the
-							Bootstrap CSS framework! <br />Just download your template and
-							start going, no strings attached!
+							软软的蛋糕中夹着甜蜜的鲜奶油，真是美味至极啊！
 						</p>
-						</br> <a href="" class="btn btn-primary btn-xl page-scroll">Find
-							Out More</a>
 					</div>
 					<!-- /header-text -->
 				</div>
@@ -133,22 +137,18 @@
 					<!-- Static Header -->
 					<div class="header-text hidden-xs">
 						<h1>
-							Great service and <br />atmosphere
+							纸杯蛋糕
 						</h1>
 						</br>
 						<p>
-							Start Bootstrap can help you build better websites using the
-							Bootstrap CSS framework! <br />Just download your template and
-							start going, no strings attached!
+							以奶油为主题的纸杯蛋糕
 						</p>
-						</br> <a href="" class="btn btn-primary btn-xl page-scroll">Find
-							Out More</a>
+							
 					</div>
 					<!-- /header-text -->
 				</div>
 			</div>
-
-			<!-- Controls -->
+		<!-- Controls -->
 			<a class="left carousel-control" href="#carousel-example-generic"
 				role="button" data-slide="prev"> <span
 				class="glyphicon glyphicon-chevron-left"></span>
@@ -156,10 +156,26 @@
 				role="button" data-slide="next"> <span
 				class="glyphicon glyphicon-chevron-right"></span>
 			</a>
-		</div>
-		<!-- Carousel -->
 	</header>
 
+<script type="text/javascript">
+var vue = new Vue({
+	el : "#head",
+	data : {
+		list : [],
+	},
+	created(){
+		this.query();
+	},
+	methods : {
+		query(){
+			axios.get("querycake.s?op=queryLimit").then(res=>{
+				this.list=res.data;
+			});
+		}
+	}
+})
+</script>
 
  
 	<!-- /////////////////////////////////////////Content -->
@@ -202,8 +218,7 @@
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"
 							v-for="row in xh">
 							<div class="item-container" v-for="idx in row">
-							<div id="heading" class="heading">
-					</div>
+							<div id="heading" class="heading"></div>
 								<a :href="'details.html#' + list[idx].cid">
 									<div class="item-caption">
 										<div class="item-caption-inner">
