@@ -59,7 +59,7 @@
 	
 	function save(){
 		$('#ff').form('submit',{
-			url:"addCake.s",
+			url:"addCake.s?op=doSave",
 			success:function(data){
 				$("#table").datagrid('reload');
 				$.messager.show({

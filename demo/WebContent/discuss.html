@@ -165,7 +165,7 @@
 						<div class="commentAll">
 							<!--回复区域 begin-->
 							<div class="comment-show" >
-								<div class="comment-show-con clearfix" id="discuss" v-for="(discuss,index) in discuss" :key="index">
+								<div class="comment-show-con clearfix"  v-for="(discuss,index) in discuss" :key="index">
 									<div class="comment-show-con-img pull-left">
 										<img src="images/header-img-comment_03.png" alt="">
 									</div>
@@ -178,22 +178,14 @@
 											<span class="date-dz-left pull-left comment-time">{{discuss.dtime}}</span>
 											<div class="date-dz-right pull-right comment-pl-block">
 												<a href="javascript:;" class="removeBlock" @click="deleteTopic(discuss,discuss.did)" v-model="discuss.did">删除</a> 
-												<a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left" v-model="discuss.show"  :value="discuss.did" @click="showCont()">回复</a>
-												<br>
-												<textarea rows="100"  cols="50" v-if="show"></textarea>
-											   	<a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left" v-if="show">发送</a>
-												
 											</div>
 										</div>
 										
-										<div class="pl-text clearfix" style="display:none">
-											<a href="#" class="comment-size-name">回复人姓名</a>
-											<a href="#" class="comment-size-name">@{{discuss.uname}}:</a>
-											<span class="my-pl-con">&nbsp;回复内容</span><br>
-											<span class="date-dz-left pull-left comment-time">回复时间</span>
+										
+										<div class="pl-text clearfix">
+											<textarea rows="100"  cols="50" v-if="discuss.show"></textarea>
+											<a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left" v-if="discuss.show">发送</a>
 										</div>
-										
-										
 									</div>
 								</div>
 							</div>
@@ -216,7 +208,7 @@
 			tid : location.hash.substring(1),
 			dcontent  : "",
 			name : "",
-			show : false
+			show : false,
 		},
 		created(){
 			this.query();
@@ -269,8 +261,10 @@
 				});
 			},
 			showCont:function(item,index){
-				this.show = !this.show;
-				console.info(index);
+				//this.show = !this.show;
+				//console.info(index);
+				item.show = item.show ? 0 : 1;
+				console.info(item)
 			},
 		}
 		

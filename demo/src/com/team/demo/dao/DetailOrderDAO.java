@@ -22,4 +22,22 @@ public class DetailOrderDAO {
 			return DBHelper.selectListMap(sql);
 		
 	}
+	
+	/**
+	 * 查询订单详情
+	 * @param did
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<?> queryOrder(int uid) throws SQLException{
+		
+		String sql = "select  d.did,u_cnum,price,uname,cname,sname,cimg,ptotal,addr,tel,d_status,pretime  "
+				+ "	from d_order d,cake_Cart o,cake_user u,cake c "
+				+ "	where o.uid=u.uid and o.did=d.did and o.cid=c.cid and u.uid= "+ uid;
+		return DBHelper.selectListMap(sql);
+	
+}
+	
+	
+
 }

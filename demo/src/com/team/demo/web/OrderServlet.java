@@ -65,6 +65,7 @@ public class OrderServlet extends BaseServlet {
 		Map<String, Object> map2 = list1.get(0);
 		did = (int) map2.get("max(did)");
 		int i = dao.addOrder(uid, Integer.parseInt(cid), Integer.parseInt(cnum), price, did);
+		
 		if (i > 0 && j > 0) {
 			write(response, "1");
 		} else {
@@ -75,6 +76,7 @@ public class OrderServlet extends BaseServlet {
 		}
 
 	}
+
 
 	/**
 	 * 立即购买
@@ -99,6 +101,12 @@ public class OrderServlet extends BaseServlet {
 		oid = (int) map1.get("max(oid)");
 		System.out.println("++++" + did);
 		System.out.println("++++" + oid);
+		List<Map<String, Object>> list3 = (List<Map<String, Object>>) dao.queryByOid(oid);
+		Map<String, Object> map3 = list3.get(0);
+		int cid = (int) map3.get("cid");
+		String price = (String) map3.get("price");
+		String cnum  = (String) map3.get("cnum");
+		dao.addCart(oid, uid, cid, cnum, price, did);
 		int i = dao.addLupdate(tel, Utils.getNowTime(), addr, sname, did);
 		int j = dao.deleteOrder(oid);
 		if(i>0 && j>0) {
@@ -122,6 +130,7 @@ public class OrderServlet extends BaseServlet {
 		String price = request.getParameter("price");
 		if(uid>0) {
 		int i = dao.addCartOrder(uid, Integer.parseInt(cid), Integer.parseInt(cnum), price);
+		
 		if (i > 0) {
 			write(response, "1");
 		} else {
@@ -141,6 +150,8 @@ public class OrderServlet extends BaseServlet {
 		total = request.getParameter("totalMoney");
 		userBuyData = request.getParameterValues("userBuyData[]");
 		cnum = request.getParameterValues("cnum[]");
+		String cid [] = request.getParameterValues("cid[]");
+		String price [] = request.getParameterValues("price[]");
 		System.out.println(total);
 		System.out.println(userBuyData);
 		System.out.println(cnum);
@@ -151,6 +162,7 @@ public class OrderServlet extends BaseServlet {
 		Map<String, Object> map2 = list1.get(0);
 		int did = (int) map2.get("max(did)");
 
+		
 		int g = dao.updateCartOrder(did, uid);
 		if (k > 0 && g > 0) {
 			System.out.println("添加订单成功！");
@@ -161,7 +173,7 @@ public class OrderServlet extends BaseServlet {
 				oid = Integer.parseInt(userBuyData[i].toString());
 				num = Integer.parseInt(cnum[i].toString());
 				int j = dao.updateOrder(num, oid);
-
+				dao.addCart(oid, uid, Integer.parseInt(cid[i]), cnum[i], price[i], did);
 				if (j > 0) {
 					write(response, "1");
 					System.out.println("修改成功");
@@ -233,6 +245,15 @@ public class OrderServlet extends BaseServlet {
 			write(response, "-1");
 		}
 	}
+	
+	public void queryDetailOrder(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, SQLException {
+		if(uid>0) {
+		write(response, ddao.queryOrder(uid));
+		}else {
+			write(response, "-1");
+		}
+	}
 
 	public void delete(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
 		String deleteData[] = request.getParameterValues("deleteData[]");
@@ -247,18 +268,7 @@ public class OrderServlet extends BaseServlet {
 		}
 	}
 
-	public void deleteCarts(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
-		int oid = 0;
-		String deleteData[] = request.getParameterValues("deleteData[]");
-		if(deleteData!=null && deleteData.length!=0) {
-		for (int i = 0; i < deleteData.length; i++) {
-			oid = Integer.parseInt(deleteData[i].toString());
-			write(response, dao.deleteOrder(oid));
-		}
-		}else {
-			write(response, "-1");
-		}
-	}
+
 
 	
 

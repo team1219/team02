@@ -16,12 +16,12 @@ public class DetailDao {
 		//计算开始页数
 		int begin=(page-1)*10;
 		//mysql分页查询语法 ：limit
-		String sql="select did,uid,tel,pretime,ptotal,addr from d_order limit ?,10";
+		String sql="select * from d_order limit ?,10";
 		return DBHelper.selectList(sql,detailMapper,begin);
 	}
 	public int selectCount() {
 		String sql="select count(*) cnt from(\r\n" + 
-				"select did,uid,tel,pretime,ptotal,addr from d_order)a " ;
+				"select * from d_order)a " ;
 		try {
 		List<Integer>  list=DBHelper.selectList(sql,new ResultSetMapper<Integer>() {
 			
@@ -47,17 +47,24 @@ public class DetailDao {
 			Detail detail=new Detail();
 			try {
 				detail.setDid(rs.getInt("did"));
-				//detail.setUid(rs.getUid("uid"));
+				detail.setUid(rs.getInt("uid"));
 				detail.setTel(rs.getString("tel"));
 				detail.setPretime(rs.getString("pretime"));
-				//detail.setPtotal(rs.getPtotal("ptotal"));
+				detail.setPtotal(rs.getString("ptotal"));
 				detail.setAddr(rs.getString("addr"));
+				detail.setD_status(rs.getString("d_status"));
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			return detail;
 		}
 		
+	}
+
+	public void upOrder(String did) throws SQLException {
+		DBHelper dbh=new DBHelper();
+		String sql="update d_order set d_status=2 where did=?";
+		dbh.update(sql, did);
 	}
 }
 

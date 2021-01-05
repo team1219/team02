@@ -64,11 +64,11 @@ public class BlogDao {
 	}
 	/**
 	 * 话题渲染
-	 * @param did
+	 * @param tid
 	 * @return
 	 */
 	public List<?> queryDiscuss(int tid){
-		String sql = "select did,topic_discuss.uid,dcontent,dtime,uname,head " +
+		String sql = "select did,topic_discuss.uid,dcontent,dtime,uname,head,0 `show` " +
 				"from topic_discuss,cake_user,topic where topic_discuss.uid=cake_user.uid"
 				+ " and topic.tid=topic_discuss.tid and topic.tid= "+tid;
 		try {

@@ -111,15 +111,27 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="hidden"><a href="#page-top"></a></li>
-					<li><a class="page-scroll" href="index.html">Home</a></li>
-					<li><a class="page-scroll" href="single.html">About</a></li>
-					<li><a class="page-scroll" href="menu.html">Menu</a></li>
-					<li><a class="page-scroll" href="blog.html">Blog</a></li>
-					<li><a class="page-scroll" href="cart.html">Cart</a></li>
-					<li><a class="page-scroll" href="login.html">Login</a></li>
-					<li><a class="page-scroll" href="register.html">Register</a></li>
-					<li><a class="page-scroll" @click="clearCookie" href="index.html">Exit</a></li>
+					 <li>
+                        <a class="page-scroll" href="index.html">主页</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="menu.html">菜单</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="blog.html">博客</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="cart.html">购物车</a>
+                    </li>
+                     <li>
+                        <a class="page-scroll" href="orderDetail.html">我的订单</a>
+                    </li>
+                     <li>
+                        <a class="page-scroll" href="login.html">登录</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="register.html">注册</a>
+                    </li>
 				</ul>
 				
 			</div>
@@ -237,13 +249,12 @@
 										<tr >
 										<th>购物车编号</th>
 									    <th class="selectLeft">
-								        <input type="checkBox"  @click="checkedAllBtn" v-model="checkedAll"/>全选
+								        <input type="checkBox"  @click="checkedAllBtn" v-model="checkedAll" value="on"/>全选
 						                </th>
 						                <th> <span>商品名称和图片</span></th>
 										<th>单价</th>
 										<th>数量</th>
 										<th>小计</th>
-										<th>操作</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -252,7 +263,7 @@
 					<span>{{tabledatas.oid}}</span>
 					</td>
 					<td  class="selectLeft">
-						<input type="checkbox" style="display: inherit;" @change="checkedRadioBtn(tabledatas)" v-model="tabledatas.checked" :value="tabledatas.oid" />	
+						<input type="checkbox" style="display: inherit;" @change="checkedRadioBtn(tabledatas,tabledatas.oid)" v-model="tabledatas.checked" :value="tabledatas.oid" />	
 					</td>
 						<td>
 						<span class="goodName">
@@ -270,9 +281,6 @@
 						<td>
 							<p class="totalPrice">￥{{tabledatas.price*tabledatas.cnum}}</p>
 						</td>
-						<td class="gongneng">
-							<p class="deletegoods" @click="deletegoods(tabledatas,tabledatas.oid)">移出购物车</p>
-						</td>
 					</tr>
 					
 				
@@ -280,8 +288,7 @@
 				
 			</table>
 				<div class="row tablefooter">
-
-				<span class="removeMuch" @click="deleteSelectAll">删除选中的商品</span>
+                <a><span class="deletegoods" @click="deletegoods()">已选商品移出购物车</span></a>
 				<span class="servicenum">已选择<span class="goodsNum">{{goodsNum}}</span>件商品</span>
 				<span class="totalclassPoin">总价：<span class="totalMoneyClass">￥:{{totalMoney}}</span></span>
 				<span @click="saveData" class="SettlementBtn">去结算</span>
@@ -299,11 +306,14 @@
 	    		name : "",
 	    		userBuyData : [],
 	    		deleteData : [],
+	    		check : 0,
 	    		totalPrice : 0,
 	    		submit : [],
 	    		goodsNum : 0,
 	    		totalMoney : 0,
-	    		checkedAll : false,
+	    		checkedAll : "",
+	    		cid : [],
+	    		price : [],
                 num : [],
 	    	},
 	    	created(){
@@ -322,7 +332,7 @@
 	    	    	    	     			   this.list = res.data;
 	    	    	    	     			   console.info(this.list);
 	    	    	    	     			  if(this.list=="-1"){
-	    	    			     				   alert("账号已失效!");
+	    	    			     				  alert("账号已失效!");
 	    	    			     				  location.href="login.html";
 	    	    			     			   }
 	    	    	    	     		   })
@@ -346,38 +356,32 @@
 	    	    			},
 	    	    			/*单选函数*/
 	    	    			checkedRadioBtn:function(tabledatas){
-	    	    				this.countTotalMoney()
-	    	    				/*单选计算商品或服务数量*/
 	    	    				if(tabledatas.checked == true){
-	    	    					
-	    	    					if(this.goodNum==this.list.length){
-	    	    						this.goodNum=this.list.length;
-	    	    					}else{
 	    	    						this.goodsNum += 1;
-	    	    					}
 	    	    				}else if(tabledatas.checked == false){
 	    	    					if(this.goodsNum>0){
 	    	    						this.goodsNum -= 1;
 	    	    					}else{
 	    	    						this.goodsNum=0;
-	    	    					}
-	    	    					
+	    	    					}	
 	    	    				}else{
 	    	    					console.log("未知错误！")
-	    	    				}
-	    	    				if(this.goodsNum==this.list.length){
-	    	    					this.checkedAll=true;
-	    	    				}else{
-	    	    					this.checkedAll=false;
-	    	    				}
+	    	    				}    	    				
 	    	    				v.countTotalMoney()
-	    	    				console.info("+++"+this.checkedAll)
+	    	    				
 	    	    			},
 	    	    			/*全选函数*/
 	    	    			checkedAllBtn:function(){
-	    	    				this.checkedAll = !this.checkedAll;
+	    	    				console.info("----"+this.checkedAll);
+	    	    				console.info(this.checkedAll.constructor);
+	    	    				this.checkedAll= this.checkedAll == "on" ? "":"on";
+	    	    				console.info("+++"+this.checkedAll);
 	    	    				for(y in this.list){
-    	    						this.list[y].checked = this.checkedAll;
+	    	    					if(this.checkedAll=="on"){
+    	    						    this.list[y].checked = true;
+	    	    					}else{
+	    	    						this.list[y].checked = false;
+	    	    					}
     	    						if(this.list[y].checked==true){
     	    							this.goodsNum++;
     	    							this.userBuyData =this.list[y].oid; 
@@ -386,96 +390,84 @@
     	    							this.userBuyData=[];
     	    						}
     	    					}
-	    	    				console.info(this.checkedAll);
+	    	    				
 	    	    				v.countTotalMoney();
 	    	    			},
 	    	    			
-	    	    			/*删除单个选中函数*/
-	    	    			deletegoods:function(item,index){
-	    	    				console.log(index);
-	    	    				this.list.splice(index, 1); 
-	    	    				let i  = [index];
-	    	    				this.goodsNum--;
+	    	    			/*移出购物车*/
+	    	    			deletegoods:function(){
+	    	    				var deleteList = [];
+	    	    				for(var i=0;i<this.list.length;i++){
+    	    						if(this.list[i].checked==true){
+    	    							deleteList[i]=this.list[i].oid;
+    	    							this.goodsNum--;
+    	    					    }		
+	    	    				}
+	    	    				this.deleteData = deleteList;
 	    	    				 axios.get("order.s?op=delete",{
 		    		    				params : {
-		    		    					deleteData : i,
+		    		    					deleteData : this.deleteData,
 		    		    				}	
 		    		    			}).then(res=>{
 		    		    				this.submit=res.data;
+		    		    				this.query();
 		    		    				 if(this.submit=="-1"){
-  	    			     				   alert("未选中!");
-  	    			     				 
-  	    			     			   }
+	    			     				   alert("未删除!");
+	    			     			   }
 		    		     		   })
 	    	    				v.countTotalMoney();
-                           
 	    	    		},
-	    	    		/*删除多个选中函数*/
-    	    			deleteSelectAll:function(index){
-    	    					for(var i=0;i<this.list.length;i++){
-    	    						 this.list.splice(index, 1);
-    	    						 this.goodsNum--;
-    	    						if(this.list[i].checked==true){
-    	    						console.info(this.list[i].oid);
-    	    						this.deleteData=this.list[i].oid;
-    	    					}	
-    	    				}
-    	    					
-    	    				axios.get("order.s?op=delete",{
-	    		    				params : {
-	    		    					deleteData : this.deleteData,
-	    		    				}	
-	    		    			}).then(res=>{
-	    		    				this.submit=res.data;
-	    		    				 if(this.submit=="-1"){
-	    			     				   alert("未选中!");
-	    			     				  
-	    			     			   }
-	    		     		   })
-    	    				  v.countTotalMoney();
-                       
-    	    		},
-	    	    		
 	    	    	      /*计算商品总价函数*/
 	    	    			countTotalMoney:function(){
 	    	    				var arry = [];
 	    	    				for(var i=0;i<this.list.length;i++){
     	    						if(this.list[i].checked==true){
     	    							
-    	    								arry[i]=parseFloat(this.list[i].cnum)*parseFloat(this.list[i].price);	
+    	    					     arry[i]=parseFloat(this.list[i].cnum)*parseFloat(this.list[i].price);	
     	    					    }		
 	    	    				}
-	    	    				this.totalMoney=arry.reduce((count,v)=>count+v,0);
-	    	    				console.info("======"+this.totalMoney);
-	    	    
-    	    						
+	    	    				this.totalMoney=arry.reduce((count,v)=>count+v,0);	
 	    	    			},
 	    	    			/*传递购买数据*/
 	    	    			saveData:function(){
 	    	    				let id =[]; 
 	    	    				let cnum =[]; 
+	    	    				let cid = [];
+	    	    				let price = [];
 	    	    				this.list.forEach(function(item,index){
 	    	    					if(item.checked == true){
 	    	    						id.push(
 	    	    							 item.oid
 	    	    						);
-	    	    						
+	    	    						cid.push(
+	    	    								item.cid
+	    	    								);
 	    	    						cnum.push(
 	    	    								item.cnum
+	    	    								);
+	    	    						price.push(
+	    	    								item.price
 	    	    								);
 	    	    					}
 	    	    				})	
 	    	    				this.userBuyData=id;
 	    	    				this.num = cnum;
+	    	    				this.cid = cid;
+	    	    				this.price = price
 	    	    				axios.get("order.s?op=update",{
 	    	    					
 	    		    				params : {
 	    		    					userBuyData : this.userBuyData,
 	    		    					totalMoney : this.totalMoney,
 	    		    					cnum :this.num ,
+	    		    					cid  : this.cid,
+	    		    					price : this.price
 	    		    				}	
 	    		    			}).then(res=>{
-	    		    				window.location.href='order.html#'+0;
+	    		    				setTimeout(function(){
+	    		    					window.location.href='order.html#'+0;
+	    		    					 }, 2000);
+	    		    				
 	    		    				console.info(this.userBuyData);
 	    		    				console.info( this.totalMoney);
 	    		    				console.info(this.num);
