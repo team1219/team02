@@ -113,10 +113,12 @@
 										<th>收货人名称</th>
 										<th>收货人地址</th>
 										<th>收货人电话</th>
+										<th>订购时间</th>
+										<th>状态</th>
 										</tr>
 									</thead>
-					<tbody >
-					<tr v-for="(list,index) in list" :key="index">
+					<tbody v-for="(list,index) in list" :key="index">
+					<tr >
 						<td>
 						<span>{{list.did}}</span>
 						</td>
@@ -140,7 +142,10 @@
 						<td><span>{{list.sname}}</span></td>
 						<td><span>{{list.addr}}</span></td>
 						<td><span>{{list.tel}}</span></td>
-	
+						<td><span>{{list.pretime}}</span></td>
+						<td>{{list.d_status}}
+                                     
+                       </td>
 					</tr>
 						
 				</tbody>
@@ -157,16 +162,31 @@
 	    	},	
 	    	
 	    	created(){
-	    		setTimeout(() =>{
-	    			this.query();	
-	    		},1000);
+	    		
+	    		this.query();	
+	    		
 	    		
 	    	},
 	    	methods : {	
+	    		show(){
+	    			
+	    		},
 	    		query(){
 	    			axios.get("order.s?op=queryDetailOrder").then(res=>{
 		     				 this.list = res.data;
 			     			   console.info(this.list);
+			     			  for(x in this.list){
+			     				  console.info("+++"+this.list[x].d_status);
+			     				   if(this.list[x].d_status==0){
+			     					  this.list[x].d_status = "已下单"; 
+			     				   }else if(this.list[x].d_status==1){
+			     					  this.list[x].d_status = "未发货";
+			     				   }else if(this.list[x].d_status==2){
+			     					  this.list[x].d_status = "已发货";
+			     				   }else{
+			     					  this.list[x].d_status = "已收货";
+			     				   }
+			    			 }
 			     			  if(this.list==-1){
 			    					alert("未登录！");
 			    					location.href="login.html";

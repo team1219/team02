@@ -464,7 +464,10 @@
 	    		    					price : this.price
 	    		    				}	
 	    		    			}).then(res=>{
-	    		    				window.location.href='order.html#'+0;
+	    		    				setTimeout(function(){
+	    		    					window.location.href='order.html#'+0;
+	    		    					 }, 2000);
+	    		    				
 	    		    				console.info(this.userBuyData);
 	    		    				console.info( this.totalMoney);
 	    		    				console.info(this.num);

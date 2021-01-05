@@ -19,7 +19,7 @@ public class OrderDAO {
 	}
 	
 	public int  addAll(int uid,Double ptotal) throws SQLException {
-		String sql = "insert into d_order(uid,ptotal) values(?,?)";
+		String sql = "insert into d_order(uid,ptotal,emp) values(?,?,0)";
 		return DBHelper.update(sql, uid,ptotal);
 	}
 	public int  addLupdate(String tel,String pretime,String addr,String sname,int did) throws SQLException {

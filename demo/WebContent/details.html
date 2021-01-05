@@ -228,7 +228,7 @@
 					</div>
 				</div>
 				<div class="Xcontent34" @click="addDetails">
-					<a  :href="'order1.html#' + cid"><img src="images/shangpinxiangqing/X17.png"></a>
+					<a  ><img src="images/shangpinxiangqing/X17.png"></a>
 				</div>
 				<div class="Xcontent35" @click="addCarts">
 					<a ><img src="images/shangpinxiangqing/X18.png"></a>
@@ -289,6 +289,7 @@
 		     				  location.href="login.html";
 
 		     			  }else{
+		     				 location.href="'order.html#'"+ this.cid;
 		     			 alert("添加购物车成功");
 		     			  }
 	
@@ -306,9 +307,9 @@
 			     			  if(this.orderstatus=="-1"){
 			     				   alert("账号已失效!");
 			     				  location.href="login.html";
-			     			   }
-			     				  
-			     			
+			     			   }else{
+			     				  location.href="'order1.html#'" + this.cid
+			     			   }			     			
 			     		   })
 			    		}
 	    	}
