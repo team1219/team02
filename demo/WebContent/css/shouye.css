@@ -14,7 +14,9 @@
 }
 
 img {
-	border: none;
+    border: none;
+    width: 50px;
+    height: 32px;
 }
 .img-1{
 	display : blcok;
@@ -1236,7 +1238,8 @@ area{outline: none;}
 }
 #img-1 {
 margin-left: 90px;
-margin-top: -50px;
+width: 400px;
+height: 400px;
 }
 .Xcontent02>a>p{
 	font-family: "微软雅黑";
