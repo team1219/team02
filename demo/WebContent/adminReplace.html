@@ -10,43 +10,42 @@
 	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
 	<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
-	
 </head>
-<style> 
- body {
-   background:url("images/chocodonut.jpg")  no-repeat center center;   /*加载背景图*/   /* 背景图不平铺 */
-   background-size:cover;  /* 让背景图基于容器大小伸缩 */
-   background-attachment:fixed;        /* 当内容高度大于图片高度时，背景图像的位置相对于viewport固定 */    //此条属性必须设置否则可能无效/
-   background-color:#CCCCCC;   /* 设置背景颜色，背景图加载过程中会显示背景色 */
- }
-</style>
-<body class="easyui-layout">
-		<div id="w" class="easyui-window" title="用户登录" collapsible="false"
+<body class="easyui-layout" style="background: no-repeat;background-size: 100%;">
+		<div id="w" class="easyui-window" title="管理员重置密码" collapsible="false"
 			minimizable="false" maximizable="false" icon="icon-save"
-			style="width: 450px; height: 250px; padding: 30px; background: #fafafa;"
+			style="width: 450px; height: 330px; padding: 30px; background: #fafafa;"
 			data-options="closable:false,draggable:false">
-			<form id="login" action="manage.html">
+			<form id="replace" action="manage.html">
 			<!-- menulogin -->
 				<div style="margin-bottom: 20px">
 					<input v-model="aname" id="aname" 
 					class="easyui-textbox" 
-						prompt="name" iconWidth="28" 
+						prompt="usercode" iconWidth="28" 
 						data-options="label:'用户名:',required:true"
 						style="width: 300px; height: 34px; padding: 10px;">
 				</div>
 				<div style="margin-bottom: 20px">
+					<input v-model="oldapwd" id="oldapwd" 
+					 class="easyui-passwordbox" 
+						prompt="password" iconWidth="28"
+						data-options="label:'旧密码:',required:true"
+						style="width: 300px; height: 34px; padding: 10px">
+				</div>
+			
+				<div style="margin-bottom: 20px">
 					<input v-model="apwd" id="apwd" 
-					 class="easyui-passwordbox"  name="password"
+					 class="easyui-passwordbox" 
 						prompt="password" iconWidth="28"
 						data-options="label:'密码:',required:true"
 						style="width: 300px; height: 34px; padding: 10px">
 				</div>
-			
 			<div style="text-align: center; padding: 5px 0">
-				<a @click="login" id="loginbtn" style="vertical-align:middle ;width: 80px"
-					class="easyui-linkbutton" ><span>登录</span></a>
-				<a href="adminRegister.html" id="registerbtn" style="vertical-align:middle ;width: 80px"
-					class="easyui-linkbutton" ><span>注册</span></a>
+				<a @click="replace" id="repbtn" style="vertical-align:middle ;width: 80px"
+					class="easyui-linkbutton" ><span>确定</span></a>
+				<a href="manage.html" id="registerbtn" style="vertical-align:middle ;width: 80px"
+					class="easyui-linkbutton" ><span>退出</span></a>
+				
 			</div>
 			</form>
 		   
@@ -54,42 +53,37 @@
 	</body>
 	<script type="text/javascript">
 	    var v = new Vue({
-	    	el : "#login",
+	    	el : "#replace",
 	    	data : {
 	    		aname: "",
+	    		oldapwd:"",
 	    		apwd : "",
 	    		ret : 0
 	    	},
 	    	methods : {
-	    		login(){
+	    		replace(){
 	    			// post 请求 发送的数据量没有限制
 	    			var p = new URLSearchParams(); //用于封装post请求参数
 	    			//p.append("参数名","参数值");
 	    			p.append("aname",$("#aname").textbox("getValue"));
+	    			p.append("oldapwd",$("#oldapwd").textbox("getValue"));
 	    			p.append("apwd",$("#apwd").textbox("getValue"));
-	    			axios.post("admin.s?op=login",p).then(res=>{
-		    			this.ret = res.data;
-		    			if(this.ret == 1){
-		    				$.messager.show("登陆成功");
-		    				
-		    				//直接通过js 跳转到main.html
-		    				//location 是 JS BOM 模型中的对象, 对于表示浏览器当前的网址
+	    			axios.post("admin.s?op=replace",p).then(res=>{
+	    				this.ret = res.data;
+		    			if(this.ret==1){
+		    				alert("修改密码成功");
 		    				location.href="manage.html";
-		    			}else{
-		    				alert("登录失败!");
+		    			}else if(this.ret==0){
+		    				alert("修改失败!旧密码错误!");
+		    			}else if(this.ret==-1){
+		    				alert("修改失败!用户名不能为空!");
 		    			}
 		    		})
 	    		}
 	    	}
 	    })
 	    
-	    /*当打开页面时,检查cookie 是否有loginedAccount   "loginAccount=aaa; a=1"*/
-	    //通过正则表达式,获取cookie中存储的值
-	    var la = document.cookie.replace(/.*loginedAname=(\w*).*/,"$1");
-	    if(la){
-	    	 //输出该值
-	    	 console.info("==========="+la);
-	    	 //account.value=la;
-	    }
+	    
 	</script>
+	
 </html>

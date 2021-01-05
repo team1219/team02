@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>管理员信息添加</title>
+	<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
+	<script type="text/javascript" src="easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript">
+	function forbiden(value,row,index){
+		//函数的返回值 会被解析成html 元素
+		return "<button onclick='updateStatus("+index+")'>禁止</button>";
+	}
+	function updateStatus(index){
+		$.messager.confirm('确认对话框','您确认禁止该用户权限吗？',function(r){
+		    if (r){
+		    	//根据index值删除记录
+				//根据index获取当前行的id值
+				var rows=$("#table").datagrid('getRows');
+				var aid=rows[index].aid;
+				//发起ajax请求 删除数据库的记录
+				//调用ajax方法删除歌手信息
+				//jquery的post方法 3个参数 url，param，回调函数
+				var url="updateStatus.s";
+				var params={aid:aid};  //jquery使用对象传入参数
+				function callback(data){
+					//刷新表格数据
+					$("#table").datagrid('reload');
+					$.messager.show({
+					    title:'系统提示',
+					    msg:data,
+					    timeout:5000,
+					    showType:'slide'
+					});
+				}
+				$.post(url,params,callback);
+		    }
+		});
+	
+	}
+	function updatepwd(value,row,index){
+		//函数的返回值 会被解析成html 元素
+		return "<button onclick='edit("+index+")'>修改</button>";
+		
+	}
+	
+	function edit(index){
+		$("#dd").dialog('open');
+		//根据index值修改记录
+		//根据index获取当前行的id值
+		var rows=$("#table").datagrid('getRows');
+		var aid=rows[index].aid;
+		//发起ajax请求 修改数据库的记录
+		//jquery的post方法 3个参数 url，param，回调函数
+		var url="updatePwd.s";
+		
+		$("#save").click(function () {
+			var apwd = $("#pwd").textbox('getValue')//取值
+			var params={apwd:apwd,aid:aid};  //jquery使用对象传入参数
+			function callback(data){
+				
+				//刷新表格数据
+				$("#table").datagrid('reload');
+				$.messager.show({
+				    title:'系统提示',
+				    msg:data,
+				    timeout:5000,
+				    showType:'slide'
+				});
+			}
+			$.post(url,params,callback);
+		});
+	}
+	function add(){
+		$("#add").dialog('open');
+	}
+	
+	function saved(){
+		$('#xx').form('submit',{
+			url:"addAdmin.s",
+			success:function(data){
+				$("#table").datagrid('reload');
+				$.messager.show({
+					title:'系统提示',
+					msg:data,
+					timeout:5000,
+					showType:'slide'
+				});
+			}
+			
+		});
+	}
+	</script>
+</head>
+<body >
+<div id="cc" class="easyui-layout" data-options="fit:true">
+     <div data-options="region:'north',title:'查询条件' " style="height:64px;">
+     <a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'"
+     onClick="add()">新增</a>
+     </div>
+     <div data-options="region:'center',title:'查询结果' "   style="padding:5px;background:#eee;">
+     <table id="table" class="easyui-datagrid" data-options="
+     fit:true,
+     url:'addAdminQuery.s',
+     fitColumns:true,singleSelect:true,
+     pagination:true">
+    <thead>
+        <tr>
+            <th data-options="field:'aid',width:35">编码</th>
+            <th data-options="field:'aname',width:70">姓名</th>
+            <th data-options="field:'apwd',width:80">密码</th>
+            <th data-options="field:'atel',width:80">电话</th>
+            <th data-options="field:'aemail',width:80">邮箱</th>
+            <th data-options="field:'status',width:80">状态</th>
+            <th data-options="field:'pwd',width:30,formatter:updatepwd">更改密码</th>
+            <th data-options="field:'updatestatus',width:30,formatter:forbiden">权限</th>
+        </tr>
+    </thead>
+   </table>
+   </div>
+   </div>
+   <div id="dd"
+    class="easyui-dialog"
+    title="My Dialog"
+	style="width:400px;height:250px;"
+	 data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
+  <form style="text-align: center; " id="ff">
+  <input name="pwd" id="pwd" class="easyui-textbox" prompt="重置密码"><br>
+  <a id='save' href="#" class="easyui-linkbutton" 
+  data-options="
+  iconCls:'icon-save'">保存</a>
+  <a id='btn' href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">取消</a>
+  </form>
+</div>
+ <div id="add"
+    class="easyui-dialog"
+    title="My Dialog"
+	style="width:400px;height:250px;"
+	 data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
+  <form style="text-align: center; " id="xx">
+  <input name="aname" id="aname" class="easyui-textbox" prompt="姓名"><br>
+  <input name="apwd" id="apwd" class="easyui-textbox" prompt="密码"><br>
+  <input name="atel" id="atel" class="easyui-textbox" prompt="电话"><br>
+  <input name="aemail" id="aemail" class="easyui-textbox" prompt="邮箱"><br>
+  <input name="status" id="status" class="easyui-textbox" prompt="状态(1:允许 0:禁止)"><br>
+  <a id='save' href="#" class="easyui-linkbutton" 
+  data-options="
+  iconCls:'icon-save',
+  onClick:saved">保存</a>
+  <a id='btn' href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">取消</a>
+  </form>
+</div>
+</body>
+</html>

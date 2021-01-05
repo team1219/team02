@@ -39,6 +39,19 @@ public class CakeBiz {
 	}
 		
 	}
+	/**
+	 * 修改蛋糕
+	 * @param cid
+	 */
+	public void update (Cake cake) {
+		
+		try {
+			dao.updateById( cake);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+			
+		}
 	
 
 }

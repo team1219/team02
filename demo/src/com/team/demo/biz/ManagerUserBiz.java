@@ -1,6 +1,9 @@
 package com.team.demo.biz;
 
+import java.sql.SQLException;
+
 import com.team.demo.dao.ManagerUserDao;
+import com.team.demo.util.Cake;
 import com.team.demo.util.User;
 
 /**
@@ -32,12 +35,27 @@ public class ManagerUserBiz {
 	 */
 	public void delete(String uid) {
 		
-	try {
-		dao.deleteById(uid);
-	}catch(Exception e) {
-		e.printStackTrace();
+		try {
+			dao.deleteById(uid);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
+	public void updateStatus(String uid) {
+		try {
+			dao.updateStatus(uid);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+	}
+	public void update(User user) {
+		try {
+			dao.updateById( user);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 

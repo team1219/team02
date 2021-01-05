@@ -7,24 +7,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.team.demo.biz.DetailBiz;
 
-
-/**
- * Servlet implementation class Del
- */
-@WebServlet("/delDetail.s")
-public class DelDetailServlet extends HttpServlet {
+@WebServlet("/GetLoginedAname")
+public class GetLoginedAname extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-  private DetailBiz delBiz=new DetailBiz();
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=utf-8");
-		int did=Integer.parseInt(request.getParameter("did"));
-		delBiz.delete(did);
-		response.getWriter().append("删除成功");
-	}
+		HttpSession sess=request.getSession();
+		String la=(String)sess.getAttribute("loginedAname");
+		response.getWriter().append(la);
+}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
