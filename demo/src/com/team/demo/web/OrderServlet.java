@@ -44,35 +44,6 @@ public class OrderServlet extends BaseServlet {
 		write(response, name);
 	}
 
-	/**
-	 * 查询所以用户信息 必须提供请求和响应对象参数
-	 * 
-	 * @param request
-	 * @param response
-	 * @throws SQLException
-	 * @throws IOException
-	 */
-	public void addOrder(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-		String cid = request.getParameter("cid");
-		System.out.println(cid);
-		String cnum = request.getParameter("num");
-		String price = request.getParameter("price");
-		if(uid>0) {
-		int did = 0;
-		int j = dao.addAll(uid, Double.parseDouble(cnum) * Double.parseDouble(price));
-		List<Map<String, Object>> list1 = (List<Map<String, Object>>) dao.queryDid(uid);
-		Map<String, Object> map2 = list1.get(0);
-		did = (int) map2.get("max(did)");
-		int i = dao.addOrder(uid, Integer.parseInt(cid), Integer.parseInt(cnum), price, did);
-		if (i > 0 && j > 0) {
-			write(response, "1");
-		} else {
-			write(response, "0");
-		}
-		}else {
-			write(response, "-1");
-		}
-	}
 
 	/**
 	 * 立即购买
@@ -245,18 +216,7 @@ public class OrderServlet extends BaseServlet {
 		}
 	}
 
-	public void deleteCarts(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
-		int oid = 0;
-		String deleteData[] = request.getParameterValues("deleteData[]");
-		if(deleteData!=null && deleteData.length!=0) {
-		for (int i = 0; i < deleteData.length; i++) {
-			oid = Integer.parseInt(deleteData[i].toString());
-			write(response, dao.deleteOrder(oid));
-		}
-		}else {
-			write(response, "-1");
-		}
-	}
+
 
 	
 
