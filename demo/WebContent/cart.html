@@ -111,15 +111,27 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="hidden"><a href="#page-top"></a></li>
-					<li><a class="page-scroll" href="index.html">Home</a></li>
-					<li><a class="page-scroll" href="single.html">About</a></li>
-					<li><a class="page-scroll" href="menu.html">Menu</a></li>
-					<li><a class="page-scroll" href="blog.html">Blog</a></li>
-					<li><a class="page-scroll" href="cart.html">Cart</a></li>
-					<li><a class="page-scroll" href="login.html">Login</a></li>
-					<li><a class="page-scroll" href="register.html">Register</a></li>
-					<li><a class="page-scroll" @click="clearCookie" href="index.html">Exit</a></li>
+					 <li>
+                        <a class="page-scroll" href="index.html">主页</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="menu.html">菜单</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="blog.html">博客</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="cart.html">购物车</a>
+                    </li>
+                     <li>
+                        <a class="page-scroll" href="orderDetail.html">我的订单</a>
+                    </li>
+                     <li>
+                        <a class="page-scroll" href="login.html">登录</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="register.html">注册</a>
+                    </li>
 				</ul>
 				
 			</div>
@@ -300,6 +312,8 @@
 	    		goodsNum : 0,
 	    		totalMoney : 0,
 	    		checkedAll : "",
+	    		cid : [],
+	    		price : [],
                 num : [],
 	    	},
 	    	created(){
@@ -418,25 +432,36 @@
 	    	    			saveData:function(){
 	    	    				let id =[]; 
 	    	    				let cnum =[]; 
+	    	    				let cid = [];
+	    	    				let price = [];
 	    	    				this.list.forEach(function(item,index){
 	    	    					if(item.checked == true){
 	    	    						id.push(
 	    	    							 item.oid
 	    	    						);
-	    	    						
+	    	    						cid.push(
+	    	    								item.cid
+	    	    								);
 	    	    						cnum.push(
 	    	    								item.cnum
+	    	    								);
+	    	    						price.push(
+	    	    								item.price
 	    	    								);
 	    	    					}
 	    	    				})	
 	    	    				this.userBuyData=id;
 	    	    				this.num = cnum;
+	    	    				this.cid = cid;
+	    	    				this.price = price
 	    	    				axios.get("order.s?op=update",{
 	    	    					
 	    		    				params : {
 	    		    					userBuyData : this.userBuyData,
 	    		    					totalMoney : this.totalMoney,
 	    		    					cnum :this.num ,
+	    		    					cid  : this.cid,
+	    		    					price : this.price
 	    		    				}	
 	    		    			}).then(res=>{
 	    		    				window.location.href='order.html#'+0;

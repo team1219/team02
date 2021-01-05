@@ -11,6 +11,13 @@ public class OrderDAO {
 		String sql = "insert into cake_order(uid,cid,cnum,price,did) values(?,?,?,?,?)";
 		return DBHelper.update(sql, uid,cid,cnum,price,did);
 	}
+	
+	
+	public int  addCart(int oid,int uid,String cid,String cnum,String price,int did) throws SQLException {
+		String sql = "insert into cake_Cart(oid,uid,cid,u_cnum,price,did) values(?,?,?,?,?,?)";
+		return DBHelper.update(sql,oid, uid,cid,cnum,price,did);
+	}
+	
 	public int  addAll(int uid,Double ptotal) throws SQLException {
 		String sql = "insert into d_order(uid,ptotal) values(?,?)";
 		return DBHelper.update(sql, uid,ptotal);
@@ -87,7 +94,7 @@ public class OrderDAO {
 	 * @return
 	 */
 	public List<?> query(int uid){
-		String sql = "select  oid,cnum,d.did,price,uname,cname,cimg "
+		String sql = "select  c.cid,oid,cnum,d.did,price,uname,cname,cimg "
 				+ "	 from d_order d,cake_order o,cake_user u,cake c "
 				+ "	where o.uid=u.uid and o.did=d.did and o.cid=c.cid and o.uid=? ";
 		try {
@@ -99,7 +106,7 @@ public class OrderDAO {
 	}
 	
 	public List<?> queryOrder(int uid){
-		String sql = "select  oid,cnum,price,uname,cname,cimg "
+		String sql = "select  oid,cnum,c.cid,price,uname,cname,cimg "
 				+ "	 from cake_order o,cake_user u,cake c "
 				+ "	where o.uid=u.uid and o.cid=c.cid and o.uid=? ";
 		try {
