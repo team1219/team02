@@ -16,11 +16,11 @@ public class CakeOrderDao {
 		//计算开始页数
 		int begin=(page-1)*10;
 		//mysql分页查询语法 ：limit
-		String sql="select * from cake_order limit ?,10";
+		String sql="select * from cake_Cart limit ?,10";
 		return DBHelper.selectList(sql,cakeOrderMapper,begin);
 	}
 	public int selectCount() {
-		String sql="select count(*) cnt from cake_order";
+		String sql="select count(*) cnt from cake_Cart";
 		try {
 		List<Integer>  list=DBHelper.selectList(sql,new ResultSetMapper<Integer>() {
 			
@@ -46,8 +46,8 @@ class CakeOrderMapper implements ResultSetMapper<CakeOrder> {
 		CakeOrder cakeOrder=new CakeOrder();
 		try {
 
-			cakeOrder.setOid(rs.getInt("oid"));
-			cakeOrder.setCnum(rs.getString("cnum"));
+			cakeOrder.setOid(rs.getInt("u_oid"));
+			cakeOrder.setCnum(rs.getString("u_cnum"));
 			cakeOrder.setUid(rs.getInt("uid"));
 			cakeOrder.setCid(rs.getInt("cid"));
 			cakeOrder.setDid(rs.getInt("did"));
