@@ -61,18 +61,7 @@ public class OrderServlet extends BaseServlet {
 		
 	}
 	
-	public void deleteOrder(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
-		String oid =request.getParameter("oid");
-		int i = dao.deleteOrder(Integer.parseInt(oid));
-		if(i>0) {
-			write(response, "1");
-			System.out.println("移出成功");
-		}else {
-			write(response, "0");
-			System.out.println("移出失败");
-		}
-	}
-<<<<<<< HEAD
+
 
 	public void delete(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
 		String deleteData[] = request.getParameterValues("deleteData[]");
@@ -89,8 +78,6 @@ public class OrderServlet extends BaseServlet {
 
 	
 
-=======
->>>>>>> branch 'main' of https://github.com/team1219/team02.git
 	public void updateOrder(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
 		String oid =request.getParameter("oid");
 		String num = request.getParameter("cnum");
